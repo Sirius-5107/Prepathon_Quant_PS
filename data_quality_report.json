@@ -1,0 +1,42 @@
+{
+  "signals_missing": {
+    "date": 0,
+    "PB01": 0,
+    "PB02": 0,
+    "PB03": 0,
+    "PB04": 0,
+    "PB05": 0,
+    "PB06": 0,
+    "PB07": 0,
+    "PB08": 0,
+    "BB01": 0,
+    "BB02": 0,
+    "BB03": 0,
+    "BB04": 0,
+    "BB05": 0,
+    "BB06": 19,
+    "BB07": 13,
+    "VB01": 0,
+    "VB02": 0,
+    "VB03": 0,
+    "VB04": 0,
+    "VB05": 19
+  },
+  "signals_duplicates": "0",
+  "price_missing": {
+    "date": 0,
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0,
+    "volume": 0
+  },
+  "price_duplicates": "21",
+  "price_nonsensical": {
+    "high_lt_low": "0",
+    "close_lt_low": "0",
+    "close_gt_high": "0",
+    "open_lt_low": "0",
+    "open_gt_high": "0"
+  }
+}
