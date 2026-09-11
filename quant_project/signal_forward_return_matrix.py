@@ -4,9 +4,9 @@ import pandas as pd
 from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
-SIGNALS = ROOT / ".." / "signals_cleaned.csv"
-PRICE = ROOT / ".." / "price_cleaned.csv"
-OUT = ROOT / ".." / "research_output"
+SIGNALS = Path("C:/Codes/Prepathon_Quant_PS/signals_cleaned.csv")
+PRICE = Path("C:/Codes/Prepathon_Quant_PS/price_cleaned.csv")
+OUT = Path("C:/Codes/Prepathon_Quant_PS/research_output")
 OUT.mkdir(exist_ok=True)
 H = [1, 3, 5, 10, 20]
 SIGS = ['PB01','PB02','PB03','PB04','PB05','PB06','PB07','PB08','BB01','BB02','BB03','BB04','BB05','BB06','BB07','VB01','VB02','VB03','VB04','VB05']
