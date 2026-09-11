@@ -308,10 +308,13 @@ class ConditionalAlphaAnalyzer:
             results_list.append(hac_res)
         
         # Multivariate test @ 5d
-        X = np.column_stack([np.ones(len(ret_q.index)), 
-                             bb04[valid_idx].values,
-                             (pb07[valid_idx] - pb07[valid_idx].mean() / pb07[valid_idx].std()).values])
-        model = OLS(fwd_ret_5d[valid_idx].values, X)
+        ret_valid = fwd_ret_5d[valid_idx].values
+        bb04_valid = bb04[valid_idx].values
+        pb07_std = (pb07[valid_idx] - pb07[valid_idx].mean()) / pb07[valid_idx].std()
+        pb07_std = pb07_std.values
+        
+        X = np.column_stack([np.ones(len(ret_valid)), bb04_valid, pb07_std])
+        model = OLS(ret_valid, X)
         results = model.fit(cov_type='HAC', cov_kwds={'maxlags': 5})
         
         self.results['bb04_vs_pb07'] = pd.DataFrame(results_list)
@@ -320,7 +323,7 @@ class ConditionalAlphaAnalyzer:
             'bb04_tstat': results.tvalues[1],
             'pb07_coef': results.params[2],
             'pb07_tstat': results.tvalues[2],
-            'n': len(ret_q),
+            'n': len(ret_valid),
             'r_squared': results.rsquared
         }
         
