@@ -67,7 +67,7 @@ class PB07BB01Validator:
         return pd.Series(forward_ret, index=self.data.index)
     
     def hac_regression(self, returns, predictor, maxlags=1):
-        """OLS regression with HAC standard errors."""
+        """OLS regression with HAC standard errors (Newey-West)."""
         valid_idx = returns.notna() & predictor.notna()
         ret_valid = returns[valid_idx].values
         pred_valid = predictor[valid_idx].values
@@ -81,28 +81,36 @@ class PB07BB01Validator:
         beta = np.linalg.lstsq(X, ret_valid, rcond=None)[0]
         residuals = ret_valid - X @ beta
         
-        # HAC covariance
+        # HAC covariance (Newey-West with Bartlett kernel)
         k = X.shape[1]
         n = len(ret_valid)
         
-        # Simplified HAC (Newey-West with Bartlett kernel)
-        sigma2 = np.dot(residuals, residuals) / n
-        gamma0 = (X.T * residuals) @ (X * residuals[:, None]) / n
+        # Lag 0: outer product of X and residuals
+        Xres = X * residuals[:, None]  # (n, k)
+        gamma0 = Xres.T @ Xres / n  # (k, k)
         
+        # Lags 1 to maxlags
         lag_sum = np.zeros((k, k))
         for lag in range(1, maxlags + 1):
-            lag_cov = (X[:-lag].T * residuals[:-lag]) @ (X[lag:] * residuals[lag:, None]) / n
+            # Outer product at lag
+            Xres_lag = X[:-lag] * residuals[:-lag, None]  # (n-lag, k)
+            Xres_future = X[lag:] * residuals[lag:, None]  # (n-lag, k)
+            
+            lag_cov = Xres_lag.T @ Xres_future / n  # (k, k)
+            
+            # Bartlett kernel weight
             weight = 1 - lag / (maxlags + 1)
             lag_sum += weight * (lag_cov + lag_cov.T)
         
+        # Long-run covariance
         Omega = gamma0 + lag_sum
-        Sigma = Omega / n
         
-        # Standard errors
+        # Variance-covariance matrix of beta
         XtX_inv = np.linalg.pinv(X.T @ X)
-        vcov = XtX_inv @ Sigma @ XtX_inv
+        vcov = XtX_inv @ Omega @ XtX_inv
         se = np.sqrt(np.diag(vcov))
         
+        # t-statistics and p-values
         t_stats = beta / se
         p_values = 2 * (1 - stats.t.cdf(np.abs(t_stats), n - k))
         
