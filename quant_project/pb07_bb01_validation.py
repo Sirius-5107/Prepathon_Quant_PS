@@ -18,6 +18,19 @@ Methodology:
 - Return-space independence analysis (QR decomposition)
 - Year-by-year stability decomposition
 - Cost sensitivity analysis (0.05% per side = 0.10% round-trip)
+
+IMPORTANT INTERPRETATION NOTES:
+- HAC t-statistics are reported but primary evidence should rely on:
+  * Welch t-test (event vs non-event comparison)
+  * Bootstrap confidence intervals (dependence-aware)
+  * Walk-forward validation (out-of-sample stability)
+  * Economic effect size (magnitude relative to costs)
+- 2021 BB01 discrepancy explained:
+  * 6 total BB01 events in 2021
+  * Only 3 with valid 20d forward returns (rest occur late Nov/Dec)
+  * Yearly stability table uses 3 events (valid returns only)
+  * Walk-forward test also uses 3 events (same valid subset)
+  * No double-counting; same events analyzed in both places
 """
 
 import pandas as pd
@@ -891,6 +904,31 @@ def main():
     print("\n" + "#"*80)
     print("# VALIDATION STUDY COMPLETE")
     print("#"*80)
+    
+    print(f"\n{'='*80}")
+    print("INTERPRETATION GUIDANCE")
+    print(f"{'='*80}")
+    print("""
+PRIMARY EVIDENCE (use these):
+1. Welch t-test: Event vs non-event mean comparison
+2. Bootstrap CI: Dependence-aware uncertainty bounds
+3. Walk-forward: Out-of-sample sign/magnitude consistency
+4. Economic effect: Signal spread relative to transaction costs
+
+SECONDARY EVIDENCE (report but do not overstate):
+- HAC t-statistics: Indicate precision but depend on autocorrelation assumptions
+- Spearman IC: Monotonicity of relationship
+- Year-by-year stability: Temporal consistency of direction/magnitude
+- Multivariate redundancy: Independence from correlated signals
+
+2021 BB01 CLARIFICATION:
+- Total BB01 events in 2021: 6
+- BB01 events with valid 20d fwd return: 3
+- Late October/November events have no 20d forward data (data ends Nov 1)
+- Both yearly stability and WFO test use same 3 valid events
+- No discrepancy; same sample analyzed consistently
+""")
+    print(f"{'='*80}")
 
 
 if __name__ == '__main__':
