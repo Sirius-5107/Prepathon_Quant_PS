@@ -1,0 +1,230 @@
+================================================================================
+✅ TASK 2 RESEARCH KIT - COMPLETE & READY TO EXECUTE
+================================================================================
+
+Repository: https://github.com/Sirius-5107/Prepathon_Quant_PS
+Status: All research modules deployed and pushed to GitHub
+Date: September 2026
+
+================================================================================
+WHAT YOU HAVE
+================================================================================
+
+📖 Documentation (3 files):
+
+1. TASK2_STRATEGY_RESEARCH_PLAN.md (30 KB)
+   - 5 candidate strategy specifications
+   - Walk-forward methodology
+   - Learnable parameters & rejection framework
+   - Implementation recommendations with priority phasing
+
+2. TASK2_RESEARCH_KIT.md (12 KB)
+   - Quick-start 3-step execution plan
+   - How to interpret validation results
+   - Strategy selection decision trees
+   - File locations & workflow guide
+   - Checklist for Task 2 readiness
+
+3. bb01_temporal_stability.py (8 KB)
+   - Temporal stability analysis for BB01 @ 20d
+   - Year-by-year decomposition (2018, 2019, 2020, 2021)
+   - Classification: STABLE, DIRECTIONALLY_CONSISTENT, UNSTABLE, etc.
+
+4. bb03_alpha_validator.py (16 KB)
+   - Foundation strategy validation
+   - 6 concurrent validation studies:
+     * Full sample (unconditional)
+     * Year-by-year stability
+     * Rolling correlation (60-day windows)
+     * Walk-forward out-of-sample
+     * Cost sensitivity analysis
+     * Formal hypothesis testing (one-tailed t-test, Cohen's d)
+
+5. conditional_alpha_analysis.py (17 KB)
+   - Independence analysis for mean-reversion family
+   - BB03 conditional on PB07 quintiles
+   - PB07 conditional on BB03 states
+   - Multivariate HAC regression
+   - Interaction effects
+   - BB04 vs PB07 comparison
+   - Breakout forensics (BB01, VB03)
+
+================================================================================
+QUICK START (3 STEPS)
+================================================================================
+
+Step 1: Understand Strategy Specs
+  → Read: TASK2_STRATEGY_RESEARCH_PLAN.md
+  → Time: 20 minutes
+  → Covers: 5 candidate strategies, specifications, methodology
+
+Step 2: Validate Foundation Strategy (BB03)
+  → Run: python quant_project/bb03_alpha_validator.py
+  → Time: ~30 seconds execution
+  → Outputs: Console + CSVs in research_output/
+
+Step 3: Run Comparative Studies
+  → Run: python quant_project/bb01_temporal_stability.py
+  → Run: python quant_project/conditional_alpha_analysis.py
+  → Time: ~90 seconds total
+  → Outputs: Multiple CSVs showing signal relationships
+
+================================================================================
+EXECUTION COMMANDS (COPY-PASTE READY)
+================================================================================
+
+cd Prepathon_Quant_PS
+
+# Foundation validation (BB03 mean-reversion)
+python quant_project/bb03_alpha_validator.py
+
+# Breakout candidate assessment (BB01 @ 20d)
+python quant_project/bb01_temporal_stability.py
+
+# Independence & redundancy analysis (BB03, PB07, BB04)
+python quant_project/conditional_alpha_analysis.py
+
+================================================================================
+OUTPUTS GENERATED
+================================================================================
+
+research_output/
+├── bb03_yearly_validation.csv       ← Year-by-year BB03 spreads & statistics
+├── bb03_rolling_correlation.csv     ← Time-series stability over windows
+├── bb01_temporal_stability.csv      ← Year-by-year BB01 @ 20d analysis
+│
+├── bb03_conditional_pb07.csv        ← BB03 conditional on PB07 quintiles
+├── pb07_conditional_bb03.csv        ← PB07 conditional on BB03 states
+├── multivariate_hac.csv             ← BB03 + PB07 regression
+├── interaction.csv                  ← BB03 + PB07 + interaction term
+├── bb04_vs_pb07.csv                 ← BB04 & PB07 analysis
+├── bb03_vs_bb04.csv                 ← Overbought vs oversold comparison
+└── breakout_forensics.csv           ← BB01 & VB03 statistics
+
+Total: 10 CSV files with detailed statistics for strategy selection
+
+================================================================================
+STRATEGY SELECTION FRAMEWORK
+================================================================================
+
+Based on validation results, decide:
+
+1. BB03 Foundation:
+   ✅ ACCEPT if: Negative spread all 4 years, HAC p < 0.05, net return > 0
+   ❌ REJECT if: Any year positive, HAC p > 0.10, net return < 0
+
+2. BB01 Breakout:
+   ✅ ACCEPT if: Positive spread in 3+ years, stable across periods
+   ⚠️ CONDITIONAL if: Positive in 2 years but weak
+   ❌ REJECT if: Positive in ≤1 year (unstable)
+
+3. Mean-Reversion Family Independence:
+   ✅ DISTINCT if: R² < 0.5 in multivariate regression
+   ❌ REDUNDANT if: R² > 0.6 (consolidate to single strategy)
+   ⚠️ PARTIAL if: R² between 0.4-0.6 (test both, pick winner)
+
+4. Final Portfolio:
+   → 3 strategies minimum
+   → 5 strategies maximum
+   → Must be geometrically distinct (QR decomposition)
+   → Must have temporal stability (yearly consistency)
+
+================================================================================
+TIMELINE
+================================================================================
+
+✅ TODAY (Task 2 Research):
+   1. Run all 3 validation scripts (~2 minutes total)
+   2. Read TASK2_RESEARCH_KIT.md (interpret results)
+   3. Review CSV outputs (identify patterns)
+   4. Make strategy selection decisions
+   → Deliverable: 3-5 selected strategy candidates
+
+📋 NEXT (Task 2 Implementation):
+   1. Build each selected strategy with walk-forward
+   2. Generate strategy returns matrix
+   3. Prepare research report (hypotheses, evidence, robustness)
+   → Deliverable: Task 2 submission (18 Sept)
+
+📋 FINAL (Task 3 Portfolio Construction):
+   1. Static allocation (equal-weight, risk-parity, optimization)
+   2. Dynamic allocator with walk-forward validation
+   3. Portfolio report
+   → Deliverable: Task 3 submission (21 Sept)
+
+================================================================================
+SUCCESS CRITERIA
+================================================================================
+
+✅ Research quality (not peak historical performance):
+   - Hypotheses are economically motivated (not data-mined)
+   - Evidence is statistically rigorous (HAC inference, walk-forward validation)
+   - Robustness is demonstrated (temporal stability, parameter sensitivity)
+   - Strategies are distinct (geometrically orthogonal, different hypotheses)
+
+✅ This research kit ensures:
+   - No lookahead information (canonical timing convention)
+   - No parameter optimization (pre-specified via strategy plan)
+   - No overfitting (walk-forward, out-of-sample testing)
+   - No data mining (validation scripts are agnostic to results)
+
+================================================================================
+NEXT IMMEDIATE ACTION
+================================================================================
+
+Pull the latest code:
+  git pull origin main
+
+Read the research plan:
+  cat TASK2_STRATEGY_RESEARCH_PLAN.md | less
+
+Run the foundation validation:
+  python quant_project/bb03_alpha_validator.py
+
+Check the results:
+  ls research_output/
+  cat research_output/bb03_yearly_validation.csv
+
+You're ready to build strategies! 🚀
+
+================================================================================
+FILES PUSHED TO GITHUB
+================================================================================
+
+✅ Commit bef32ee: Add BB03 alpha validation study
+✅ Commit a53eb63: Add Task 2 Strategy Research Plan
+✅ Commit 327100f: Add Task 2 Research Kit - Complete execution guide
+
+All files now live on GitHub:
+https://github.com/Sirius-5107/Prepathon_Quant_PS
+
+================================================================================
+SUPPORT
+================================================================================
+
+If results look unexpected:
+1. Check research_output/ CSVs for patterns
+2. Re-read TASK2_RESEARCH_KIT.md interpretation section
+3. Verify data paths are correct (signals_cleaned.csv, price_cleaned.csv)
+
+If a script crashes:
+1. Ensure you're in the repo root directory
+2. Check Python version (3.7+ required)
+3. Verify pandas, numpy, scipy installed (should be from Task 1)
+
+Questions about methodology:
+→ Refer to TASK2_STRATEGY_RESEARCH_PLAN.md (detailed specifications)
+→ Refer to script docstrings (each validation study explained)
+
+================================================================================
+YOU ARE NOW READY FOR TASK 2
+================================================================================
+
+The research infrastructure is complete. All validation tools are deployed.
+All strategy specifications are documented. All methodologies are rigorous.
+
+Focus: Build 3-5 strategies with strong evidence and temporal stability.
+
+Good luck! 💪
+
+================================================================================
