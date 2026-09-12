@@ -204,6 +204,8 @@ class BB03AlphaValidator:
         bb03 = self.data['BB03'].astype(float)
         
         rolling_corr = []
+        rolling_dates = []
+        
         for i in range(window, len(self.data)):
             window_data = self.data.iloc[i-window:i]
             ret_window = fwd_ret.iloc[i-window:i]
@@ -212,14 +214,17 @@ class BB03AlphaValidator:
             valid = ret_window.notna() & bb03_window.notna()
             if valid.sum() < 10:
                 rolling_corr.append(np.nan)
+                rolling_dates.append(self.data.iloc[i]['date'])
                 continue
             
             corr, _ = stats.spearmanr(bb03_window[valid], ret_window[valid])
             rolling_corr.append(corr)
+            rolling_dates.append(self.data.iloc[i]['date'])
         
-        rolling_corr = pd.Series(rolling_corr, index=self.data.index[window:])
+        # Create Series with proper DatetimeIndex
+        rolling_corr = pd.Series(rolling_corr, index=pd.to_datetime(rolling_dates))
         
-        # Quarterly stats
+        # Yearly stats
         for year in sorted(self.data['year'].unique()):
             year_data = rolling_corr[rolling_corr.index.year == year]
             if len(year_data) > 0:
@@ -294,7 +299,9 @@ class BB03AlphaValidator:
         fwd_ret = self.compute_forward_returns(10)
         bb03 = self.data['BB03'].astype(int)
         
-        result = self.hac_ttest(fwd_ret, bb03[fwd_ret.notna()])
+        # Align series before passing to hac_ttest
+        valid_idx = fwd_ret.notna()
+        result = self.hac_ttest(fwd_ret[valid_idx], bb03[valid_idx])
         
         gross_spread = result['spread']
         
