@@ -1,0 +1,31 @@
+{
+  "signal_events": 43,
+  "skipped_events": 26,
+  "executable_trades": 17,
+  "metrics": {
+    "total_return_pct": 18.708130962687754,
+    "annualized_return_pct": 4.70648038166166,
+    "annualized_volatility_pct": 134.37325889699247,
+    "sharpe_ratio": 0.035025424108151924,
+    "max_drawdown_pct": -32.747054385671035,
+    "calmar_ratio": 0.14372225135831,
+    "n_trades": 17,
+    "win_rate_pct": 47.05882352941176,
+    "avg_trade_pct": 1.354493257801515,
+    "median_trade_pct": -1.2648860857253201,
+    "profit_factor": 1.5167632188959277,
+    "best_trade_pct": 18.488346410927065,
+    "worst_trade_pct": -9.852133279154808,
+    "avg_winner_pct": 8.448156993232947,
+    "avg_loser_pct": -4.950985618137535,
+    "avg_holding_days": 32.1764705882353,
+    "total_transaction_costs_pct": 1.7000000000000002,
+    "gross_pnl_pct": 24.726385382625757,
+    "net_pnl_pct": 23.026385382625755,
+    "period_start": "2018-02-08",
+    "period_end": "2021-11-01",
+    "total_period_days": 1362,
+    "winners": 8,
+    "losers": 9
+  }
+}
