@@ -222,7 +222,7 @@ The baseline is slightly profitable but with negative Sharpe (returns don't comp
 
 ### Alignment
 - **Merged Date Range:** 2018-01-02 to 2021-11-01
-- **Overlapping Rows:** 979 candles available for backtesting
+- **Overlapping Rows:** 866 candles available for backtesting (inner join of signals and prices)
 
 ---
 

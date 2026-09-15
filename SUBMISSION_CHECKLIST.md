@@ -138,7 +138,7 @@
 
 - [x] **Data Alignment**
   - [x] Signals and price merged by date
-  - [x] Inner join (979 overlapping candles)
+  - [x] Inner join (866 overlapping candles after merge)
   - [x] No lookahead issues
 
 - [x] **Target Engineering**
@@ -245,7 +245,7 @@
 - [x] **Data Summary**
   - [x] Signals: 1000 rows (2018-01-02 to 2021-11-01) ✓
   - [x] Price: 979 rows (after dedup) ✓
-  - [x] Overlap: 979 candles ✓
+  - [x] Overlap: 866 candles (inner join) ✓
 
 ---
 

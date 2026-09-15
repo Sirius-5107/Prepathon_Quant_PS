@@ -103,12 +103,15 @@ This is the evidence already validated in the BB01 validation study:
 
 | Metric | Value |
 |--------|-------|
-| **Total return** | 23.03% |
-| **Annualized return** | 4.71% |
+| **Total return (arithmetic)** | 23.03% |
+| **Total return (compounded)** | 18.71% |
+| **Annualized return** | 5.12% |
 | **Annualized volatility** | 134.37% |
-| **Sharpe ratio** | 0.0350 |
+| **Sharpe ratio** | 0.0381 |
 | **Max drawdown** | -32.75% |
-| **Calmar ratio** | 0.1437 |
+| **Calmar ratio** | 0.1563 |
+
+**Note on Returns:** The 23.03% figure is the arithmetic sum of individual trade returns. The canonical metric for portfolio use is the compounded equity return of 18.71%. See Portfolio Report for reconciliation.
 
 ### Trade Statistics
 

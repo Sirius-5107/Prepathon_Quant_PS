@@ -23,7 +23,7 @@ A **production-ready quantitative research and backtesting framework** consistin
 ### Data Processed
 - **Signals:** 1000 rows (2018-01-02 to 2021-11-01), 20 anonymised signals
 - **Price:** 979 rows (after deduplication), open/high/low/close/volume
-- **Alignment:** 979 overlapping candles ready for backtesting
+- **Alignment:** 866 overlapping candles (inner join of signals and prices) ready for backtesting
 
 ### Baseline Strategy
 - **Type:** Simple trend-following (PB01 + PB02)

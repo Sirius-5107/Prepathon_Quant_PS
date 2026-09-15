@@ -139,14 +139,17 @@ This evidence comes from the Candidate C validation:
 
 | Metric | Value |
 |--------|-------|
-| **Total return** | 22.64% (net) / 24.54% (gross) |
-| **Annualized return** | 5.94% |
+| **Total return (arithmetic)** | 22.64% |
+| **Total return (compounded)** | 22.91% |
+| **Annualized return** | 6.19% |
 | **Annualized volatility** | 71.30% |
-| **Sharpe ratio** | 0.0833 |
+| **Sharpe ratio** | 0.0868 |
 | **Maximum drawdown** | -9.85% |
-| **Calmar ratio** | 0.6028 |
+| **Calmar ratio** | 0.6280 |
 
-**Key observation:** Strategy 2 delivers comparable total return to Strategy 1 (22.64% vs 23.03%) but with **half the volatility** (71% vs 134%) and **one-third the drawdown** (-9.85% vs -32.75%). The risk-adjusted metrics (Sharpe 0.0833 vs 0.0350, Calmar 0.603 vs 0.144) are significantly better.
+**Key observation:** Strategy 2 demonstrates superior risk-adjusted returns compared to Strategy 1 across both tested allocations. The compounded total return of 22.91% (vs BB01's 18.71%) is achieved with only 71% volatility (vs BB01's 134%) and one-third the drawdown (-9.85% vs -32.75%). The risk-adjusted metrics (Sharpe 0.0868 vs 0.0381, Calmar 0.6280 vs 0.1563) are substantially better.
+
+**Note on Returns:** The 22.64% figure is the arithmetic sum of net trade returns. The canonical metric for portfolio use is the compounded equity return of 22.91%.
 
 ### Trade Statistics
 

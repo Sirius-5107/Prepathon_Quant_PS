@@ -44,7 +44,7 @@ python main.py
 
 Expected output:
 - Data loads: 1000 signals, 1000 price rows
-- Cleaning: Removes duplicates, keeps 979 rows
+- Cleaning: Removes duplicates from price data, keeps 979 rows
 - Backtest: Baseline generates 491 trades
 - Results saved to `../` (equity curve, trades, metrics)
 
@@ -179,7 +179,7 @@ At candle t:
 - **Quality:** No nonsensical prices, all dates valid
 
 ### Alignment
-- **Overlapping Candles:** 979 (inner join by date)
+- **Overlapping Candles:** 866 (inner join of 1000-row signals with 979-row price data)
 - **Ready for Backtesting:** Yes
 
 ---

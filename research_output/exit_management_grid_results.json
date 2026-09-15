@@ -1,0 +1,2778 @@
+{
+  "bb01": {
+    "max_hold=10_trail=0.02": {
+      "metrics": {
+        "total_return": 16.519855221332858,
+        "annualized_return": 4.129963805333214,
+        "volatility": 111.69939465819792,
+        "sharpe": 0.03697391394081387,
+        "max_drawdown": -31.248392015011785,
+        "calmar": 0.13216564242247,
+        "num_trades": 43,
+        "win_rate": 46.51162790697674,
+        "profit_factor": 1.2510953452284377,
+        "avg_holding_days": 7.3023255813953485,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 35,
+          "max_holding": 8
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 0.0786031728117198,
+          "trades": 6
+        },
+        "2019": {
+          "return": -9.04063775802786,
+          "trades": 15
+        },
+        "2020": {
+          "return": 32.63288443751566,
+          "trades": 16
+        },
+        "2021": {
+          "return": -3.4927189976711293,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=10_trail=0.03": {
+      "metrics": {
+        "total_return": 9.578895589121972,
+        "annualized_return": 2.394723897280493,
+        "volatility": 118.22512136706216,
+        "sharpe": 0.02025562646576119,
+        "max_drawdown": -40.717599366817645,
+        "calmar": 0.058812993263842726,
+        "num_trades": 43,
+        "win_rate": 46.51162790697674,
+        "profit_factor": 1.1769347612059762,
+        "avg_holding_days": 8.30232558139535,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 27,
+          "max_holding": 16
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.517001628407295,
+          "trades": 6
+        },
+        "2019": {
+          "return": -23.84152075354423,
+          "trades": 15
+        },
+        "2020": {
+          "return": 37.76258170575253,
+          "trades": 16
+        },
+        "2021": {
+          "return": -3.754685237875932,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=10_trail=0.04": {
+      "metrics": {
+        "total_return": -4.05084721871205,
+        "annualized_return": -1.0127118046780126,
+        "volatility": 120.49955071139651,
+        "sharpe": -0.008404278677382929,
+        "max_drawdown": -47.8630246945324,
+        "calmar": -0.02115854171651837,
+        "num_trades": 43,
+        "win_rate": 46.51162790697674,
+        "profit_factor": 1.063152165878827,
+        "avg_holding_days": 9.162790697674419,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 22,
+          "max_holding": 21
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.517001628407295,
+          "trades": 6
+        },
+        "2019": {
+          "return": -29.96457405633013,
+          "trades": 15
+        },
+        "2020": {
+          "return": 31.75036050500857,
+          "trades": 16
+        },
+        "2021": {
+          "return": -4.176115498272736,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=10_trail=0.05": {
+      "metrics": {
+        "total_return": 19.942641907880933,
+        "annualized_return": 4.985660476970233,
+        "volatility": 127.44602420704413,
+        "sharpe": 0.03911978037754016,
+        "max_drawdown": -37.58734460143198,
+        "calmar": 0.13264199772123017,
+        "num_trades": 43,
+        "win_rate": 48.837209302325576,
+        "profit_factor": 1.2611962008940705,
+        "avg_holding_days": 9.813953488372093,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 23,
+          "trailing_stop": 20
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.517001628407295,
+          "trades": 6
+        },
+        "2019": {
+          "return": -29.96457405633013,
+          "trades": 15
+        },
+        "2020": {
+          "return": 60.28072662720321,
+          "trades": 16
+        },
+        "2021": {
+          "return": -1.5361646997269496,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=10_trail=0.07": {
+      "metrics": {
+        "total_return": 1.6235247801867914,
+        "annualized_return": 0.40588119504669784,
+        "volatility": 123.57874204911754,
+        "sharpe": 0.0032843933213479106,
+        "max_drawdown": -45.85021739226133,
+        "calmar": 0.008852328693979172,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.114104741206297,
+        "avg_holding_days": 10.906976744186046,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 32,
+          "trailing_stop": 11
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 6.384268797932058,
+          "trades": 6
+        },
+        "2019": {
+          "return": -35.17106961343682,
+          "trades": 15
+        },
+        "2020": {
+          "return": 49.05817935701107,
+          "trades": 16
+        },
+        "2021": {
+          "return": -1.1464721838776337,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=10_trail=0.10": {
+      "metrics": {
+        "total_return": -20.247145180246417,
+        "annualized_return": -5.061786295061604,
+        "volatility": 130.85886114711926,
+        "sharpe": -0.03868126507207521,
+        "max_drawdown": -57.50393661135651,
+        "calmar": -0.08802503955984724,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 0.9435638846640911,
+        "avg_holding_days": 11.488372093023257,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 36,
+          "trailing_stop": 7
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 1.948387239114635,
+          "trades": 6
+        },
+        "2019": {
+          "return": -46.629587431987915,
+          "trades": 15
+        },
+        "2020": {
+          "return": 48.276779667386705,
+          "trades": 16
+        },
+        "2021": {
+          "return": -1.1464721838776337,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.02": {
+      "metrics": {
+        "total_return": 19.07839470531403,
+        "annualized_return": 4.769598676328507,
+        "volatility": 112.27391209058996,
+        "sharpe": 0.04248180710475361,
+        "max_drawdown": -27.454595639033606,
+        "calmar": 0.17372678654743412,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.2646803434518699,
+        "avg_holding_days": 8.0,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 39,
+          "max_holding": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 0.2012021380446205,
+          "trades": 6
+        },
+        "2019": {
+          "return": -1.0924458201598264,
+          "trades": 15
+        },
+        "2020": {
+          "return": 29.649716718541285,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.325766095880503,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.03": {
+      "metrics": {
+        "total_return": 15.3061425967689,
+        "annualized_return": 3.826535649192225,
+        "volatility": 119.57797472609404,
+        "sharpe": 0.03200033833954211,
+        "max_drawdown": -37.52492908025594,
+        "calmar": 0.10197316138848053,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.224193341514905,
+        "avg_holding_days": 9.720930232558139,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 31,
+          "max_holding": 12
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.099544707838113,
+          "trades": 6
+        },
+        "2019": {
+          "return": -14.675262624576446,
+          "trades": 15
+        },
+        "2020": {
+          "return": 37.10590920948138,
+          "trades": 16
+        },
+        "2021": {
+          "return": -8.82044977854095,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.04": {
+      "metrics": {
+        "total_return": 3.941924267089214,
+        "annualized_return": 0.9854810667723035,
+        "volatility": 122.70500475108466,
+        "sharpe": 0.008031302951101448,
+        "max_drawdown": -40.81903473936618,
+        "calmar": 0.024142684241915652,
+        "num_trades": 43,
+        "win_rate": 46.51162790697674,
+        "profit_factor": 1.1304766047835941,
+        "avg_holding_days": 10.883720930232558,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 29,
+          "max_holding": 14
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.099544707838113,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.938539176865575,
+          "trades": 15
+        },
+        "2020": {
+          "return": 27.519236051995534,
+          "trades": 16
+        },
+        "2021": {
+          "return": -9.219698528338938,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.05": {
+      "metrics": {
+        "total_return": 29.5839189741957,
+        "annualized_return": 7.395979743548925,
+        "volatility": 129.76538493626094,
+        "sharpe": 0.05699501255424729,
+        "max_drawdown": -29.270558737142004,
+        "calmar": 0.25267641147430564,
+        "num_trades": 43,
+        "win_rate": 48.837209302325576,
+        "profit_factor": 1.325263828675585,
+        "avg_holding_days": 11.837209302325581,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 26,
+          "max_holding": 17
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.099544707838113,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.938539176865575,
+          "trades": 15
+        },
+        "2020": {
+          "return": 55.32660623079517,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.085856672774272,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.07": {
+      "metrics": {
+        "total_return": 4.549253721912638,
+        "annualized_return": 1.1373134304781596,
+        "volatility": 124.28325133696929,
+        "sharpe": 0.009150979059877993,
+        "max_drawdown": -40.74332737100918,
+        "calmar": 0.027914102844909333,
+        "num_trades": 43,
+        "win_rate": 48.837209302325576,
+        "profit_factor": 1.1393307699337414,
+        "avg_holding_days": 13.604651162790697,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 26,
+          "trailing_stop": 17
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 5.975016343634909,
+          "trades": 6
+        },
+        "2019": {
+          "return": -24.79680134609419,
+          "trades": 15
+        },
+        "2020": {
+          "return": 39.943844194550884,
+          "trades": 16
+        },
+        "2021": {
+          "return": -6.259485622053296,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=15_trail=0.10": {
+      "metrics": {
+        "total_return": 8.317062318232459,
+        "annualized_return": 2.0792655795581148,
+        "volatility": 128.39744221024353,
+        "sharpe": 0.01619397975353306,
+        "max_drawdown": -44.20687909003175,
+        "calmar": 0.04703488738310347,
+        "num_trades": 43,
+        "win_rate": 51.162790697674424,
+        "profit_factor": 1.1702060271307395,
+        "avg_holding_days": 15.186046511627907,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 33,
+          "trailing_stop": 10
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 5.274393733467186,
+          "trades": 6
+        },
+        "2019": {
+          "return": -30.00496191735801,
+          "trades": 14
+        },
+        "2020": {
+          "return": 56.812087947485004,
+          "trades": 17
+        },
+        "2021": {
+          "return": -6.259485622053296,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.02": {
+      "metrics": {
+        "total_return": 23.404564528973417,
+        "annualized_return": 5.851141132243354,
+        "volatility": 111.60965556853533,
+        "sharpe": 0.05242504425300718,
+        "max_drawdown": -27.454595639033602,
+        "calmar": 0.21312064505238926,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.3078233257340495,
+        "avg_holding_days": 8.279069767441861,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 41,
+          "max_holding": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -8.257193114262906,
+          "trades": 6
+        },
+        "2019": {
+          "return": 11.951166645430899,
+          "trades": 15
+        },
+        "2020": {
+          "return": 29.649716718541285,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.325766095880503,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.03": {
+      "metrics": {
+        "total_return": 9.766020053545876,
+        "annualized_return": 2.441505013386469,
+        "volatility": 118.55836059678747,
+        "sharpe": 0.020593275759690503,
+        "max_drawdown": -39.79408690362527,
+        "calmar": 0.06135346236990919,
+        "num_trades": 43,
+        "win_rate": 41.86046511627907,
+        "profit_factor": 1.179911812350018,
+        "avg_holding_days": 10.627906976744185,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 35,
+          "max_holding": 8
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -9.114245691320644,
+          "trades": 6
+        },
+        "2019": {
+          "return": -6.930686401860154,
+          "trades": 15
+        },
+        "2020": {
+          "return": 32.38647333175444,
+          "trades": 15
+        },
+        "2021": {
+          "return": -1.9783570156274521,
+          "trades": 7
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.04": {
+      "metrics": {
+        "total_return": -8.64557051702537,
+        "annualized_return": -2.1613926292563423,
+        "volatility": 121.86738415193616,
+        "sharpe": -0.01773561190549279,
+        "max_drawdown": -47.345218234413636,
+        "calmar": -0.04565176188553925,
+        "num_trades": 43,
+        "win_rate": 41.86046511627907,
+        "profit_factor": 1.0249672035879356,
+        "avg_holding_days": 11.930232558139535,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 33,
+          "max_holding": 10
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -9.114245691320644,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": 23.25867420253971,
+          "trades": 15
+        },
+        "2021": {
+          "return": -2.4075653010335873,
+          "trades": 7
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.05": {
+      "metrics": {
+        "total_return": 2.737298135517441,
+        "annualized_return": 0.6843245338793602,
+        "volatility": 131.6248611110654,
+        "sharpe": 0.0051990522770764816,
+        "max_drawdown": -41.34834407016471,
+        "calmar": 0.016550228292531336,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.126292820704077,
+        "avg_holding_days": 13.232558139534884,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 30,
+          "max_holding": 13
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -9.114245691320644,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": 37.296653927448276,
+          "trades": 15
+        },
+        "2021": {
+          "return": -1.4691516537546079,
+          "trades": 7
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.07": {
+      "metrics": {
+        "total_return": -24.86059506482038,
+        "annualized_return": -6.215148766205095,
+        "volatility": 127.10662637662821,
+        "sharpe": -0.04889712632124353,
+        "max_drawdown": -54.73343158791795,
+        "calmar": -0.11355306228555655,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 0.8944549271276835,
+        "avg_holding_days": 15.953488372093023,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 22,
+          "trailing_stop": 20,
+          "horizon": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -10.900463787360348,
+          "trades": 6
+        },
+        "2019": {
+          "return": -27.262584730670415,
+          "trades": 15
+        },
+        "2020": {
+          "return": 16.138963094106785,
+          "trades": 15
+        },
+        "2021": {
+          "return": -0.17105088858277995,
+          "trades": 7
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=20_trail=0.10": {
+      "metrics": {
+        "total_return": -16.75326952804288,
+        "annualized_return": -4.18831738201072,
+        "volatility": 134.0765862432932,
+        "sharpe": -0.03123824598584772,
+        "max_drawdown": -49.849299136161775,
+        "calmar": -0.08401958411833362,
+        "num_trades": 43,
+        "win_rate": 46.51162790697674,
+        "profit_factor": 0.9781152329507152,
+        "avg_holding_days": 17.837209302325583,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "max_holding": 27,
+          "trailing_stop": 15,
+          "horizon": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -11.489519130589688,
+          "trades": 6
+        },
+        "2019": {
+          "return": -27.81360428433237,
+          "trades": 14
+        },
+        "2020": {
+          "return": 30.515060191861632,
+          "trades": 16
+        },
+        "2021": {
+          "return": -0.17105088858277995,
+          "trades": 7
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.02": {
+      "metrics": {
+        "total_return": 28.429805503259644,
+        "annualized_return": 7.107451375814911,
+        "volatility": 112.31950261118371,
+        "sharpe": 0.06327887152793729,
+        "max_drawdown": -27.454595639033645,
+        "calmar": 0.25888020604134754,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.3485560391939324,
+        "avg_holding_days": 8.372093023255815,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 43
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -4.521272048312374,
+          "trades": 6
+        },
+        "2019": {
+          "return": 11.951166645430899,
+          "trades": 15
+        },
+        "2020": {
+          "return": 29.649716718541285,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.325766095880503,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.03": {
+      "metrics": {
+        "total_return": 6.591627881190165,
+        "annualized_return": 1.6479069702975413,
+        "volatility": 115.73835338468683,
+        "sharpe": 0.01423820991145683,
+        "max_drawdown": -39.79408690362528,
+        "calmar": 0.04141085016697331,
+        "num_trades": 43,
+        "win_rate": 41.86046511627907,
+        "profit_factor": 1.1487206919175577,
+        "avg_holding_days": 11.744186046511627,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 41,
+          "max_holding": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -6.930686401860154,
+          "trades": 15
+        },
+        "2020": {
+          "return": -18.815408775930898,
+          "trades": 12
+        },
+        "2021": {
+          "return": 49.146325651616316,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.04": {
+      "metrics": {
+        "total_return": -14.608505195721266,
+        "annualized_return": -3.6521262989303165,
+        "volatility": 124.49167154129603,
+        "sharpe": -0.029336310242399175,
+        "max_drawdown": -51.49472067289705,
+        "calmar": -0.07092234410065498,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 0.9767654673035437,
+        "avg_holding_days": 13.651162790697674,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 38,
+          "max_holding": 5
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -30.369633667138075,
+          "trades": 12
+        },
+        "2021": {
+          "return": 55.162000410105726,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.05": {
+      "metrics": {
+        "total_return": -9.863651874295398,
+        "annualized_return": -2.4659129685738495,
+        "volatility": 134.5307629415869,
+        "sharpe": -0.0183297330265238,
+        "max_drawdown": -45.97043500172384,
+        "calmar": -0.05364127984608761,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 1.0309530657222488,
+        "avg_holding_days": 15.465116279069768,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 35,
+          "max_holding": 6,
+          "horizon": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -22.439403384014266,
+          "trades": 12
+        },
+        "2021": {
+          "return": 47.03754791710062,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.07": {
+      "metrics": {
+        "total_return": -49.83830678517527,
+        "annualized_return": -12.459576696293817,
+        "volatility": 127.59623102807981,
+        "sharpe": -0.09764846967581563,
+        "max_drawdown": -66.86408455746783,
+        "calmar": -0.18634184224245462,
+        "num_trades": 43,
+        "win_rate": 34.883720930232556,
+        "profit_factor": 0.6661680515768459,
+        "avg_holding_days": 19.6046511627907,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 32,
+          "max_holding": 8,
+          "horizon": 3
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -7.656148911812155,
+          "trades": 6
+        },
+        "2019": {
+          "return": -23.521230911467317,
+          "trades": 15
+        },
+        "2020": {
+          "return": -50.209283349729496,
+          "trades": 12
+        },
+        "2021": {
+          "return": 42.65103885718011,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=30_trail=0.10": {
+      "metrics": {
+        "total_return": -54.071121209002115,
+        "annualized_return": -13.517780302250529,
+        "volatility": 127.88731054868916,
+        "sharpe": -0.10570071607772258,
+        "max_drawdown": -70.67853887461281,
+        "calmar": -0.19125721212533459,
+        "num_trades": 43,
+        "win_rate": 30.23255813953488,
+        "profit_factor": 0.6265200407196567,
+        "avg_holding_days": 22.441860465116278,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 29,
+          "max_holding": 11,
+          "horizon": 3
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -8.570383812412953,
+          "trades": 6
+        },
+        "2019": {
+          "return": -28.172943474227395,
+          "trades": 14
+        },
+        "2020": {
+          "return": -52.6184877681584,
+          "trades": 13
+        },
+        "2021": {
+          "return": 47.60530278415149,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.02": {
+      "metrics": {
+        "total_return": 28.429805503259644,
+        "annualized_return": 7.107451375814911,
+        "volatility": 112.31950261118371,
+        "sharpe": 0.06327887152793729,
+        "max_drawdown": -27.454595639033645,
+        "calmar": 0.25888020604134754,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.3485560391939324,
+        "avg_holding_days": 8.372093023255815,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 43
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -4.521272048312374,
+          "trades": 6
+        },
+        "2019": {
+          "return": 11.951166645430899,
+          "trades": 15
+        },
+        "2020": {
+          "return": 29.649716718541285,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.325766095880503,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.03": {
+      "metrics": {
+        "total_return": 6.248457430510457,
+        "annualized_return": 1.5621143576276142,
+        "volatility": 115.77173030346512,
+        "sharpe": 0.01349305528675215,
+        "max_drawdown": -39.79408690362528,
+        "calmar": 0.03925493657916559,
+        "num_trades": 43,
+        "win_rate": 41.86046511627907,
+        "profit_factor": 1.1456206382534766,
+        "avg_holding_days": 11.930232558139535,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 42,
+          "max_holding": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -6.930686401860154,
+          "trades": 15
+        },
+        "2020": {
+          "return": -18.815408775930898,
+          "trades": 12
+        },
+        "2021": {
+          "return": 48.66615086858235,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.04": {
+      "metrics": {
+        "total_return": -17.37269775883985,
+        "annualized_return": -4.343174439709962,
+        "volatility": 119.67686894933163,
+        "sharpe": -0.036290842815655214,
+        "max_drawdown": -51.49472067289705,
+        "calmar": -0.08434213027969452,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 0.9462976958720279,
+        "avg_holding_days": 14.13953488372093,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 41,
+          "max_holding": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -30.369633667138075,
+          "trades": 12
+        },
+        "2021": {
+          "return": 50.13927948695913,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.05": {
+      "metrics": {
+        "total_return": -12.192228636497438,
+        "annualized_return": -3.0480571591243595,
+        "volatility": 130.1287678744084,
+        "sharpe": -0.02342339214389658,
+        "max_drawdown": -45.97043500172384,
+        "calmar": -0.06630472735378859,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 1.0071867346446384,
+        "avg_holding_days": 16.3953488372093,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 36,
+          "max_holding": 5,
+          "horizon": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -22.439403384014266,
+          "trades": 12
+        },
+        "2021": {
+          "return": 43.23898912954658,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.07": {
+      "metrics": {
+        "total_return": -48.81235615732452,
+        "annualized_return": -12.20308903933113,
+        "volatility": 122.39523695719521,
+        "sharpe": -0.09970231965479888,
+        "max_drawdown": -67.7159462377058,
+        "calmar": -0.18020997589687626,
+        "num_trades": 43,
+        "win_rate": 37.2093023255814,
+        "profit_factor": 0.6643754413374201,
+        "avg_holding_days": 20.930232558139537,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 33,
+          "max_holding": 7,
+          "horizon": 3
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -7.656148911812155,
+          "trades": 6
+        },
+        "2019": {
+          "return": -23.521230911467317,
+          "trades": 15
+        },
+        "2020": {
+          "return": -51.48930845178267,
+          "trades": 12
+        },
+        "2021": {
+          "return": 49.40970283686654,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=40_trail=0.10": {
+      "metrics": {
+        "total_return": -54.18714161155251,
+        "annualized_return": -13.546785402888128,
+        "volatility": 122.7687854244234,
+        "sharpe": -0.11034389039571907,
+        "max_drawdown": -72.3339412415198,
+        "calmar": -0.18728117354556995,
+        "num_trades": 43,
+        "win_rate": 32.55813953488372,
+        "profit_factor": 0.6155405498218092,
+        "avg_holding_days": 24.209302325581394,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 31,
+          "max_holding": 9,
+          "horizon": 3
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -8.570383812412953,
+          "trades": 6
+        },
+        "2019": {
+          "return": -28.172943474227395,
+          "trades": 14
+        },
+        "2020": {
+          "return": -55.29350683220875,
+          "trades": 13
+        },
+        "2021": {
+          "return": 56.04211164067525,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.02": {
+      "metrics": {
+        "total_return": 28.429805503259644,
+        "annualized_return": 7.107451375814911,
+        "volatility": 112.31950261118371,
+        "sharpe": 0.06327887152793729,
+        "max_drawdown": -27.454595639033645,
+        "calmar": 0.25888020604134754,
+        "num_trades": 43,
+        "win_rate": 44.18604651162791,
+        "profit_factor": 1.3485560391939324,
+        "avg_holding_days": 8.372093023255815,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 43
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -4.521272048312374,
+          "trades": 6
+        },
+        "2019": {
+          "return": 11.951166645430899,
+          "trades": 15
+        },
+        "2020": {
+          "return": 29.649716718541285,
+          "trades": 16
+        },
+        "2021": {
+          "return": -7.325766095880503,
+          "trades": 6
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.03": {
+      "metrics": {
+        "total_return": 6.248457430510457,
+        "annualized_return": 1.5621143576276142,
+        "volatility": 115.77173030346512,
+        "sharpe": 0.01349305528675215,
+        "max_drawdown": -39.79408690362528,
+        "calmar": 0.03925493657916559,
+        "num_trades": 43,
+        "win_rate": 41.86046511627907,
+        "profit_factor": 1.1456206382534766,
+        "avg_holding_days": 11.930232558139535,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 43
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -6.930686401860154,
+          "trades": 15
+        },
+        "2020": {
+          "return": -18.815408775930898,
+          "trades": 12
+        },
+        "2021": {
+          "return": 48.66615086858235,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.04": {
+      "metrics": {
+        "total_return": -17.37269775883985,
+        "annualized_return": -4.343174439709962,
+        "volatility": 119.67686894933163,
+        "sharpe": -0.036290842815655214,
+        "max_drawdown": -51.49472067289705,
+        "calmar": -0.08434213027969452,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 0.9462976958720279,
+        "avg_holding_days": 14.13953488372093,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 43
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -30.369633667138075,
+          "trades": 12
+        },
+        "2021": {
+          "return": 50.13927948695913,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.05": {
+      "metrics": {
+        "total_return": -16.45597028807436,
+        "annualized_return": -4.11399257201859,
+        "volatility": 126.68248529812473,
+        "sharpe": -0.032474833141590484,
+        "max_drawdown": -45.97043500172384,
+        "calmar": -0.08949213928178665,
+        "num_trades": 43,
+        "win_rate": 39.53488372093023,
+        "profit_factor": 0.968021238097065,
+        "avg_holding_days": 17.906976744186046,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 40,
+          "horizon": 2,
+          "max_holding": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -5.413225244676956,
+          "trades": 6
+        },
+        "2019": {
+          "return": -16.43966952094975,
+          "trades": 15
+        },
+        "2020": {
+          "return": -22.439403384014266,
+          "trades": 12
+        },
+        "2021": {
+          "return": 36.28363615112811,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.07": {
+      "metrics": {
+        "total_return": -47.97638486711061,
+        "annualized_return": -11.994096216777653,
+        "volatility": 126.88077634651708,
+        "sharpe": -0.09453044473830487,
+        "max_drawdown": -67.7159462377058,
+        "calmar": -0.17712365968680896,
+        "num_trades": 43,
+        "win_rate": 37.2093023255814,
+        "profit_factor": 0.679173577347259,
+        "avg_holding_days": 22.6046511627907,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 35,
+          "max_holding": 4,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -7.656148911812155,
+          "trades": 6
+        },
+        "2019": {
+          "return": -23.521230911467317,
+          "trades": 15
+        },
+        "2020": {
+          "return": -51.48930845178267,
+          "trades": 12
+        },
+        "2021": {
+          "return": 51.84978823003088,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    },
+    "max_hold=60_trail=0.10": {
+      "metrics": {
+        "total_return": -52.53159192085525,
+        "annualized_return": -13.132897980213812,
+        "volatility": 127.60949278125379,
+        "sharpe": -0.10291474163858658,
+        "max_drawdown": -73.02062731493619,
+        "calmar": -0.1798518920355469,
+        "num_trades": 43,
+        "win_rate": 32.55813953488372,
+        "profit_factor": 0.6371433760801136,
+        "avg_holding_days": 26.930232558139537,
+        "total_transaction_costs": 4.300000000000001,
+        "exit_reason_counts": {
+          "trailing_stop": 33,
+          "max_holding": 6,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -8.570383812412953,
+          "trades": 6
+        },
+        "2019": {
+          "return": -28.172943474227395,
+          "trades": 14
+        },
+        "2020": {
+          "return": -56.403145415629986,
+          "trades": 13
+        },
+        "2021": {
+          "return": 65.79618922650073,
+          "trades": 10
+        }
+      },
+      "num_trades": 43
+    }
+  },
+  "pb07": {
+    "max_hold=10_trail=0.02": {
+      "metrics": {
+        "total_return": 198.98202948628682,
+        "annualized_return": 49.745507371571705,
+        "volatility": 98.2814199774582,
+        "sharpe": 0.5061537306133888,
+        "max_drawdown": -52.34615398172829,
+        "calmar": 0.9503182867825523,
+        "num_trades": 174,
+        "win_rate": 40.804597701149426,
+        "profit_factor": 1.430803447028323,
+        "avg_holding_days": 8.149425287356323,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 112,
+          "max_holding": 58,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 51.80909511909042,
+          "trades": 54
+        },
+        "2019": {
+          "return": -34.368623799280684,
+          "trades": 84
+        },
+        "2020": {
+          "return": 183.98871340851892,
+          "trades": 29
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=10_trail=0.03": {
+      "metrics": {
+        "total_return": 316.3598798665423,
+        "annualized_return": 79.08996996663558,
+        "volatility": 100.26304715642891,
+        "sharpe": 0.7888247186746737,
+        "max_drawdown": -49.30857585829671,
+        "calmar": 1.6039800093583074,
+        "num_trades": 174,
+        "win_rate": 44.827586206896555,
+        "profit_factor": 1.5346275136668064,
+        "avg_holding_days": 9.24712643678161,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 91,
+          "max_holding": 79,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 76.32898089341981,
+          "trades": 54
+        },
+        "2019": {
+          "return": -20.93963642324731,
+          "trades": 84
+        },
+        "2020": {
+          "return": 182.65174240338902,
+          "trades": 29
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=10_trail=0.04": {
+      "metrics": {
+        "total_return": 700.6846402740122,
+        "annualized_return": 175.17116006850304,
+        "volatility": 103.11984239100107,
+        "sharpe": 1.6987143890727052,
+        "max_drawdown": -43.78642561496043,
+        "calmar": 4.000581404129334,
+        "num_trades": 174,
+        "win_rate": 50.0,
+        "profit_factor": 1.7794879679466267,
+        "avg_holding_days": 10.304597701149426,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 107,
+          "trailing_stop": 63,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 59.975170492555364,
+          "trades": 54
+        },
+        "2019": {
+          "return": 68.3888714355648,
+          "trades": 83
+        },
+        "2020": {
+          "return": 181.29423178375384,
+          "trades": 30
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=10_trail=0.05": {
+      "metrics": {
+        "total_return": 820.4790881348822,
+        "annualized_return": 205.11977203372055,
+        "volatility": 103.74977789812493,
+        "sharpe": 1.9770622760767151,
+        "max_drawdown": -43.0811983300769,
+        "calmar": 4.761236455452013,
+        "num_trades": 174,
+        "win_rate": 51.14942528735632,
+        "profit_factor": 1.8418316730434328,
+        "avg_holding_days": 10.706896551724139,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 121,
+          "trailing_stop": 49,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 43.05774911785838,
+          "trades": 54
+        },
+        "2019": {
+          "return": 77.49470411688762,
+          "trades": 83
+        },
+        "2020": {
+          "return": 243.06975821889378,
+          "trades": 30
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=10_trail=0.07": {
+      "metrics": {
+        "total_return": 507.75234119444184,
+        "annualized_return": 126.93808529861046,
+        "volatility": 103.41891876994703,
+        "sharpe": 1.2274164805472514,
+        "max_drawdown": -43.31874224074434,
+        "calmar": 2.9303271224531584,
+        "num_trades": 174,
+        "win_rate": 50.57471264367817,
+        "profit_factor": 1.661854588127785,
+        "avg_holding_days": 11.166666666666666,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 133,
+          "trailing_stop": 37,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 36.36366428724516,
+          "trades": 54
+        },
+        "2019": {
+          "return": 78.61116093957689,
+          "trades": 83
+        },
+        "2020": {
+          "return": 136.14822279838862,
+          "trades": 30
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=10_trail=0.10": {
+      "metrics": {
+        "total_return": 546.4675441032055,
+        "annualized_return": 136.61688602580136,
+        "volatility": 104.05246768442804,
+        "sharpe": 1.3129615189918917,
+        "max_drawdown": -47.488837169903356,
+        "calmar": 2.876821041901275,
+        "num_trades": 174,
+        "win_rate": 51.14942528735632,
+        "profit_factor": 1.6835333527200962,
+        "avg_holding_days": 11.764367816091953,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 148,
+          "trailing_stop": 22,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 15.520070853877144,
+          "trades": 54
+        },
+        "2019": {
+          "return": 90.61937125868478,
+          "trades": 83
+        },
+        "2020": {
+          "return": 177.83537690039205,
+          "trades": 30
+        },
+        "2021": {
+          "return": 5.665862628481211,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.02": {
+      "metrics": {
+        "total_return": 14.313721460193607,
+        "annualized_return": 3.5784303650484017,
+        "volatility": 88.27481611887265,
+        "sharpe": 0.0405373867925096,
+        "max_drawdown": -66.11339683826041,
+        "calmar": 0.05412564678536578,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 1.1141822019808263,
+        "avg_holding_days": 9.022988505747126,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 150,
+          "max_holding": 20,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 67.28450420593539,
+          "trades": 54
+        },
+        "2019": {
+          "return": -64.2178602657544,
+          "trades": 84
+        },
+        "2020": {
+          "return": 88.43937493709493,
+          "trades": 29
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.03": {
+      "metrics": {
+        "total_return": 36.1303879237628,
+        "annualized_return": 9.0325969809407,
+        "volatility": 89.71948030250697,
+        "sharpe": 0.10067598419524403,
+        "max_drawdown": -66.92484777322609,
+        "calmar": 0.13496626860545918,
+        "num_trades": 174,
+        "win_rate": 40.804597701149426,
+        "profit_factor": 1.164782075159707,
+        "avg_holding_days": 10.540229885057471,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 138,
+          "max_holding": 32,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 99.06110488374726,
+          "trades": 54
+        },
+        "2019": {
+          "return": -64.02160856064852,
+          "trades": 84
+        },
+        "2020": {
+          "return": 87.55223411557462,
+          "trades": 29
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.04": {
+      "metrics": {
+        "total_return": 148.58275909942918,
+        "annualized_return": 37.145689774857296,
+        "volatility": 93.09143204709086,
+        "sharpe": 0.39902372278543236,
+        "max_drawdown": -50.46821137071233,
+        "calmar": 0.736021522577946,
+        "num_trades": 174,
+        "win_rate": 44.827586206896555,
+        "profit_factor": 1.3549184509558867,
+        "avg_holding_days": 12.494252873563218,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 112,
+          "max_holding": 58,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 79.53692636356007,
+          "trades": 54
+        },
+        "2019": {
+          "return": -25.651489301549557,
+          "trades": 83
+        },
+        "2020": {
+          "return": 83.75546210907456,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.05": {
+      "metrics": {
+        "total_return": 538.3130095579562,
+        "annualized_return": 134.57825238948905,
+        "volatility": 94.93995668785958,
+        "sharpe": 1.4175090982182659,
+        "max_drawdown": -45.096992360478744,
+        "calmar": 2.984195737794439,
+        "num_trades": 174,
+        "win_rate": 52.87356321839081,
+        "profit_factor": 1.7051343914278554,
+        "avg_holding_days": 13.448275862068966,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 93,
+          "max_holding": 77,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 92.88441319289258,
+          "trades": 54
+        },
+        "2019": {
+          "return": 40.113200481090615,
+          "trades": 83
+        },
+        "2020": {
+          "return": 133.05199283620172,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.07": {
+      "metrics": {
+        "total_return": 320.11343384740513,
+        "annualized_return": 80.02835846185128,
+        "volatility": 97.56314444250275,
+        "sharpe": 0.8202724391382721,
+        "max_drawdown": -45.372712022796016,
+        "calmar": 1.7637993166827606,
+        "num_trades": 174,
+        "win_rate": 51.14942528735632,
+        "profit_factor": 1.5394674607459213,
+        "avg_holding_days": 14.436781609195402,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 96,
+          "trailing_stop": 74,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 111.56900676919945,
+          "trades": 54
+        },
+        "2019": {
+          "return": 11.014633345483716,
+          "trades": 83
+        },
+        "2020": {
+          "return": 76.49386164725311,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=15_trail=0.10": {
+      "metrics": {
+        "total_return": 315.71101612412525,
+        "annualized_return": 78.92775403103131,
+        "volatility": 100.01804376768777,
+        "sharpe": 0.7891351505969969,
+        "max_drawdown": -57.41772006819913,
+        "calmar": 1.3746236168430788,
+        "num_trades": 174,
+        "win_rate": 53.44827586206896,
+        "profit_factor": 1.5222883766126674,
+        "avg_holding_days": 15.706896551724139,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 122,
+          "trailing_stop": 48,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 62.31140838440024,
+          "trades": 54
+        },
+        "2019": {
+          "return": 26.810528320908244,
+          "trades": 83
+        },
+        "2020": {
+          "return": 99.28861442057324,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.3455508251285275,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.02": {
+      "metrics": {
+        "total_return": 26.479465740470264,
+        "annualized_return": 6.619866435117566,
+        "volatility": 90.62251047139056,
+        "sharpe": 0.07304880874170278,
+        "max_drawdown": -69.0329471984676,
+        "calmar": 0.09589430415140257,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 1.1460008767387666,
+        "avg_holding_days": 9.258620689655173,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 164,
+          "max_holding": 6,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 90.49018226911612,
+          "trades": 54
+        },
+        "2019": {
+          "return": -65.1760287917641,
+          "trades": 84
+        },
+        "2020": {
+          "return": 88.43937493709493,
+          "trades": 29
+        },
+        "2021": {
+          "return": 1.1806523175128314,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.03": {
+      "metrics": {
+        "total_return": 49.208772117896245,
+        "annualized_return": 12.302193029474061,
+        "volatility": 92.25247355570058,
+        "sharpe": 0.13335353032074737,
+        "max_drawdown": -71.447819829672,
+        "calmar": 0.17218430259736223,
+        "num_trades": 174,
+        "win_rate": 39.6551724137931,
+        "profit_factor": 1.192918813488714,
+        "avg_holding_days": 10.971264367816092,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 156,
+          "max_holding": 14,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 139.9091092008366,
+          "trades": 54
+        },
+        "2019": {
+          "return": -67.22611681346591,
+          "trades": 84
+        },
+        "2020": {
+          "return": 87.55223411557462,
+          "trades": 29
+        },
+        "2021": {
+          "return": 1.1806523175128314,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.04": {
+      "metrics": {
+        "total_return": 50.05480278958716,
+        "annualized_return": 12.51370069739679,
+        "volatility": 92.0672288057488,
+        "sharpe": 0.1359191631997445,
+        "max_drawdown": -62.84073377127517,
+        "calmar": 0.1991335865514172,
+        "num_trades": 174,
+        "win_rate": 41.37931034482759,
+        "profit_factor": 1.1932590217897883,
+        "avg_holding_days": 13.488505747126437,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 139,
+          "max_holding": 31,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 71.54376830536802,
+          "trades": 54
+        },
+        "2019": {
+          "return": -52.64198452362394,
+          "trades": 83
+        },
+        "2020": {
+          "return": 83.75546210907456,
+          "trades": 30
+        },
+        "2021": {
+          "return": 0.5173896906316422,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.05": {
+      "metrics": {
+        "total_return": 245.30753668813915,
+        "annualized_return": 61.32688417203479,
+        "volatility": 93.31155390747051,
+        "sharpe": 0.6572271235869427,
+        "max_drawdown": -53.17386797640742,
+        "calmar": 1.1533274991250355,
+        "num_trades": 174,
+        "win_rate": 48.275862068965516,
+        "profit_factor": 1.4737441999951566,
+        "avg_holding_days": 14.908045977011493,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 125,
+          "max_holding": 45,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 17.11086308382377,
+          "trades": 54
+        },
+        "2019": {
+          "return": 6.606712359669942,
+          "trades": 83
+        },
+        "2020": {
+          "return": 173.7619941895177,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.0301899623406996,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.07": {
+      "metrics": {
+        "total_return": 81.05674975576862,
+        "annualized_return": 20.264187438942155,
+        "volatility": 93.94557127905986,
+        "sharpe": 0.21570135944725444,
+        "max_drawdown": -66.80795357867346,
+        "calmar": 0.3033199844248922,
+        "num_trades": 174,
+        "win_rate": 44.827586206896555,
+        "profit_factor": 1.255505124666261,
+        "avg_holding_days": 16.385057471264368,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 105,
+          "max_holding": 65,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 47.83682339978903,
+          "trades": 54
+        },
+        "2019": {
+          "return": -34.36595301057024,
+          "trades": 83
+        },
+        "2020": {
+          "return": 84.6935565823989,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.0301899623406996,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=20_trail=0.10": {
+      "metrics": {
+        "total_return": 88.23783141747965,
+        "annualized_return": 22.059457854369914,
+        "volatility": 99.2037410868963,
+        "sharpe": 0.2223651811179903,
+        "max_drawdown": -70.1190238127221,
+        "calmar": 0.3146001848697662,
+        "num_trades": 174,
+        "win_rate": 47.12643678160919,
+        "profit_factor": 1.2595923819322972,
+        "avg_holding_days": 18.43103448275862,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "max_holding": 95,
+          "trailing_stop": 75,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 19.08837784965829,
+          "trades": 54
+        },
+        "2019": {
+          "return": -22.069401913757304,
+          "trades": 83
+        },
+        "2020": {
+          "return": 100.76053875418167,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.0301899623406996,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.02": {
+      "metrics": {
+        "total_return": 36.181495534475694,
+        "annualized_return": 9.045373883618923,
+        "volatility": 90.93044485601409,
+        "sharpe": 0.09947574652188307,
+        "max_drawdown": -66.29648296027294,
+        "calmar": 0.13643821632346942,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 1.1677914217171637,
+        "avg_holding_days": 9.408045977011493,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 168,
+          "horizon": 4,
+          "max_holding": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 85.05725864209444,
+          "trades": 54
+        },
+        "2019": {
+          "return": -62.09874040872035,
+          "trades": 84
+        },
+        "2020": {
+          "return": 88.43937493709493,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.03": {
+      "metrics": {
+        "total_return": 34.48773651895118,
+        "annualized_return": 8.621934129737795,
+        "volatility": 91.58799804769872,
+        "sharpe": 0.09413825297554294,
+        "max_drawdown": -71.96991908639693,
+        "calmar": 0.11979913607221815,
+        "num_trades": 174,
+        "win_rate": 39.08045977011494,
+        "profit_factor": 1.1611808076760022,
+        "avg_holding_days": 11.241379310344827,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 168,
+          "horizon": 4,
+          "max_holding": 2
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 98.74007084463052,
+          "trades": 54
+        },
+        "2019": {
+          "return": -64.98224291912382,
+          "trades": 84
+        },
+        "2020": {
+          "return": 87.55223411557462,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.04": {
+      "metrics": {
+        "total_return": 14.286035722611956,
+        "annualized_return": 3.571508930652989,
+        "volatility": 91.25568030259986,
+        "sharpe": 0.039137387599435136,
+        "max_drawdown": -72.08054695313075,
+        "calmar": 0.04954886001316426,
+        "num_trades": 174,
+        "win_rate": 39.6551724137931,
+        "profit_factor": 1.1118953822938855,
+        "avg_holding_days": 14.155172413793103,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 166,
+          "max_holding": 4,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 37.764081179339406,
+          "trades": 54
+        },
+        "2019": {
+          "return": -55.89513392712754,
+          "trades": 83
+        },
+        "2020": {
+          "return": 83.75546210907456,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.3600297621093835,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.05": {
+      "metrics": {
+        "total_return": 25.329422110313395,
+        "annualized_return": 6.332355527578349,
+        "volatility": 84.69062632669794,
+        "sharpe": 0.0747704415734393,
+        "max_drawdown": -63.25140456578347,
+        "calmar": 0.10011406973567676,
+        "num_trades": 174,
+        "win_rate": 45.97701149425287,
+        "profit_factor": 1.137287564432129,
+        "avg_holding_days": 16.022988505747126,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 164,
+          "max_holding": 6,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -22.504059124171405,
+          "trades": 54
+        },
+        "2019": {
+          "return": -43.05629561513723,
+          "trades": 83
+        },
+        "2020": {
+          "return": 173.7619941895177,
+          "trades": 30
+        },
+        "2021": {
+          "return": 3.7421417895875386,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.07": {
+      "metrics": {
+        "total_return": -69.14294542572546,
+        "annualized_return": -17.285736356431364,
+        "volatility": 79.92597176954924,
+        "sharpe": -0.2162718322183354,
+        "max_drawdown": -85.4051258202126,
+        "calmar": -0.20239694269428024,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 0.7600787906432294,
+        "avg_holding_days": 18.350574712643677,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 157,
+          "max_holding": 13,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 4.588874874157156,
+          "trades": 54
+        },
+        "2019": {
+          "return": -81.08571213533912,
+          "trades": 83
+        },
+        "2020": {
+          "return": 50.35704200617628,
+          "trades": 30
+        },
+        "2021": {
+          "return": 3.7421417895875386,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=30_trail=0.10": {
+      "metrics": {
+        "total_return": -80.62100913346954,
+        "annualized_return": -20.155252283367386,
+        "volatility": 86.6947742281615,
+        "sharpe": -0.23248520412918097,
+        "max_drawdown": -87.64048185673633,
+        "calmar": -0.2299765114974455,
+        "num_trades": 174,
+        "win_rate": 39.08045977011494,
+        "profit_factor": 0.692589989637028,
+        "avg_holding_days": 22.24137931034483,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 130,
+          "max_holding": 40,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -30.864577354561618,
+          "trades": 54
+        },
+        "2019": {
+          "return": -72.49038721938854,
+          "trades": 83
+        },
+        "2020": {
+          "return": -1.7820537855958496,
+          "trades": 30
+        },
+        "2021": {
+          "return": 3.7421417895875386,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.02": {
+      "metrics": {
+        "total_return": 36.181495534475694,
+        "annualized_return": 9.045373883618923,
+        "volatility": 90.93044485601409,
+        "sharpe": 0.09947574652188307,
+        "max_drawdown": -66.29648296027294,
+        "calmar": 0.13643821632346942,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 1.1677914217171637,
+        "avg_holding_days": 9.408045977011493,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 85.05725864209444,
+          "trades": 54
+        },
+        "2019": {
+          "return": -62.09874040872035,
+          "trades": 84
+        },
+        "2020": {
+          "return": 88.43937493709493,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.03": {
+      "metrics": {
+        "total_return": 34.48773651895118,
+        "annualized_return": 8.621934129737795,
+        "volatility": 91.58799804769872,
+        "sharpe": 0.09413825297554294,
+        "max_drawdown": -71.96991908639693,
+        "calmar": 0.11979913607221815,
+        "num_trades": 174,
+        "win_rate": 39.08045977011494,
+        "profit_factor": 1.1611808076760022,
+        "avg_holding_days": 11.241379310344827,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 98.74007084463052,
+          "trades": 54
+        },
+        "2019": {
+          "return": -64.98224291912382,
+          "trades": 84
+        },
+        "2020": {
+          "return": 87.55223411557462,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.04": {
+      "metrics": {
+        "total_return": 12.003728867594198,
+        "annualized_return": 3.0009322168985495,
+        "volatility": 91.33074502123553,
+        "sharpe": 0.03285785324756516,
+        "max_drawdown": -72.63810202689213,
+        "calmar": 0.04131347231219701,
+        "num_trades": 174,
+        "win_rate": 39.6551724137931,
+        "profit_factor": 1.1060176731728926,
+        "avg_holding_days": 14.160919540229886,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 37.764081179339406,
+          "trades": 54
+        },
+        "2019": {
+          "return": -56.77591378392537,
+          "trades": 83
+        },
+        "2020": {
+          "return": 83.75546210907456,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.3600297621093835,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.05": {
+      "metrics": {
+        "total_return": 20.905143389365044,
+        "annualized_return": 5.226285847341261,
+        "volatility": 84.7200419001399,
+        "sharpe": 0.06168889592266161,
+        "max_drawdown": -63.98527875033698,
+        "calmar": 0.08167950424555642,
+        "num_trades": 174,
+        "win_rate": 45.97701149425287,
+        "profit_factor": 1.126130787479836,
+        "avg_holding_days": 16.10919540229885,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 169,
+          "horizon": 4,
+          "max_holding": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -22.504059124171405,
+          "trades": 54
+        },
+        "2019": {
+          "return": -44.19346872684717,
+          "trades": 83
+        },
+        "2020": {
+          "return": 173.7619941895177,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.119254589901609,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.07": {
+      "metrics": {
+        "total_return": -70.42623228825714,
+        "annualized_return": -17.606558072064285,
+        "volatility": 79.77972386849683,
+        "sharpe": -0.22068963413668455,
+        "max_drawdown": -86.07322206785882,
+        "calmar": -0.20455325883099323,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 0.7504804959239013,
+        "avg_holding_days": 18.528735632183906,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 167,
+          "horizon": 4,
+          "max_holding": 3
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.105071287750754,
+          "trades": 54
+        },
+        "2019": {
+          "return": -81.95153424477401,
+          "trades": 83
+        },
+        "2020": {
+          "return": 50.35704200617628,
+          "trades": 30
+        },
+        "2021": {
+          "return": 0.808354759395824,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=40_trail=0.10": {
+      "metrics": {
+        "total_return": -83.51261532554064,
+        "annualized_return": -20.87815383138516,
+        "volatility": 85.53245781219164,
+        "sharpe": -0.24409626901203377,
+        "max_drawdown": -86.63625445168132,
+        "calmar": -0.24098633953559592,
+        "num_trades": 174,
+        "win_rate": 39.6551724137931,
+        "profit_factor": 0.6577765530257287,
+        "avg_holding_days": 23.67241379310345,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 148,
+          "max_holding": 22,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -27.44755751220591,
+          "trades": 54
+        },
+        "2019": {
+          "return": -70.4902516424443,
+          "trades": 83
+        },
+        "2020": {
+          "return": -23.993218524478955,
+          "trades": 30
+        },
+        "2021": {
+          "return": 1.316897962269592,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.02": {
+      "metrics": {
+        "total_return": 36.181495534475694,
+        "annualized_return": 9.045373883618923,
+        "volatility": 90.93044485601409,
+        "sharpe": 0.09947574652188307,
+        "max_drawdown": -66.29648296027294,
+        "calmar": 0.13643821632346942,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 1.1677914217171637,
+        "avg_holding_days": 9.408045977011493,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 85.05725864209444,
+          "trades": 54
+        },
+        "2019": {
+          "return": -62.09874040872035,
+          "trades": 84
+        },
+        "2020": {
+          "return": 88.43937493709493,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.03": {
+      "metrics": {
+        "total_return": 34.48773651895118,
+        "annualized_return": 8.621934129737795,
+        "volatility": 91.58799804769872,
+        "sharpe": 0.09413825297554294,
+        "max_drawdown": -71.96991908639693,
+        "calmar": 0.11979913607221815,
+        "num_trades": 174,
+        "win_rate": 39.08045977011494,
+        "profit_factor": 1.1611808076760022,
+        "avg_holding_days": 11.241379310344827,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 98.74007084463052,
+          "trades": 54
+        },
+        "2019": {
+          "return": -64.98224291912382,
+          "trades": 84
+        },
+        "2020": {
+          "return": 87.55223411557462,
+          "trades": 29
+        },
+        "2021": {
+          "return": 3.035451024406388,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.04": {
+      "metrics": {
+        "total_return": 12.003728867594198,
+        "annualized_return": 3.0009322168985495,
+        "volatility": 91.33074502123553,
+        "sharpe": 0.03285785324756516,
+        "max_drawdown": -72.63810202689213,
+        "calmar": 0.04131347231219701,
+        "num_trades": 174,
+        "win_rate": 39.6551724137931,
+        "profit_factor": 1.1060176731728926,
+        "avg_holding_days": 14.160919540229886,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 170,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 37.764081179339406,
+          "trades": 54
+        },
+        "2019": {
+          "return": -56.77591378392537,
+          "trades": 83
+        },
+        "2020": {
+          "return": 83.75546210907456,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.3600297621093835,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.05": {
+      "metrics": {
+        "total_return": 21.938053005561642,
+        "annualized_return": 5.4845132513904105,
+        "volatility": 84.74281602176235,
+        "sharpe": 0.06471950672469938,
+        "max_drawdown": -63.98527875033698,
+        "calmar": 0.08571523573086764,
+        "num_trades": 174,
+        "win_rate": 45.97701149425287,
+        "profit_factor": 1.1286367074855592,
+        "avg_holding_days": 16.195402298850574,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 169,
+          "horizon": 4,
+          "max_holding": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -22.504059124171405,
+          "trades": 54
+        },
+        "2019": {
+          "return": -44.19346872684717,
+          "trades": 83
+        },
+        "2020": {
+          "return": 173.7619941895177,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.991673720368637,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.07": {
+      "metrics": {
+        "total_return": -71.01562292294872,
+        "annualized_return": -17.75390573073718,
+        "volatility": 79.603364917892,
+        "sharpe": -0.22302958862417055,
+        "max_drawdown": -86.25623115826329,
+        "calmar": -0.20582751521060827,
+        "num_trades": 174,
+        "win_rate": 37.93103448275862,
+        "profit_factor": 0.7452229764377725,
+        "avg_holding_days": 18.798850574712645,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 169,
+          "horizon": 4,
+          "max_holding": 1
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": 8.105071287750754,
+          "trades": 54
+        },
+        "2019": {
+          "return": -82.18870563625839,
+          "trades": 83
+        },
+        "2020": {
+          "return": 50.35704200617628,
+          "trades": 30
+        },
+        "2021": {
+          "return": 0.11488416038873961,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    },
+    "max_hold=60_trail=0.10": {
+      "metrics": {
+        "total_return": -94.06547577647135,
+        "annualized_return": -23.516368944117836,
+        "volatility": 82.5949909808992,
+        "sharpe": -0.2847190690965291,
+        "max_drawdown": -94.79555086727697,
+        "calmar": -0.24807460612833032,
+        "num_trades": 174,
+        "win_rate": 31.60919540229885,
+        "profit_factor": 0.48687563721172306,
+        "avg_holding_days": 24.95402298850575,
+        "total_transaction_costs": 17.400000000000002,
+        "exit_reason_counts": {
+          "trailing_stop": 166,
+          "max_holding": 4,
+          "horizon": 4
+        }
+      },
+      "yearly": {
+        "2018": {
+          "return": -27.44755751220591,
+          "trades": 54
+        },
+        "2019": {
+          "return": -85.25080853806152,
+          "trades": 83
+        },
+        "2020": {
+          "return": -46.03416019387326,
+          "trades": 30
+        },
+        "2021": {
+          "return": 2.7653524617536673,
+          "trades": 7
+        }
+      },
+      "num_trades": 174
+    }
+  }
+}
