@@ -13,7 +13,7 @@ We conducted disciplined alpha research on the NIFTY 500 signal library (2018-20
 1. **BB01 Bollinger Band Breakout** (18.71% return, 0.0381 Sharpe)
 2. **PB07 Price/Book Mean Reversion** (22.91% return, 0.0868 Sharpe)
 
-**Combined Portfolio (70/30):** 23.64% return, 0.6684 Sharpe, 0.7647 Calmar, -8.33% max DD
+**Combined Portfolio (70% PB07 + 30% BB01):** 23.64% return, 0.6684 Sharpe, 0.7647 Calmar, -8.33% max DD
 
 **Key Finding:** The two strategies are nearly independent (Pearson ρ = -0.0038), operate in complementary market regimes, and combine to reduce volatility while maintaining return.
 
@@ -41,7 +41,7 @@ Discover and validate alpha-generating trading strategies from the NIFTY 500 fun
 - Signals defined through close of day t-1 only (no forward-looking data)
 - Entry at open of day t
 - Exit at close of day t+20 (fixed 20-day holding period)
-- Marked to market at exit dates only (sparse portfolio)
+- Portfolio positions change only on entry/exit events; however, portfolio equity is marked to market on every trading day, retaining all 866 observations for return, volatility, drawdown and Sharpe calculations
 - Transaction costs: 0.05% per side (entry and exit)
 
 ---
@@ -84,10 +84,10 @@ For remaining candidates:
 
 ### Phase 5: Portfolio Construction
 
-1. Tested fixed allocations: 50/50, 30/70, 70/30
-2. Inverse-volatility weighting (underperformed 30/70)
+1. Tested fixed allocations: 50/50 (BB01/PB07), 70/30 (BB01/PB07), 30/70 (BB01/PB07)
+2. Inverse-volatility weighting (underperformed 30/70 allocation)
 3. Conditional-alpha analysis (found no material improvement from conditioning)
-4. Selected 70/30 allocation (highest Sharpe and Calmar)
+4. Selected 70% PB07 + 30% BB01 allocation (highest Sharpe and Calmar)
 
 ---
 
@@ -331,11 +331,11 @@ When signals disagree (14% of active days):
 |----------|--------|---------|--------|--------|----------|
 | 100% BB01 | 18.71% | 19.06% | 0.2685 | 0.1563 | — |
 | 100% PB07 | 22.91% | 10.92% | 0.5666 | 0.6280 | — |
-| 50/50 | 23.14% | 10.97% | 0.5695 | 0.4808 | baseline |
-| **30/70** | **23.64%** | **9.53%** | **0.6684** | **0.7647** | **+17.4% Sharpe** |
-| 70/30 | 21.90% | 13.73% | 0.4321 | 0.2775 | -24.1% Sharpe |
+| 50% PB07 + 50% BB01 | 23.14% | 10.97% | 0.5695 | 0.4808 | baseline |
+| **70% PB07 + 30% BB01** | **23.64%** | **9.53%** | **0.6684** | **0.7647** | **+17.4% Sharpe** |
+| 30% PB07 + 70% BB01 | 21.90% | 13.73% | 0.4321 | 0.2775 | -24.1% Sharpe |
 
-**Finding:** 30/70 allocation optimal. Higher PB07 weight reduces volatility (strong risk manager) while maintaining return. Inverse-volatility allocation (36/64) underperformed 30/70 by 3% Sharpe, showing allocation contains real information beyond vol matching.
+**Finding:** 70% PB07 + 30% BB01 allocation optimal. Higher PB07 weight reduces volatility (strong risk manager) while maintaining return. Inverse-volatility allocation (36% PB07 + 64% BB01) underperformed the 70/30 allocation by 3% Sharpe, showing allocation contains real information beyond vol matching.
 
 ---
 
