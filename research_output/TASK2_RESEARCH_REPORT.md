@@ -8,10 +8,14 @@
 
 ## Executive Summary
 
-We conducted disciplined alpha research on the NIFTY 500 signal library (2018-2021), rigorously evaluating 20+ candidate signals using statistical hypothesis testing, multiple-testing correction, and walk-forward out-of-sample analysis. Two strategies survived systematic testing and formed the final portfolio:
+We conducted disciplined alpha research on the NIFTY 500 signal library (2018-2021), rigorously evaluating 20+ candidate signals using statistical hypothesis testing, multiple-testing correction, and walk-forward out-of-sample analysis. Three strategies were developed as candidates and subjected to rigorous testing. Two survived this process and formed the final portfolio:
 
+**Selected Strategies (Final Portfolio):**
 1. **BB01 Bollinger Band Breakout** (18.71% return, 0.0381 Sharpe)
 2. **PB07 Price/Book Mean Reversion** (22.91% return, 0.0868 Sharpe)
+
+**Rejected Candidate:**
+3. **BB03 Overbought Mean Reversion** (no significant alpha; rejected)
 
 **Combined Portfolio (70% PB07 + 30% BB01):** 23.64% return, 0.6684 Sharpe, 0.7647 Calmar, -8.33% max DD
 
@@ -93,12 +97,13 @@ For remaining candidates:
 
 ## Candidate Strategy Table
 
-| Strategy | Signal | Trades | Return | Ann Return | Sharpe | Max DD | Calmar | Status |
-|----------|--------|--------|--------|-----------|--------|--------|--------|--------|
-| BB01 | Upper BB Breakout | 17 | 18.71% | 5.12% | 0.0381 | -32.75% | 0.1563 | **VALIDATED** |
-| PB07 | P/B Q1 (Mean Reversion) | 19 | 22.91% | 6.19% | 0.0868 | -9.85% | 0.6280 | **VALIDATED** |
-| BB03 | Lower BB Breakout | 8 | 5.44% | 1.34% | 0.0012 | -51.2% | 0.0262 | NOT RECOMMENDED |
-| BB04 | Mid-Band Reversal | 12 | 8.92% | 2.25% | 0.0031 | -48.6% | 0.0462 | NOT RECOMMENDED |
+| Strategy | Signal | Signals | Spread | t-stat | p-value | Status |
+|----------|--------|---------|--------|--------|---------|--------|
+| BB01 | Upper BB Breakout | 17 | +0.323% | 2.03 | 0.048 | **✓ SELECTED** |
+| PB07 | P/B Q1 Mean Reversion | 19 | +1.252% | 2.67 | 0.008 | **✓ SELECTED** |
+| BB03 | Overbought Mean Reversion | 108 | -0.122% | -0.57 | 0.569 | **✗ REJECTED** |
+
+**Note:** Three candidate strategies were researched and implemented. Two (BB01 and PB07) were selected for the final portfolio. BB03 was rejected due to lack of statistical significance (p > 0.50), insufficient magnitude relative to transaction costs, and non-generalization in out-of-sample testing. See STRATEGY_03_BB03.md for detailed rejection analysis.
 
 ---
 
