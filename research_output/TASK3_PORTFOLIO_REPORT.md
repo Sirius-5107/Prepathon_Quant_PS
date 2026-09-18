@@ -2,88 +2,80 @@
 
 ## Executive Summary
 
-We constructed and compared multiple portfolio allocation strategies using the two selected
-strategies from Task 2 (PB07 price/book mean reversion and BB01 Bollinger Band breakout).
-The analysis includes static allocations and walk-forward dynamic rebalancing.
+Task 3 compares static allocations of the two strategies selected in Task 2
+(PB07 and BB01) and a strictly out-of-sample dynamic allocator.
 
----
+The canonical Task 2 return stream reproduces the Task 2 baseline exactly:
+**70% PB07 + 30% BB01 = 23.64% cumulative return**.
 
-## Methodology
+## Return Construction
 
-### Data
-- Period: 2018-01-02 to 2021-11-01 (866 observations)
-- Strategies: PB07 (70% baseline) and BB01 (30% baseline) from Task 2
-- Return type: Daily mark-to-market (MTM), transaction costs included
-- Long-only, no leverage
+Task 3 uses research_output/portfolio_daily_returns.csv, the canonical Task 2
+daily realized-return stream. The values are already decimal returns and are
+compounded once at the portfolio level. The separate daily MTM files are not
+used for portfolio construction because those files contain cumulative
+from-entry MTM values during holding periods, which must not be compounded as
+independent daily returns.
 
-### Static Allocators
-1. **Baseline (70/30)**: Task 2 canonical allocation
-2. **Equal-Weight (50/50)**: Simple equal allocation
-3. **Risk-Parity**: Equal marginal risk contribution using full-sample volatility
-4. **Optimize Sharpe**: Constrained mean-variance optimization (long-only)
-5. **Grid Search**: Exhaustive search over 10% allocation increments
+Period: 2018-01-02 to 2021-11-01 (866 observations).
 
-### Dynamic Allocator
-- **Method**: Walk-forward risk-parity with rolling rebalancing
-- **Training**: 2-year window (504 trading days)
-- **Testing**: 1-year holdout (252 trading days)
-- **Rebalance**: Quarterly (every 63 trading days)
-- **Window 1**: Train 2018-2019, test 2020
-- **Window 2**: Train 2019-2020, test 2021
+## Static Allocation Study
 
----
+Static allocations are full-sample descriptive comparisons.
 
-## Key Results
+| Allocator | PB07 | BB01 | Total Return | CAGR | Annual Vol | Sharpe | Max DD |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| baseline | 70.00% | 30.00% | 23.64% | 6.37% | 9.53% | 0.695 | -8.33% |
+| equal_weight | 50.00% | 50.00% | 23.14% | 6.24% | 10.97% | 0.606 | -12.99% |
+| risk_parity | 63.58% | 36.42% | 23.56% | 6.35% | 9.80% | 0.676 | -8.68% |
+| optimize_sharpe | 74.90% | 25.10% | 23.64% | 6.37% | 9.46% | 0.699 | -8.06% |
 
-| Allocator | Total Return | Annual Vol | Sharpe | Max DD | Calmar |
-|-----------|--------------|------------|--------|--------|--------|
-| baseline             |        3.82% |      0.55% |  1.992 | -3.24% |  0.339 |
-| equal_weight         |        3.42% |      0.53% |  1.833 | -3.11% |  0.316 |
-| risk_parity          |        3.46% |      0.53% |  1.859 | -3.13% |  0.318 |
-| optimize_sharpe      |        3.93% |      0.56% |  1.999 | -3.27% |  0.344 |
-| dynamic              |        3.30% |      0.54% |  1.751 | -3.08% |  0.309 |
+The Sharpe optimizer uses the full sample and is therefore explicitly an
+in-sample/descriptive sensitivity check, not an OOS forecast. The grid search
+uses 10 percentage-point increments; its best Sharpe grid point is 70% PB07 /
+30% BB01.
 
----
+## Dynamic Allocation
 
-## Analysis
+The dynamic allocator uses a 504-observation rolling training window and
+63-observation quarterly OOS test/rebalance windows.
 
-### Static Allocation Results
+At each rebalance:
+1. only the preceding 504 observations are used;
+2. covariance-based ERC weights are estimated from that training sample;
+3. those weights are frozen for the next 63 observations;
+4. the process repeats through the final observation.
 
-The baseline 70/30 allocation (Task 2) generates 3.82% total return
-with a Sharpe ratio of 1.992.
+This produces **6 genuine OOS windows**, beginning 2020-03-18 and ending
+2021-11-01. No pre-OOS weights are backfilled.
 
-Equal-weight allocation produces 3.42% return
-with Sharpe 1.833.
+### OOS Context
 
-Risk-parity allocation yields 3.46% return
-with Sharpe 1.859.
+Over the common OOS period (2020-03-18 to 2021-11-01, 362
+observations):
+- 70/30 Task 2 baseline cumulative return: 14.72%.
+- 50/50 cumulative return: 25.35%.
+- Dynamic ERC WFO cumulative return: 26.08%.
 
-Mean-variance optimization achieves 3.93% return
-with Sharpe 1.999.
+These are period-matched descriptive comparisons; the full-sample static
+metrics above should not be interpreted as OOS estimates.
 
-### Dynamic Allocation Results
+## Validation
 
-The walk-forward risk-parity allocator achieves 3.30% total return
-with Sharpe 1.751.
-Average quarterly turnover: 0.00%
+- Canonical observations: 866.
+- Canonical period: 2018-01-02 to 2021-11-01.
+- 70/30 baseline reproduction: 23.64%.
+- Dynamic weights start only after 504 training observations.
+- Every dynamic weight uses observations strictly before its test start.
+- No dynamic pre-OOS backfill.
+- All weights are non-negative and sum to 1.
+- Dynamic performance is evaluated only on genuine OOS observations.
 
----
+## Files
 
-## Files Generated
-
-- `task3_static_allocators.csv` — Metrics for all static allocators
-- `task3_grid_search.csv` — Grid search results (10% increments)
-- `task3_dynamic_weights.csv` — Time-varying weights from walk-forward
-- `task3_portfolio_comparison.csv` — Equity curves for all allocators
-- `task3_allocator_comparison.csv` — Summary metrics comparison
-
----
-
-## Conclusion
-
-The portfolio allocation analysis identifies the optimal weight allocation between PB07 and BB01.
-Static allocations provide a clear baseline, while dynamic walk-forward allocation demonstrates
-the potential for weight adaptation based on recent market conditions.
-
-**Recommended allocation: 70% PB07 + 30% BB01**
-based on Task 2 research findings.
+- task3_static_allocators.csv
+- task3_grid_search.csv
+- task3_dynamic_weights.csv
+- task3_portfolio_comparison.csv
+- task3_allocator_comparison.csv
+- TASK3_PORTFOLIO_REPORT.md
