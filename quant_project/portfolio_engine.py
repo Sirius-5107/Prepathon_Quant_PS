@@ -96,15 +96,21 @@ class PortfolioEngine:
         if (w[["w_pb07", "w_bb01"]] < 0).any().any():
             raise ValueError("Dynamic weights contain short positions")
 
-        merged = pd.DataFrame({"date": self.dates}).merge(w, on="date", how="left")
-        # No backfill: performance begins only when genuine OOS weights exist.
-        if merged["w_pb07"].isna().any():
-            raise ValueError("Dynamic weights do not cover every performance date")
-        returns = merged["w_pb07"].to_numpy() * self.pb07_returns + merged["w_bb01"].to_numpy() * self.bb01_returns
+        merged = pd.DataFrame({
+            "date": self.dates,
+            "bb01_return": self.bb01_returns,
+            "pb07_return": self.pb07_returns,
+        }).merge(w, on="date", how="inner")
+        if len(merged) != len(w):
+            raise ValueError("Some dynamic weight dates are outside the canonical return stream")
+        if merged.empty:
+            raise ValueError("No OOS observations covered by dynamic weights")
+        # Crucially, pre-training observations are excluded rather than backfilled.
+        returns = merged["w_pb07"].to_numpy() * merged["pb07_return"].to_numpy() + merged["w_bb01"].to_numpy() * merged["bb01_return"].to_numpy()
         return {
             "returns": returns,
             "equity_curve": np.cumprod(1.0 + returns),
-            "dates": self.dates,
+            "dates": pd.DatetimeIndex(merged["date"]),
             "weights_df": merged,
             "metrics": self._metrics(returns),
         }
