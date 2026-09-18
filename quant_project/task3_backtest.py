@@ -68,8 +68,7 @@ Task 3 compares static allocations of the two strategies selected in Task 2
 (PB07 and BB01) and a strictly out-of-sample dynamic allocator.
 
 The Task 2 baseline is reproduced from the canonical return stream:
-**70% PB07 + 30% BB01 = {b["total_return"]:.4%} cumulative return**, matching the
-Task 2 reference result of 23.6351%.
+**70% PB07 + 30% BB01 = {b["total_return"]:.4%} cumulative return**, matching the corrected Task 2 reference result of 27.6741%.
 
 ## Return Construction
 
