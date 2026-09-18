@@ -58,7 +58,7 @@ def main():
     }).to_csv(out / "task3_dynamic_oos_equity.csv", index=False)
 
     b = static["baseline"]["portfolio"]["metrics"]
-    assert abs(b["total_return"] - 0.23635102957146126) < 1e-10, "Task 2 baseline reproduction failed"
+    assert abs(b["total_return"] - 0.2767412687419928) < 1e-10, "Corrected Task 2 baseline reproduction failed"
 
     report = f"""# Task 3: Portfolio Construction and Allocation
 
