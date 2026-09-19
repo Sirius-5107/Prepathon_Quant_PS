@@ -1,3 +1,13 @@
+# Inter-IIT Quantitative Finance Prepathon — Current Project Status
+
+> **Updated September 19, 2026:** Task 2 has been re-audited for causal PB07 signal construction and Task 3 has been regenerated from the corrected canonical return stream. For current submission results, use `research_output/TASK2_RESEARCH_REPORT.md` and `research_output/TASK3_PORTFOLIO_REPORT.md`. Historical reports marked **superseded** are retained only as research provenance.
+
+**Current canonical Task 2 baseline:** 70% PB07 / 30% BB01; 27.6741% cumulative return; Sharpe 0.9161; max drawdown -9.85%; 32 combined trades.
+
+**Current Task 3 dynamic ERC OOS:** 23.48% cumulative return; Sharpe 1.545; max drawdown -1.91%; six genuine OOS windows.
+
+---
+
 # Inter-IIT Quantitative Finance Prepathon — Task 1 Complete ✅
 
 **Status:** Task 1 (Data & Backtesting Infrastructure) — **COMPLETE** and ready for submission  
