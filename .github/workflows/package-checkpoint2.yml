@@ -1,0 +1,99 @@
+name: Package Checkpoint 2
+
+on:
+  push:
+    branches:
+      - checkpoint2-packaging-temp
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build clean Checkpoint 2 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf package checkpoint2
+          mkdir -p checkpoint2/quant_project checkpoint2/research_output
+
+          cp README.md checkpoint2/
+          cp signals_cleaned.csv checkpoint2/
+          cp price_cleaned.csv checkpoint2/
+
+          cat > checkpoint2/CHECKPOINT2_README.md <<'EOF'
+# PREPATHON Checkpoint 2 Submission Package
+
+Canonical Task 2 submission snapshot from main branch.
+
+## Current canonical Task 2 result
+- PB07: causal expanding historical Q20, 60-observation minimum history
+- PB07 trades: 15
+- BB01 trades: 17
+- Portfolio: 70% PB07 / 30% BB01
+- Cumulative return: 27.6741%
+- Sharpe: 0.9161
+- Max drawdown: -9.85%
+- Observations: 866
+
+## Timing
+Signal at t-1 close -> entry at t open -> exit at t+20 close.
+Transaction cost: 0.05% per side.
+
+## Reproduction
+python quant_project/strategy_mean_reversion.py
+python quant_project/task3_backtest.py
+
+The Task 2 integrity audit is included. Task 3 code is included only where required for reproducibility of the portfolio baseline, but this package is a Task 2 checkpoint package.
+
+Legacy MTM artifacts and superseded Task 2 reports are intentionally excluded from this clean package.
+EOF
+
+          cp quant_project/strategy_mean_reversion.py checkpoint2/quant_project/
+          cp quant_project/strategy_bb01.py checkpoint2/quant_project/
+          cp quant_project/portfolio_engine.py checkpoint2/quant_project/
+          cp quant_project/static_allocator.py checkpoint2/quant_project/
+          cp quant_project/dynamic_allocator.py checkpoint2/quant_project/
+          cp quant_project/task3_backtest.py checkpoint2/quant_project/
+          cp quant_project/task2_submission_integrity_audit.py checkpoint2/quant_project/
+          cp quant_project/signal_shape_analysis.py checkpoint2/quant_project/
+          cp quant_project/signal_statistical_validation.py checkpoint2/quant_project/
+          cp quant_project/pb07_bb01_validation.py checkpoint2/quant_project/
+
+          cp research_output/TASK2_RESEARCH_REPORT.md checkpoint2/research_output/
+          cp research_output/TASK2_CAUSAL_PB07_AUDIT.md checkpoint2/research_output/
+          cp research_output/strategy_02_candidates.csv checkpoint2/research_output/
+          cp research_output/strategy_02_equity.csv checkpoint2/research_output/
+          cp research_output/strategy_02_metrics.json checkpoint2/research_output/
+          cp research_output/strategy_02_trades.csv checkpoint2/research_output/
+          cp research_output/strategy_02_wfo.csv checkpoint2/research_output/
+          cp research_output/strategy_02_yearly.csv checkpoint2/research_output/
+          cp research_output/strategy_bb01_metrics.json checkpoint2/research_output/
+          cp research_output/strategy_bb01_trades.csv checkpoint2/research_output/
+          cp research_output/strategy_bb01_wfo.csv checkpoint2/research_output/
+          cp research_output/strategy_bb01_yearly.csv checkpoint2/research_output/
+          cp research_output/portfolio_daily_returns.csv checkpoint2/research_output/
+          cp research_output/portfolio_metrics.json checkpoint2/research_output/
+          cp research_output/portfolio_yearly.csv checkpoint2/research_output/
+          cp research_output/portfolio_wfo.csv checkpoint2/research_output/
+          cp research_output/pb07_continuous_validation.csv checkpoint2/research_output/
+          cp research_output/pb07_shape_analysis.csv checkpoint2/research_output/
+          cp research_output/pb07_walk_forward.csv checkpoint2/research_output/
+          cp research_output/pb07_yearly_stability.csv checkpoint2/research_output/
+          cp research_output/bb01_horizon_validation.csv checkpoint2/research_output/
+          cp research_output/bb01_walk_forward.csv checkpoint2/research_output/
+          cp research_output/bb01_yearly_stability.csv checkpoint2/research_output/
+          cp research_output/signal_statistical_validation.csv checkpoint2/research_output/
+
+          find checkpoint2 -type f -print | sort
+          mkdir -p package
+          (cd checkpoint2 && zip -r ../package/Himanshu_Sahoo_25065059_Checkpoint2.zip .)
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Himanshu_Sahoo_25065059_Checkpoint2
+          path: package/Himanshu_Sahoo_25065059_Checkpoint2.zip
+          retention-days: 7
