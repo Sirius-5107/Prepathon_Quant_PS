@@ -1,278 +1,158 @@
-"""
-Task 3 Backtest
-
-Runs comprehensive portfolio allocation study:
-1. Static allocators (equal-weight, baseline, risk-parity, optimization, grid)
-2. Dynamic allocator (walk-forward risk-parity)
-3. Comparative analysis and metrics
-4. Generates CSV outputs and markdown report
-"""
+"""Task 3 reproducible backtest runner."""
 
 import sys
-import numpy as np
-import pandas as pd
-import json
 from pathlib import Path
+import pandas as pd
 
-# Add quant_project to path
 sys.path.insert(0, str(Path(__file__).parent))
-
 from portfolio_engine import PortfolioEngine
 from static_allocator import run_static_allocation_study
 from dynamic_allocator import run_dynamic_allocation_study
 
 
-def save_results_to_csv(results, output_dir="research_output"):
-    """Save results to CSV files."""
-    output_dir = Path(output_dir)
-    output_dir.mkdir(exist_ok=True)
-    
-    # 1. Static allocator comparison
-    static_metrics = []
-    for name, data in results['static_allocations'].items():
-        if name == 'grid_search':
-            continue
-        
-        metrics = data['portfolio']['metrics'].copy()
-        metrics['allocator'] = name
-        metrics['w_pb07'] = data['weights']['pb07']
-        metrics['w_bb01'] = data['weights']['bb01']
-        static_metrics.append(metrics)
-    
-    static_df = pd.DataFrame(static_metrics)
-    static_df.to_csv(output_dir / "task3_static_allocators.csv", index=False)
-    
-    # 2. Grid search results
-    grid_df = pd.DataFrame(results['static_allocations']['grid_search'])
-    grid_df.to_csv(output_dir / "task3_grid_search.csv", index=False)
-    
-    # 3. Dynamic allocation results
-    results['dynamic_allocation']['weights'].to_csv(
-        output_dir / "task3_dynamic_weights.csv",
-        index=False
-    )
-    
-    # 4. Portfolio comparison (equity curves)
-    portfolio_comparison = pd.DataFrame({
-        'date': results['static_allocations']['baseline']['portfolio']['dates'],
-        'baseline_equity': results['static_allocations']['baseline']['portfolio']['equity_curve'],
-        'equal_weight_equity': results['static_allocations']['equal_weight']['portfolio']['equity_curve'],
-        'risk_parity_equity': results['static_allocations']['risk_parity']['portfolio']['equity_curve'],
-        'optimize_sharpe_equity': results['static_allocations']['optimize_sharpe']['portfolio']['equity_curve'],
-        'dynamic_equity': results['dynamic_allocation']['portfolio']['equity_curve']
-    })
-    portfolio_comparison.to_csv(output_dir / "task3_portfolio_comparison.csv", index=False)
-    
-    # 5. Annual returns
-    annual_comparison = pd.DataFrame({
-        'allocator': ['baseline', 'equal_weight', 'risk_parity', 'optimize_sharpe', 'dynamic'],
-        'total_return': [
-            results['static_allocations']['baseline']['portfolio']['metrics']['total_return'],
-            results['static_allocations']['equal_weight']['portfolio']['metrics']['total_return'],
-            results['static_allocations']['risk_parity']['portfolio']['metrics']['total_return'],
-            results['static_allocations']['optimize_sharpe']['portfolio']['metrics']['total_return'],
-            results['dynamic_allocation']['portfolio']['metrics']['total_return']
-        ],
-        'sharpe': [
-            results['static_allocations']['baseline']['portfolio']['metrics']['sharpe'],
-            results['static_allocations']['equal_weight']['portfolio']['metrics']['sharpe'],
-            results['static_allocations']['risk_parity']['portfolio']['metrics']['sharpe'],
-            results['static_allocations']['optimize_sharpe']['portfolio']['metrics']['sharpe'],
-            results['dynamic_allocation']['portfolio']['metrics']['sharpe']
-        ]
-    })
-    annual_comparison.to_csv(output_dir / "task3_allocator_comparison.csv", index=False)
-    
-    print(f"✓ Results saved to {output_dir}/")
-
-
-def generate_report(results, output_dir="research_output"):
-    """Generate markdown report."""
-    output_dir = Path(output_dir)
-    
-    report_lines = [
-        "# Task 3: Portfolio Construction and Allocation",
-        "",
-        "## Executive Summary",
-        "",
-        "We constructed and compared multiple portfolio allocation strategies using the two selected",
-        "strategies from Task 2 (PB07 price/book mean reversion and BB01 Bollinger Band breakout).",
-        "The analysis includes static allocations and walk-forward dynamic rebalancing.",
-        "",
-        "---",
-        "",
-        "## Methodology",
-        "",
-        "### Data",
-        f"- Period: 2018-01-02 to 2021-11-01 ({results['n_obs']} observations)",
-        "- Strategies: PB07 (70% baseline) and BB01 (30% baseline) from Task 2",
-        "- Return type: Daily mark-to-market (MTM), transaction costs included",
-        "- Long-only, no leverage",
-        "",
-        "### Static Allocators",
-        "1. **Baseline (70/30)**: Task 2 canonical allocation",
-        "2. **Equal-Weight (50/50)**: Simple equal allocation",
-        "3. **Risk-Parity**: Equal marginal risk contribution using full-sample volatility",
-        "4. **Optimize Sharpe**: Constrained mean-variance optimization (long-only)",
-        "5. **Grid Search**: Exhaustive search over 10% allocation increments",
-        "",
-        "### Dynamic Allocator",
-        "- **Method**: Walk-forward risk-parity with rolling rebalancing",
-        "- **Training**: 2-year window (504 trading days)",
-        "- **Testing**: 1-year holdout (252 trading days)",
-        "- **Rebalance**: Quarterly (every 63 trading days)",
-        "- **Window 1**: Train 2018-2019, test 2020",
-        "- **Window 2**: Train 2019-2020, test 2021",
-        "",
-        "---",
-        "",
-        "## Key Results",
-        "",
-    ]
-    
-    # Add metrics summary
-    metrics_keys = ['total_return', 'sharpe', 'annual_vol', 'max_drawdown', 'calmar']
-    
-    report_lines.append("| Allocator | Total Return | Annual Vol | Sharpe | Max DD | Calmar |")
-    report_lines.append("|-----------|--------------|------------|--------|--------|--------|")
-    
-    for name in ['baseline', 'equal_weight', 'risk_parity', 'optimize_sharpe', 'dynamic']:
-        if name == 'dynamic':
-            metrics = results['dynamic_allocation']['portfolio']['metrics']
-        else:
-            metrics = results['static_allocations'][name]['portfolio']['metrics']
-        
-        ret = f"{metrics['total_return']:.2%}"
-        vol = f"{metrics['annual_vol']:.2%}"
-        sharpe = f"{metrics['sharpe']:.3f}"
-        mdd = f"{metrics['max_drawdown']:.2%}"
-        calmar = f"{metrics['calmar']:.3f}"
-        
-        report_lines.append(f"| {name:20s} | {ret:>12s} | {vol:>10s} | {sharpe:>6s} | {mdd:>6s} | {calmar:>6s} |")
-    
-    report_lines.extend([
-        "",
-        "---",
-        "",
-        "## Analysis",
-        "",
-        "### Static Allocation Results",
-        "",
-        f"The baseline 70/30 allocation (Task 2) generates {results['static_allocations']['baseline']['portfolio']['metrics']['total_return']:.2%} total return",
-        f"with a Sharpe ratio of {results['static_allocations']['baseline']['portfolio']['metrics']['sharpe']:.3f}.",
-        "",
-        f"Equal-weight allocation produces {results['static_allocations']['equal_weight']['portfolio']['metrics']['total_return']:.2%} return",
-        f"with Sharpe {results['static_allocations']['equal_weight']['portfolio']['metrics']['sharpe']:.3f}.",
-        "",
-        f"Risk-parity allocation yields {results['static_allocations']['risk_parity']['portfolio']['metrics']['total_return']:.2%} return",
-        f"with Sharpe {results['static_allocations']['risk_parity']['portfolio']['metrics']['sharpe']:.3f}.",
-        "",
-        f"Mean-variance optimization achieves {results['static_allocations']['optimize_sharpe']['portfolio']['metrics']['total_return']:.2%} return",
-        f"with Sharpe {results['static_allocations']['optimize_sharpe']['portfolio']['metrics']['sharpe']:.3f}.",
-        "",
-        "### Dynamic Allocation Results",
-        "",
-        f"The walk-forward risk-parity allocator achieves {results['dynamic_allocation']['portfolio']['metrics']['total_return']:.2%} total return",
-        f"with Sharpe {results['dynamic_allocation']['portfolio']['metrics']['sharpe']:.3f}.",
-        f"Average quarterly turnover: {results['dynamic_allocation']['turnover']:.2%}",
-        "",
-        "---",
-        "",
-        "## Files Generated",
-        "",
-        "- `task3_static_allocators.csv` — Metrics for all static allocators",
-        "- `task3_grid_search.csv` — Grid search results (10% increments)",
-        "- `task3_dynamic_weights.csv` — Time-varying weights from walk-forward",
-        "- `task3_portfolio_comparison.csv` — Equity curves for all allocators",
-        "- `task3_allocator_comparison.csv` — Summary metrics comparison",
-        "",
-        "---",
-        "",
-        "## Conclusion",
-        "",
-        "The portfolio allocation analysis identifies the optimal weight allocation between PB07 and BB01.",
-        "Static allocations provide a clear baseline, while dynamic walk-forward allocation demonstrates",
-        "the potential for weight adaptation based on recent market conditions.",
-        "",
-        f"**Recommended allocation: {results['static_allocations']['baseline']['weights']['pb07']:.0%} PB07 + {results['static_allocations']['baseline']['weights']['bb01']:.0%} BB01**",
-        "based on Task 2 research findings.",
-    ])
-    
-    report_text = "\n".join(report_lines)
-    
-    report_path = output_dir / "TASK3_PORTFOLIO_REPORT.md"
-    with open(report_path, 'w') as f:
-        f.write(report_text)
-    
-    print(f"✓ Report saved to {report_path}")
-
-
 def main():
-    """Main execution."""
-    print("=" * 80)
-    print("TASK 3: PORTFOLIO CONSTRUCTION AND ALLOCATION")
-    print("=" * 80)
-    print()
-    
-    # Load portfolio engine
-    print("Loading strategy returns from Task 2...")
-    portfolio_engine = PortfolioEngine()
-    print(f"  ✓ Loaded {portfolio_engine.n_obs} observations")
-    print(f"  ✓ Period: {portfolio_engine.dates[0].date()} to {portfolio_engine.dates[-1].date()}")
-    print()
-    
-    # Run static allocations
-    print("Running static allocation study...")
-    static_results = run_static_allocation_study(portfolio_engine)
-    print("  ✓ Equal-weight allocation")
-    print("  ✓ Baseline (70/30) allocation")
-    print("  ✓ Risk-parity allocation")
-    print("  ✓ Mean-variance optimization")
-    print("  ✓ Grid search (10% increments)")
-    print()
-    
-    # Run dynamic allocation
-    print("Running walk-forward dynamic allocation...")
-    dynamic_results = run_dynamic_allocation_study(portfolio_engine)
-    print("  ✓ Walk-forward risk-parity (2-year train, 1-year test)")
-    print(f"  ✓ Average turnover: {dynamic_results['turnover']:.2%}")
-    print()
-    
-    # Combine results
-    results = {
-        'n_obs': portfolio_engine.n_obs,
-        'dates': portfolio_engine.dates,
-        'static_allocations': static_results,
-        'dynamic_allocation': dynamic_results
-    }
-    
-    # Save results
-    print("Saving results...")
-    save_results_to_csv(results)
-    print()
-    
-    # Generate report
-    print("Generating report...")
-    generate_report(results)
-    print()
-    
-    # Print summary
-    print("=" * 80)
-    print("TASK 3 COMPLETE")
-    print("=" * 80)
-    print()
-    print("Summary:")
-    for name, data in static_results.items():
-        if name == 'grid_search':
-            continue
-        metrics = data['portfolio']['metrics']
-        print(f"  {name:20s}: {metrics['total_return']:>8.2%} return, {metrics['sharpe']:>6.3f} Sharpe")
-    
-    metrics = dynamic_results['portfolio']['metrics']
-    print(f"  {'dynamic':20s}: {metrics['total_return']:>8.2%} return, {metrics['sharpe']:>6.3f} Sharpe")
-    print()
-    print("✓ All results saved to research_output/")
-    print()
+    out = Path("research_output")
+    out.mkdir(exist_ok=True)
+
+    engine = PortfolioEngine()
+    static = run_static_allocation_study(engine)
+    dynamic = run_dynamic_allocation_study(engine)
+
+    rows = []
+    for name in ["baseline", "equal_weight", "risk_parity", "optimize_sharpe"]:
+        m = static[name]["portfolio"]["metrics"]
+        rows.append({
+            "allocator": name,
+            "w_pb07": static[name]["weights"]["pb07"],
+            "w_bb01": static[name]["weights"]["bb01"],
+            **m,
+            "evaluation": "full_sample_descriptive",
+        })
+    m = dynamic["portfolio"]["metrics"]
+    rows.append({
+        "allocator": "dynamic_erc_wfo",
+        "w_pb07": float(dynamic["weights"]["w_pb07"].iloc[0]),
+        "w_bb01": float(dynamic["weights"]["w_bb01"].iloc[0]),
+        **m,
+        "evaluation": "out_of_sample",
+    })
+    pd.DataFrame(rows).to_csv(out / "task3_allocator_comparison.csv", index=False)
+
+    grid = pd.DataFrame(static["grid_search"])
+    grid["evaluation"] = "full_sample_descriptive"
+    grid.to_csv(out / "task3_grid_search.csv", index=False)
+
+    dynamic["weights"].to_csv(out / "task3_dynamic_weights.csv", index=False)
+
+    pd.DataFrame({
+        "date": static["baseline"]["portfolio"]["dates"],
+        "baseline_equity": static["baseline"]["portfolio"]["equity_curve"],
+        "equal_weight_equity": static["equal_weight"]["portfolio"]["equity_curve"],
+        "risk_parity_equity": static["risk_parity"]["portfolio"]["equity_curve"],
+        "optimize_sharpe_equity": static["optimize_sharpe"]["portfolio"]["equity_curve"],
+    }).to_csv(out / "task3_portfolio_comparison.csv", index=False)
+
+    pd.DataFrame({
+        "date": dynamic["portfolio"]["dates"],
+        "dynamic_erc_wfo_equity": dynamic["portfolio"]["equity_curve"],
+    }).to_csv(out / "task3_dynamic_oos_equity.csv", index=False)
+
+    b = static["baseline"]["portfolio"]["metrics"]
+    assert abs(b["total_return"] - 0.2767412687419928) < 1e-10, "Corrected Task 2 baseline reproduction failed"
+
+    report = f"""# Task 3: Portfolio Construction and Allocation
+
+## Executive Summary
+
+Task 3 compares static allocations of the two strategies selected in Task 2
+(PB07 and BB01) and a strictly out-of-sample dynamic allocator.
+
+The Task 2 baseline is reproduced from the canonical return stream:
+**70% PB07 + 30% BB01 = {b["total_return"]:.4%} cumulative return**, matching the corrected Task 2 reference result of 27.6741%.
+
+## Return Construction
+
+Task 3 uses research_output/portfolio_daily_returns.csv, the canonical Task 2
+daily realized-return stream. Returns are already decimals and are compounded
+once at the portfolio level. The separate daily MTM files are not used,
+because their values represent cumulative return from entry during a holding
+period rather than incremental daily returns.
+
+Period: {engine.dates[0].date()} to {engine.dates[-1].date()} ({engine.n_obs} observations).
+
+## Static Allocation Study
+
+Static results are full-sample descriptive comparisons, not out-of-sample
+forecasts.
+
+- **Baseline:** 70% PB07 / 30% BB01.
+- **Equal weight:** 50% / 50%.
+- **ERC risk parity:** covariance-based equal-risk-contribution allocation.
+- **Sharpe optimization:** long-only full-sample Sharpe maximization; explicitly
+  treated as in-sample/descriptive.
+- **Grid search:** 10 percentage-point increments from 0/100 through 100/0.
+
+The baseline is retained as the Task 2 reference allocation. The optimizer is
+not treated as an OOS result.
+
+## Dynamic Allocation
+
+The dynamic allocator uses a **504-observation rolling training window** and
+**63-observation quarterly OOS test/rebalance windows**.
+
+At each rebalance date:
+1. only the preceding 504 observations are used;
+2. ERC weights are estimated from that training sample;
+3. the weights are frozen for the next 63 observations;
+4. the process repeats until the final observation.
+
+No weight is assigned to the pre-training period, and no backfill is used.
+This produces **{dynamic["n_oos_windows"]} genuine OOS windows**, beginning
+{dynamic["oos_start"]}.
+
+Dynamic performance is therefore evaluated only on the OOS period, from
+{dynamic["oos_start"]} through {dynamic["portfolio"]["dates"][-1].date()}.
+
+## Results
+
+| Allocator | Evaluation | Total Return | CAGR | Annual Vol | Sharpe | Max DD | Calmar |
+|---|---|---:|---:|---:|---:|---:|---:|
+"""
+    for name in ["baseline", "equal_weight", "risk_parity", "optimize_sharpe"]:
+        m = static[name]["portfolio"]["metrics"]
+        report += f'| {name} | Full sample | {m["total_return"]:.2%} | {m["cagr"]:.2%} | {m["annual_vol"]:.2%} | {m["sharpe"]:.3f} | {m["max_drawdown"]:.2%} | {m["calmar"]:.3f} |\n'
+    d = dynamic["portfolio"]["metrics"]
+    report += f'| dynamic_erc_wfo | OOS only | {d["total_return"]:.2%} | {d["cagr"]:.2%} | {d["annual_vol"]:.2%} | {d["sharpe"]:.3f} | {d["max_drawdown"]:.2%} | {d["calmar"]:.3f} |\n'
+    report += """
+## Interpretation
+
+The 70/30 allocation remains the direct Task 2 benchmark. Full-sample
+optimization is useful as a descriptive sensitivity check, but its weights
+use the complete sample and therefore should not be presented as an OOS
+forecast. The dynamic ERC series is the only allocation in this study whose
+weights are estimated strictly from prior observations and evaluated on
+subsequent observations.
+
+## Validation Checks
+
+- Canonical observation count: 866.
+- Canonical period: 2018-01-02 to 2021-11-01.
+- 70/30 baseline reproduction test is enforced in the runner.
+- Dynamic weights start at the first OOS observation (after 504 training days).
+- Dynamic weights contain no backfilled pre-OOS observations.
+- All weights are non-negative and sum to 1.
+- Dynamic performance is measured only on genuine OOS dates.
+
+## Files
+
+- task3_allocator_comparison.csv
+- task3_grid_search.csv
+- task3_dynamic_weights.csv
+- task3_portfolio_comparison.csv
+- task3_dynamic_oos_equity.csv
+- TASK3_PORTFOLIO_REPORT.md
+"""
+    (out / "TASK3_PORTFOLIO_REPORT.md").write_text(report)
 
 
 if __name__ == "__main__":

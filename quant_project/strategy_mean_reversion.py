@@ -46,11 +46,24 @@ class MeanReversionCandidates:
         self.results = {}
     
     def compute_forward_returns(self, horizon):
-        """Compute forward returns for a given horizon."""
+        """Compute executable holding-period return: open[t] -> close[t+horizon]."""
         close_future = self.data['close'].shift(-horizon).values
         open_current = self.data['open'].values
         fwd_ret = (close_future - open_current) / open_current
         return pd.Series(fwd_ret, index=self.data.index)
+
+    def causal_pb07_q1_signal(self, min_history=60):
+        """Build Q1 using only observations strictly before each signal date."""
+        pb07 = self.data['PB07']
+        signal = pd.Series(0, index=self.data.index, dtype=int)
+        threshold = pd.Series(np.nan, index=self.data.index, dtype=float)
+        for i in range(len(pb07)):
+            history = pb07.iloc[:i].dropna()
+            if len(history) < min_history or pd.isna(pb07.iloc[i]):
+                continue
+            threshold.iloc[i] = history.quantile(0.20)
+            signal.iloc[i] = int(pb07.iloc[i] <= threshold.iloc[i])
+        return signal, threshold
     
     def welch_ttest(self, signal_series, returns_series, signal_value=1):
         """Welch t-test for signal vs non-signal returns."""
@@ -290,25 +303,14 @@ class MeanReversionCandidates:
         print(f"\n{'='*80}")
         print("CANDIDATE C: PB07 Extreme Quintile Mean Reversion (20d)")
         print(f"{'='*80}")
-        print("Hypothesis: PB07 Q1 (most negative) → long; Q5 (most positive) → short (mean reversion)")
+        print("Hypothesis: PB07 historical Q1 (bottom quintile) → long (mean reversion)")
         
         horizon = 20
         fwd_ret = self.compute_forward_returns(horizon)
         pb07 = self.data['PB07']
         
-        # Create quintiles
-        pb07_q = pd.qcut(pb07.dropna(), q=5, labels=[1, 2, 3, 4, 5], duplicates='drop')
-        
-        # For mean reversion: Q1 and Q5 (extremes) should revert
-        # We'll test Q1 (extreme negative) as "long" signal
-        pb07_signal = pd.Series(np.nan, index=pb07.index)
-        for idx in pb07_q.index:
-            if pb07_q[idx] in [1, 5]:  # Extremes
-                pb07_signal[idx] = 1 if pb07_q[idx] == 1 else -1  # 1=long, -1=short
-        
-        # For simplicity, test Q1 long signal
-        pb07_q1_signal = pd.Series(0, index=pb07.index)
-        pb07_q1_signal[pb07_signal == 1] = 1
+        # Causal Q1: threshold at t uses only observations strictly before t.
+        pb07_q1_signal, pb07_threshold = self.causal_pb07_q1_signal(min_history=60)
         
         welch_result = self.welch_ttest(pb07_q1_signal, fwd_ret, signal_value=1)
         boot_result = self.block_bootstrap_ci(pb07_q1_signal, fwd_ret, signal_value=1, block_len=20)
@@ -368,7 +370,7 @@ class MeanReversionCandidates:
         self.candidates['C_pb07_q1_long_20d'] = {
             'name': 'PB07 Q1 Long Reversal (20d)',
             'horizon': horizon,
-            'signal': 'PB07 Q1 (most negative) → long',
+            'signal': 'Causal PB07 Q1 (historical bottom quintile) → long',
             'welch': welch_result,
             'bootstrap': boot_result,
             'yearly': yearly,
@@ -496,14 +498,10 @@ class PB07MeanReversionStrategy:
         
         pb07 = self.data['PB07']
         
-        # Create quintiles from PB07
-        pb07_q = pd.qcut(pb07.dropna(), q=5, labels=[1, 2, 3, 4, 5], duplicates='drop')
-        
-        # Signal: PB07 Q1 (bottom quintile)
-        pb07_signal = pd.Series(0, index=self.data.index)
-        for idx in pb07_q.index:
-            if pb07_q[idx] == 1:
-                pb07_signal[idx] = 1
+        # Causal Q1: each date's threshold uses only prior observations.
+        pb07_signal, pb07_threshold = self.causal_pb07_q1_signal(min_history=60)
+        self.data['pb07_q1_threshold'] = pb07_threshold
+        self.data['pb07_q1_signal'] = pb07_signal
         
         # Find all Q1 events (using t-1 close convention)
         all_events = []
@@ -754,7 +752,7 @@ class PB07MeanReversionStrategy:
         
         print(f"\nSignal-level validation (all events):")
         print(f"  Total PB07 Q1 events: {self.results['all_events']}")
-        print(f"  Signal spread: +1.25% (Welch t=2.667, p=0.0082)")
+        print(f"  Q1 threshold: expanding historical 20th percentile, prior observations only (min 60 observations)")
         
         print(f"\nExecutable strategy (no overlaps):")
         print(f"  Events skipped (position overlap): {self.results['skipped_events']}")

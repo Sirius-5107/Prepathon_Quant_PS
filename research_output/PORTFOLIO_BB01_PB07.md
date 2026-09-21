@@ -1,3 +1,5 @@
+> **Superseded notice — September 19, 2026:** This historical research artifact predates the causal PB07 correction and is not a canonical submission result. Use `research_output/TASK2_RESEARCH_REPORT.md` and the current regenerated Task 2/Task 3 outputs for submission figures.
+
 # COMBINED PORTFOLIO: BB01 BREAKOUT + PB07 MEAN REVERSION
 
 **Status:** DIVERSIFICATION CONFIRMED  

@@ -1,3 +1,5 @@
+> **Revision notice — September 19, 2026:** This audit predates the causal PB07 correction. Its 23.6351% portfolio figures are legacy results and must not be treated as the current canonical Task 2 result. See TASK2_CAUSAL_PB07_AUDIT.md and the revised TASK2_RESEARCH_REPORT.md. The corrected canonical 70/30 PB07/BB01 portfolio is 27.6741% cumulative return from the regenerated 866-day return stream.
+
 # Task 2 Submission Integrity Audit
 
 **Date:** September 15, 2026  

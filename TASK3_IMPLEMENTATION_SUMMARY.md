@@ -1,3 +1,13 @@
+## Superseded Notice — September 19, 2026
+
+This implementation summary describes an earlier Task 3 run and is **not the current canonical result**. It predates the causal PB07 correction and therefore contains obsolete performance figures, WFO descriptions, and conclusions. Use `research_output/TASK3_PORTFOLIO_REPORT.md` and the current Task 3 CSV outputs instead.
+
+**Current canonical Task 2 baseline:** 27.6741% cumulative return, Sharpe 0.9161, max drawdown -9.85%.
+
+**Current Task 3 dynamic ERC OOS:** 23.48% cumulative return, Sharpe 1.545, max drawdown -1.91%, six genuine OOS windows.
+
+---
+
 # Task 3: Portfolio Construction and Allocation — COMPLETE
 
 **Status:** ✅ FULLY IMPLEMENTED AND VALIDATED  
