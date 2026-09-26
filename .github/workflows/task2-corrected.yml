@@ -1,0 +1,19 @@
+name: Task 2 corrected validation
+on:
+  push:
+    paths:
+      - 'quant_project/strategies/**'
+      - 'quant_project/task2_corrected_runner.py'
+      - 'signals_cleaned.csv'
+      - 'price_cleaned.csv'
+      - '.github/workflows/task2-corrected.yml'
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas numpy
+      - run: python quant_project/task2_corrected_runner.py
