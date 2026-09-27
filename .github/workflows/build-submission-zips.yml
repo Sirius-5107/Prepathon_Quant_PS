@@ -1,0 +1,70 @@
+name: Build submission zips
+
+on:
+  push:
+    branches: [packaging-20260928]
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Checkpoint 2
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf out checkpoint2 checkpoint3
+          mkdir -p out checkpoint2/quant_project checkpoint2/research_output
+          cp README.md checkpoint2/
+          cp TASK2_RESEARCH_KIT.md checkpoint2/
+          cp TASK2_ROADMAP.md checkpoint2/
+          cp TASK2_STRATEGY_RESEARCH_PLAN.md checkpoint2/
+          cp data/price_cleaned.csv checkpoint2/
+          cp data/signals_cleaned.csv checkpoint2/
+          for f in alpha_research.py backtester.py config.py data_cleaner.py data_loader.py execution_engine.py feature_engine.py orthogonality.py performance.py signal_shape_analysis.py signal_statistical_validation.py pb07_bb01_validation.py strategy_bb01.py strategy_mean_reversion.py task2_corrected_runner.py task2_submission_integrity_audit.py; do
+            test -f quant_project/$f && cp quant_project/$f checkpoint2/quant_project/
+          done
+          for f in TASK2_CORRECTED_RESEARCH_REPORT.md TASK2_RETURN_SPACE_CORRELATION.csv TASK2_RESULTS_986_BASELINE.json portfolio_daily_returns.csv strategy_bb01_metrics.json strategy_bb01_trades.csv strategy_bb01_wfo.csv strategy_bb01_yearly.csv strategy_02_candidates.csv strategy_02_equity.csv strategy_02_metrics.json strategy_02_trades.csv strategy_02_wfo.csv strategy_02_yearly.csv signal_statistical_validation.csv; do
+            test -f research_output/$f && cp research_output/$f checkpoint2/research_output/
+          done
+          cat > checkpoint2/CHECKPOINT2_PACKAGE_README.md <<'EOF'
+# PREPATHON Checkpoint 2
+This package contains the corrected Task 2 alpha-discovery research snapshot from the submission repository.
+Canonical Task 2 data: 986 observations.
+Execution: signal through t-1 -> execution at t open; fixed 0.05% per-side cost.
+EOF
+          (cd checkpoint2 && zip -qr ../out/Himanshu_Sahoo_25065059_Checkpoint2.zip .)
+
+      - name: Build Checkpoint 3
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p checkpoint3/quant_project checkpoint3/research_output
+          cp README.md checkpoint3/
+          cp TASK3_IMPLEMENTATION_SUMMARY.md checkpoint3/
+          cp data/price_cleaned.csv checkpoint3/
+          cp data/signals_cleaned.csv checkpoint3/
+          cp research_output/portfolio_daily_returns.csv checkpoint3/research_output/
+          cp quant_project/portfolio_engine.py checkpoint3/quant_project/
+          cp quant_project/dynamic_allocator.py checkpoint3/quant_project/
+          cp quant_project/task3_backtest.py checkpoint3/quant_project/
+          test -f quant_project/static_allocator.py && cp quant_project/static_allocator.py checkpoint3/quant_project/
+          test -f quant_project/portfolio_bb01_pb07.py && cp quant_project/portfolio_bb01_pb07.py checkpoint3/quant_project/
+          for f in TASK3_PORTFOLIO_REPORT.md task3_allocator_comparison.csv task3_dynamic_oos_equity.csv task3_dynamic_weights.csv task3_grid_search.csv task3_portfolio_comparison.csv task3_static_allocators.csv; do
+            test -f research_output/$f && cp research_output/$f checkpoint3/research_output/
+          done
+          cat > checkpoint3/CHECKPOINT3_PACKAGE_README.md <<'EOF'
+# PREPATHON Checkpoint 3
+This package contains the final Task 3 portfolio-construction and dynamic-allocation snapshot.
+Canonical Task 2 return stream: 986 observations.
+Dynamic WFO: 504-observation training window, 63-observation OOS windows, 8 OOS windows.
+Transaction cost: fixed 0.05% per side.
+EOF
+          (cd checkpoint3 && zip -qr ../out/Himanshu_Sahoo_Checkpoint3.zip .)
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PREPATHON-submission-zips
+          path: out/*.zip
+          retention-days: 7
