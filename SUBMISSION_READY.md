@@ -1,52 +1,58 @@
 # PREPATHON Submission Status
 
-**Date:** September 27, 2026  
-**Status:** Corrected Task 2 research complete; legacy Task 2 portfolio claims superseded.
+**Date:** September 28, 2026  
+**Status:** Task 2 final research artifacts completed. Task 3 remains frozen.
 
 ## Task 1
 
 Task 1 remains frozen and unchanged.
 
-## Task 2 — Corrected
+## Task 2 — Final
 
-Task 2 has been rebuilt around the supplied 20-signal information set.
+The final Task 2 run uses the synchronized dataset available in the repository:
 
-Primary evidence:
-- 866 common observations, 2018-01-02 to 2021-11-01
-- supplied signals PB01-PB08, BB01-BB07, VB01-VB05
-- signal at t -> next-open execution
-- 0.05% transaction cost per side
-- 5 rolling WFO folds: 504 train / 63 test
-- training-only parameter estimation
-- no price/OHLC-derived predictive features
+- 986 signal observations
+- 986 price observations
+- 986 common dates
+- 2018-01-02 to 2021-11-01
+- 20 supplied predictive signals
+- 9 tested strategy hypotheses
+- 7 chronological WFO folds
+- 504 training / 63 test observations per fold
+- next-open execution
+- open-to-open marking
+- 0.05% transaction cost per executed side
+- training-only parameter fitting
 
-### Corrected WFO result
+### Final WFO results
 
-| Strategy | Mean WFO Return | Mean WFO Sharpe | Positive Folds |
+| Strategy | Mean WFO Return | Mean WFO Sharpe | Positive-Return Folds |
 |---|---:|---:|---:|
-| BB01_Breakout_20D | -3.29% | -0.56 | 0/5 |
-| PB07_TailReversal_10D | -0.60% | -0.26 | 0/5 |
-| BB03_Reversal_10D | -5.01% | -0.38 | 1/5 |
-| MeanReversion_Composite_10D | -4.73% | -0.33 | 2/5 |
-| BB03_RegimeFiltered_10D | -5.46% | -0.82 | 0/5 |
+| BB01_Breakout_20D | -3.23% | -1.107 | 1/7 |
+| PB07_TailReversal_10D | +5.26% | +1.769 | 3/7 |
+| BB03_Reversal_10D | +2.37% | +1.012 | 6/7 |
+| MeanReversion_Composite_10D | -0.32% | -0.110 | 3/7 |
+| BB03_RegimeFiltered_10D | +1.35% | +0.391 | 4/7 |
+| BB04_Reversal_5D | -0.38% | -0.146 | 1/7 |
+| VB03_Continuation_5D | +0.29% | +0.393 | 2/7 |
+| BB07_UpperTail_10D | +0.50% | +0.652 | 3/7 |
+| PB07_BB03_BB04_Conditional | +3.11% | +1.667 | 6/7 |
 
-**Conclusion:** No tested candidate is currently supported as a robust profitable OOS strategy.
+These are descriptive WFO results. They should not be presented as guarantees of future performance.
 
-The previous 70% PB07 / 30% BB01 portfolio metrics are legacy results from an invalid information-set implementation and must not be used as canonical Task 2 evidence.
+### Canonical Task 2 artifacts
+
+- `quant_project/task2_corrected_runner.py`
+- `research_output/TASK2_CORRECTED_RESULTS.json`
+- `research_output/TASK2_RETURN_SPACE_CORRELATION.csv`
+- `research_output/TASK2_RESEARCH_REPORT.md`
+
+The previous 70% PB07 / 30% BB01 portfolio figures are historical and are **not** the canonical Task 2 result.
 
 ## Task 3
 
-Any Task 3 result that consumes the superseded PB07/BB01 portfolio must be treated as **stale** until Task 3 is rerun using corrected Task 2 outputs.
-
-## Canonical Documentation
-
-- `research_output/TASK2_RESEARCH_REPORT.md` — corrected research narrative
-- `quant_project/task2_corrected_runner.py` — corrected causal WFO runner
-- `research_output/TASK2_CORRECTED_RESULTS.json` — corrected WFO output
-- `research_output/TASK2_RETURN_SPACE_CORRELATION.csv` — candidate signal-stream correlation
+Task 3 artifacts are frozen and were not modified as part of this Task 2 completion.
 
 ## Submission Principle
 
-The submission should prioritize reproducibility and information-set correctness over presenting an unsupported positive backtest.
-
-**Do not cite the superseded 23.6351% / 0.6684 Sharpe portfolio as a validated Task 2 result.**
+The submission should report the reproducible research evidence from the final runner and clearly distinguish frozen-sample results from chronological WFO results.
