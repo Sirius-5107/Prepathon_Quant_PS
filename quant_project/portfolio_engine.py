@@ -42,8 +42,8 @@ class PortfolioEngine:
             raise AssertionError("Canonical returns contain NaNs")
         if np.min(self.bb01_returns) <= -1 or np.min(self.pb07_returns) <= -1:
             raise AssertionError("Return <= -100% is invalid")
-        if self.n_obs != 866:
-            raise AssertionError(f"Expected 866 canonical observations, found {self.n_obs}")
+        if self.n_obs != 986:
+            raise AssertionError(f"Expected 986 canonical observations, found {self.n_obs}")
 
     @staticmethod
     def _metrics(returns):
