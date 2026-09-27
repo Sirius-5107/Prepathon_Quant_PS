@@ -21,6 +21,9 @@ from strategies.alpha_02 import Alpha02
 from strategies.alpha_03 import Alpha03
 from strategies.alpha_04 import Alpha04
 from strategies.alpha_05 import Alpha05
+from strategies.alpha_06 import Alpha06
+from strategies.alpha_07 import Alpha07
+from strategies.alpha_08 import Alpha08
 
 SIGNALS = (
     [f"PB{i:02d}" for i in range(1, 9)]
@@ -182,7 +185,7 @@ def wfo(cls, signals, data, train=504, test=63):
 
 def main():
     signals, price, data = load_data()
-    classes = [Alpha01, Alpha02, Alpha03, Alpha04, Alpha05]
+    classes = [Alpha01, Alpha02, Alpha03, Alpha04, Alpha05, Alpha06, Alpha07, Alpha08]
     results = []
     signal_streams = {}
     return_streams = {}
