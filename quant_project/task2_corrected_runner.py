@@ -35,8 +35,8 @@ COST = 0.0005
 
 
 def load_data():
-    s = pd.read_csv(ROOT / "signals_cleaned.csv", parse_dates=["date"])
-    p = pd.read_csv(ROOT / "price_cleaned.csv", parse_dates=["date"])
+    s = pd.read_csv(ROOT / "data" / "signals_cleaned.csv", parse_dates=["date"])
+    p = pd.read_csv(ROOT / "data" / "price_cleaned.csv", parse_dates=["date"])
     s = s[["date"] + SIGNALS].sort_values("date").drop_duplicates("date")
     p = p.sort_values("date").drop_duplicates("date")
     data = s.merge(p, on="date", how="inner").sort_values("date").reset_index(drop=True)

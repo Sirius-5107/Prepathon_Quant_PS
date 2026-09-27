@@ -1,0 +1,1075 @@
+[
+  {
+    "strategy": "BB01_Breakout_20D",
+    "metadata": {
+      "name": "BB01_Breakout_20D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB01"
+      ],
+      "holding_period_days": 20,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": -3.117853252105607,
+      "sharpe_ratio": -0.03474738053044733,
+      "volatility_%": 9.722151336906618,
+      "max_drawdown_%": -19.51791528060449,
+      "trades": 17,
+      "raw_events": 35
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": -9.51414101933501,
+        "sharpe_ratio": -2.7714362653631537,
+        "volatility_%": 14.285571207397673,
+        "max_drawdown_%": -10.90315748807461,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": -4.9398597926312515,
+        "sharpe_ratio": -1.2240132145301945,
+        "volatility_%": 15.810487008408147,
+        "max_drawdown_%": -8.072860330193986,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": -9.02843540123046,
+        "sharpe_ratio": -3.532735953945954,
+        "volatility_%": 10.717832232558221,
+        "max_drawdown_%": -11.01602121716313,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 2.142451491123998,
+        "sharpe_ratio": 1.226001035234778,
+        "volatility_%": 7.238821512347014,
+        "max_drawdown_%": -2.5927810955337027,
+        "trades": 0,
+        "raw_events": 1
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": -1.3005731806927434,
+        "sharpe_ratio": -1.449787480041077,
+        "volatility_%": 3.6251278287723947,
+        "max_drawdown_%": -2.416180511519772,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      }
+    ],
+    "wfo_mean_return_%": -3.2343654146807808,
+    "wfo_mean_sharpe": -1.1074245540922287,
+    "wfo_positive_folds": 1
+  },
+  {
+    "strategy": "PB07_TailReversal_10D",
+    "metadata": {
+      "name": "PB07_TailReversal_10D",
+      "fitted": true,
+      "predictive_inputs": [
+        "PB07"
+      ],
+      "holding_period_days": 10,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only",
+      "threshold_type": "training-window empirical quantile",
+      "quantile": 0.2
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 59.67648557859886,
+      "sharpe_ratio": 1.3696267613251436,
+      "volatility_%": 9.040042925936344,
+      "max_drawdown_%": -9.99771869919731,
+      "trades": 20,
+      "raw_events": 40
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 23.053052033896293,
+        "sharpe_ratio": 5.400260466221903,
+        "volatility_%": 15.866121588450778,
+        "max_drawdown_%": -1.7966611404557242,
+        "trades": 3,
+        "raw_events": 6
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 11.723792193269,
+        "sharpe_ratio": 4.257557567623511,
+        "volatility_%": 10.724018550524852,
+        "max_drawdown_%": -1.1881105058881736,
+        "trades": 2,
+        "raw_events": 4
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 2.0752775040438154,
+        "sharpe_ratio": 2.726405211799374,
+        "volatility_%": 3.0797011721104472,
+        "max_drawdown_%": -0.4228685814806732,
+        "trades": 1,
+        "raw_events": 2
+      }
+    ],
+    "wfo_mean_return_%": 5.2645888187441585,
+    "wfo_mean_sharpe": 1.769174749377827,
+    "wfo_positive_folds": 3
+  },
+  {
+    "strategy": "BB03_Reversal_10D",
+    "metadata": {
+      "name": "BB03_Reversal_10D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB03"
+      ],
+      "holding_period_days": 10,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 13.211369499200076,
+      "sharpe_ratio": 0.44304055539680165,
+      "volatility_%": 7.861540023579898,
+      "max_drawdown_%": -9.044863634170241,
+      "trades": 25,
+      "raw_events": 50
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 6.18541373410102,
+        "sharpe_ratio": 2.9143154819934995,
+        "volatility_%": 8.494665997377126,
+        "max_drawdown_%": -1.556010558345855,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 5.078074537086774,
+        "sharpe_ratio": 2.147060722733272,
+        "volatility_%": 9.591828779423338,
+        "max_drawdown_%": -3.971247598035721,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 3.4531658870146753,
+        "sharpe_ratio": 0.9265062899013411,
+        "volatility_%": 16.309507555386755,
+        "max_drawdown_%": -5.746650232525674,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 0.3979425415986615,
+        "sharpe_ratio": 0.2048583606831777,
+        "volatility_%": 12.81112121406976,
+        "max_drawdown_%": -6.037158707173507,
+        "trades": 3,
+        "raw_events": 6
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 1.359384104612693,
+        "sharpe_ratio": 0.760933444750455,
+        "volatility_%": 7.585136643221715,
+        "max_drawdown_%": -3.6223864078250845,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.10303315093087573,
+        "sharpe_ratio": 0.13079813406640303,
+        "volatility_%": 3.721764928478042,
+        "max_drawdown_%": -1.1614961762561382,
+        "trades": 1,
+        "raw_events": 2
+      }
+    ],
+    "wfo_mean_return_%": 2.3681448507635285,
+    "wfo_mean_sharpe": 1.0120674905897353,
+    "wfo_positive_folds": 6
+  },
+  {
+    "strategy": "MeanReversion_Composite_10D",
+    "metadata": {
+      "name": "MeanReversion_Composite_10D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB03",
+        "PB07",
+        "BB04"
+      ],
+      "weights_training_only": true,
+      "training_pb_transform": "median/MAD-like robust scale"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": -3.8095317944539353,
+      "sharpe_ratio": 0.01455345272754883,
+      "volatility_%": 15.636034925619096,
+      "max_drawdown_%": -23.3381365078419,
+      "trades": 89,
+      "raw_events": 178
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": -2.1066214202727696,
+        "sharpe_ratio": -1.0376151364049764,
+        "volatility_%": 8.034357280698163,
+        "max_drawdown_%": -3.1337892832718706,
+        "trades": 5,
+        "raw_events": 11
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 4.090759564708812,
+        "sharpe_ratio": 4.1456253411359825,
+        "volatility_%": 3.9505654262435845,
+        "max_drawdown_%": -0.5489126634501074,
+        "trades": 5,
+        "raw_events": 11
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 5.461569689097945,
+        "sharpe_ratio": 1.3661986609310446,
+        "volatility_%": 16.8496851055472,
+        "max_drawdown_%": -4.484313190932521,
+        "trades": 4,
+        "raw_events": 10
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": -6.264026842357651,
+        "sharpe_ratio": -1.7328012317949795,
+        "volatility_%": 14.454463825521701,
+        "max_drawdown_%": -9.693619713999801,
+        "trades": 5,
+        "raw_events": 11
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": -1.1481919925438455,
+        "sharpe_ratio": -1.0227272173083035,
+        "volatility_%": 4.4919647353798275,
+        "max_drawdown_%": -3.32508484688806,
+        "trades": 5,
+        "raw_events": 11
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.9804626448299603,
+        "sharpe_ratio": 0.610984489092804,
+        "volatility_%": 6.870975033919052,
+        "max_drawdown_%": -2.1108298606406173,
+        "trades": 5,
+        "raw_events": 11
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": -3.2565925914641913,
+        "sharpe_ratio": -3.0998148408692616,
+        "volatility_%": 4.310423483008149,
+        "max_drawdown_%": -3.7178172807141974,
+        "trades": 4,
+        "raw_events": 9
+      }
+    ],
+    "wfo_mean_return_%": -0.32037727828596285,
+    "wfo_mean_sharpe": -0.11002141931681285,
+    "wfo_positive_folds": 3
+  },
+  {
+    "strategy": "BB03_RegimeFiltered_10D",
+    "metadata": {
+      "name": "BB03_RegimeFiltered_10D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB03",
+        "VB02"
+      ],
+      "context_signal": "VB02",
+      "threshold": "training-window median"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 13.211369499200076,
+      "sharpe_ratio": 0.44304055539680165,
+      "volatility_%": 7.861540023579898,
+      "max_drawdown_%": -9.044863634170241,
+      "trades": 25,
+      "raw_events": 50
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 6.18541373410102,
+        "sharpe_ratio": 2.9143154819934995,
+        "volatility_%": 8.494665997377126,
+        "max_drawdown_%": -1.556010558345855,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 1.270326874940375,
+        "sharpe_ratio": 0.6627335335474879,
+        "volatility_%": 8.249656586745164,
+        "max_drawdown_%": -4.019261974236688,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 3.4531658870146753,
+        "sharpe_ratio": 0.9265062899013411,
+        "volatility_%": 16.309507555386755,
+        "max_drawdown_%": -5.746650232525674,
+        "trades": 1,
+        "raw_events": 3
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 0.3979425415986615,
+        "sharpe_ratio": 0.2048583606831777,
+        "volatility_%": 12.81112121406976,
+        "max_drawdown_%": -6.037158707173507,
+        "trades": 3,
+        "raw_events": 6
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": -1.887331451687635,
+        "sharpe_ratio": -1.9691915186354108,
+        "volatility_%": 3.894166146628241,
+        "max_drawdown_%": -2.7783759830316,
+        "trades": 0,
+        "raw_events": 1
+      }
+    ],
+    "wfo_mean_return_%": 1.3456453694238708,
+    "wfo_mean_sharpe": 0.3913174496414422,
+    "wfo_positive_folds": 4
+  },
+  {
+    "strategy": "BB04_Reversal_5D",
+    "metadata": {
+      "name": "BB04_Reversal_5D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB04"
+      ],
+      "holding_period_days": 5,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": -5.857350200798727,
+      "sharpe_ratio": -0.2159136661887071,
+      "volatility_%": 6.248974932185993,
+      "max_drawdown_%": -12.601945436173146,
+      "trades": 24,
+      "raw_events": 48
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": -3.7436036512462523,
+        "sharpe_ratio": -2.370021123276046,
+        "volatility_%": 6.453841920101722,
+        "max_drawdown_%": -4.967861955701968,
+        "trades": 2,
+        "raw_events": 4
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 1.1073091540883429,
+        "sharpe_ratio": 1.3498676768878652,
+        "volatility_%": 3.3571314459608126,
+        "max_drawdown_%": -1.0064242049355188,
+        "trades": 2,
+        "raw_events": 4
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      }
+    ],
+    "wfo_mean_return_%": -0.37661349959398704,
+    "wfo_mean_sharpe": -0.145736206626883,
+    "wfo_positive_folds": 1
+  },
+  {
+    "strategy": "VB03_Continuation_5D",
+    "metadata": {
+      "name": "VB03_Continuation_5D",
+      "fitted": true,
+      "predictive_inputs": [
+        "VB03"
+      ],
+      "holding_period_days": 5,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only"
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 21.903429749398274,
+      "sharpe_ratio": 0.8574339004131311,
+      "volatility_%": 6.126834882625684,
+      "max_drawdown_%": -5.5160132150003705,
+      "trades": 16,
+      "raw_events": 32
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 1.1653840828546702,
+        "sharpe_ratio": 0.3184280225080091,
+        "volatility_%": 22.92671985685213,
+        "max_drawdown_%": -10.054655584630678,
+        "trades": 2,
+        "raw_events": 5
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": -3.5940113997070533,
+        "sharpe_ratio": -1.4055659069960442,
+        "volatility_%": 10.216302097789253,
+        "max_drawdown_%": -5.753288787732924,
+        "trades": 0,
+        "raw_events": 1
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": -0.5660660063038114,
+        "sharpe_ratio": -0.2996486061182308,
+        "volatility_%": 6.918285088308586,
+        "max_drawdown_%": -3.6389998939066803,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 5.051625942624249,
+        "sharpe_ratio": 4.137921472183025,
+        "volatility_%": 4.870617437814874,
+        "max_drawdown_%": -0.04999999999999449,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      }
+    ],
+    "wfo_mean_return_%": 0.29384751706686496,
+    "wfo_mean_sharpe": 0.39301928308239414,
+    "wfo_positive_folds": 2
+  },
+  {
+    "strategy": "BB07_UpperTail_10D",
+    "metadata": {
+      "name": "BB07_UpperTail_10D",
+      "fitted": true,
+      "predictive_inputs": [
+        "BB07"
+      ],
+      "holding_period_days": 10,
+      "transaction_cost_per_side": 0.0005,
+      "information_set": "supplied signal library only",
+      "threshold_type": "training-window empirical quantile",
+      "quantile": 0.8
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 6.336869992734773,
+      "sharpe_ratio": 0.20339017922076097,
+      "volatility_%": 10.360240546375795,
+      "max_drawdown_%": -18.679919247918352,
+      "trades": 23,
+      "raw_events": 46
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": -6.07199571763386,
+        "sharpe_ratio": -1.9392516191852058,
+        "volatility_%": 12.707891051190181,
+        "max_drawdown_%": -8.593492621041532,
+        "trades": 4,
+        "raw_events": 9
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 3.1836284304824547,
+        "sharpe_ratio": 3.935562912729457,
+        "volatility_%": 3.250648712981472,
+        "max_drawdown_%": -0.24683650816383906,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 7.837044296493589,
+        "sharpe_ratio": 3.5270829055460653,
+        "volatility_%": 8.806594570117559,
+        "max_drawdown_%": -1.1823654518582583,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": -2.488158558015585,
+        "sharpe_ratio": -1.6694079478773036,
+        "volatility_%": 5.9076514288814215,
+        "max_drawdown_%": -4.340121041896561,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 1.027530391513909,
+        "sharpe_ratio": 0.7116055651307347,
+        "volatility_%": 6.096843684225309,
+        "max_drawdown_%": -2.2473264045790087,
+        "trades": 1,
+        "raw_events": 2
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "raw_events": 0
+      }
+    ],
+    "wfo_mean_return_%": 0.49829269183435826,
+    "wfo_mean_sharpe": 0.6522274023348211,
+    "wfo_positive_folds": 3
+  },
+  {
+    "strategy": "PB07_BB03_BB04_Conditional",
+    "metadata": {
+      "name": "PB07_BB03_BB04_Conditional",
+      "fitted": true,
+      "predictive_inputs": [
+        "PB07",
+        "BB03",
+        "BB04"
+      ],
+      "information_set": "supplied signal library only",
+      "signal_semantics": "desired position; 0 means flat",
+      "fixed_rules": [
+        "PB07 < -0.025 -> +1",
+        "BB03 == 1 and PB07 > 0.020 -> -1",
+        "BB04 == 1 and PB07 < -0.010 -> +1"
+      ],
+      "thresholds_learned": false
+    },
+    "full_sample_frozen_fit": {
+      "total_return_%": 16.58550536727268,
+      "sharpe_ratio": 0.47687446503122427,
+      "volatility_%": 9.098762842795772,
+      "max_drawdown_%": -11.384155279278962,
+      "trades": 62,
+      "win_rate_%": 67.74193548387096,
+      "profit_factor": 1.6108587659969908
+    },
+    "wfo_folds": [
+      {
+        "fold": 1,
+        "train_start": "2018-01-02",
+        "train_end": "2019-12-19",
+        "test_start": "2019-12-20",
+        "test_end": "2020-03-17",
+        "total_return_%": 12.199338481979073,
+        "sharpe_ratio": 3.9722267468919044,
+        "volatility_%": 11.964643858558025,
+        "max_drawdown_%": -1.556010558345844,
+        "trades": 8,
+        "win_rate_%": 87.5,
+        "profit_factor": 11.130434171486765
+      },
+      {
+        "fold": 2,
+        "train_start": "2018-04-03",
+        "train_end": "2020-03-17",
+        "test_start": "2020-03-18",
+        "test_end": "2020-06-12",
+        "total_return_%": 0.7927847904490193,
+        "sharpe_ratio": 1.3148400794731587,
+        "volatility_%": 2.463839505768712,
+        "max_drawdown_%": -0.6486523583728476,
+        "trades": 3,
+        "win_rate_%": 100.0,
+        "profit_factor": Infinity
+      },
+      {
+        "fold": 3,
+        "train_start": "2018-07-04",
+        "train_end": "2020-06-12",
+        "test_start": "2020-06-16",
+        "test_end": "2020-09-11",
+        "total_return_%": 0.5203945693156076,
+        "sharpe_ratio": 0.2907547635752529,
+        "volatility_%": 8.471401166075571,
+        "max_drawdown_%": -3.4188256173616427,
+        "trades": 6,
+        "win_rate_%": 50.0,
+        "profit_factor": 1.2616405547234155
+      },
+      {
+        "fold": 4,
+        "train_start": "2018-10-01",
+        "train_end": "2020-09-11",
+        "test_start": "2020-09-14",
+        "test_end": "2020-12-10",
+        "total_return_%": 3.899464996150237,
+        "sharpe_ratio": 1.8367768955323356,
+        "volatility_%": 8.783365312072307,
+        "max_drawdown_%": -2.7066169937370432,
+        "trades": 5,
+        "win_rate_%": 100.0,
+        "profit_factor": Infinity
+      },
+      {
+        "fold": 5,
+        "train_start": "2018-12-31",
+        "train_end": "2020-12-10",
+        "test_start": "2020-12-11",
+        "test_end": "2021-03-11",
+        "total_return_%": 3.4678151605009644,
+        "sharpe_ratio": 2.1097432490855526,
+        "volatility_%": 6.771727799681761,
+        "max_drawdown_%": -1.2567489247475971,
+        "trades": 3,
+        "win_rate_%": 100.0,
+        "profit_factor": Infinity
+      },
+      {
+        "fold": 6,
+        "train_start": "2019-03-28",
+        "train_end": "2021-03-11",
+        "test_start": "2021-03-12",
+        "test_end": "2021-06-08",
+        "total_return_%": 0.0,
+        "sharpe_ratio": 0.0,
+        "volatility_%": 0.0,
+        "max_drawdown_%": 0.0,
+        "trades": 0,
+        "win_rate_%": 0.0,
+        "profit_factor": 0.0
+      },
+      {
+        "fold": 7,
+        "train_start": "2019-06-25",
+        "train_end": "2021-06-08",
+        "test_start": "2021-06-09",
+        "test_end": "2021-09-03",
+        "total_return_%": 0.9219374950062864,
+        "sharpe_ratio": 2.145398488374994,
+        "volatility_%": 1.745714500636394,
+        "max_drawdown_%": -0.1301333254149828,
+        "trades": 2,
+        "win_rate_%": 100.0,
+        "profit_factor": Infinity
+      }
+    ],
+    "wfo_mean_return_%": 3.1145336419144556,
+    "wfo_mean_sharpe": 1.667105746133314,
+    "wfo_positive_folds": 6
+  }
+]
