@@ -1,5 +1,4 @@
-"""
-Corrected Task 2 runner: supplied signals are the only predictive inputs.
+"""Corrected Task 2 runner: supplied signals are the only predictive inputs.
 
 Execution convention:
 - signal observed at date t
@@ -41,7 +40,7 @@ def load_data():
 
 
 def forward_target(data, h=10):
-    """Return the causal target matching t signal -> t+1 open entry -> h-day open exit."""
+    """Causal target: t signal -> t+1 open entry -> h-day open exit."""
     y = np.full(len(data), np.nan)
     for i in range(len(data) - h - 1):
         entry = float(data.iloc[i + 1]["open"])
@@ -50,14 +49,47 @@ def forward_target(data, h=10):
     return pd.Series(y, index=data.index)
 
 
-def backtest_events(data, sig, start=0, end=None, cost=COST):
-    """
-    Event backtest with causal next-open execution and open-to-open marking.
+def _event_equity(data, sig, start=0, end=None, cost=COST):
+    """Return the daily equity curve under causal next-open execution."""
+    end = len(data) if end is None else min(end, len(data))
+    start = max(start, 0)
 
-    A signal at t executes at t+1 open. The return from open[t-1] to open[t]
-    is attributed to the position held before the t-open event. Costs are
-    charged once at each executed entry/exit.
-    """
+    equity = 1.0
+    position = 0
+    entry_price = None
+    daily_equity = []
+
+    for i in range(start, end):
+        open_px = float(data.iloc[i]["open"])
+
+        if i > 0 and position != 0:
+            prev_open = float(data.iloc[i - 1]["open"])
+            equity *= 1.0 + position * (open_px / prev_open - 1.0)
+
+        signal = int(sig.iloc[i - 1]) if i > 0 else 0
+
+        if position != 0 and signal == -position:
+            equity *= 1.0 - cost
+            position = 0
+            entry_price = None
+        elif position == 0 and signal != 0:
+            position = signal
+            entry_price = open_px
+            equity *= 1.0 - cost
+
+        daily_equity.append(equity)
+
+    return pd.Series(daily_equity, index=data.index[start:end], dtype=float)
+
+
+def daily_return_stream(data, sig, start=0, end=None, cost=COST):
+    """Daily realized return stream, including zero-return idle days."""
+    eq = _event_equity(data, sig, start=start, end=end, cost=cost)
+    return eq.pct_change().fillna(0.0)
+
+
+def backtest_events(data, sig, start=0, end=None, cost=COST):
+    """Event backtest with causal next-open execution and open-to-open marking."""
     end = len(data) if end is None else min(end, len(data))
     start = max(start, 0)
 
@@ -72,12 +104,10 @@ def backtest_events(data, sig, start=0, end=None, cost=COST):
     for i in range(start, end):
         open_px = float(data.iloc[i]["open"])
 
-        # Mark the position held before today's open using open-to-open return.
         if i > 0 and position != 0:
             prev_open = float(data.iloc[i - 1]["open"])
             equity *= 1.0 + position * (open_px / prev_open - 1.0)
 
-        # signal[i-1] is the information observed at t-1 and executed at t open.
         signal = int(sig.iloc[i - 1]) if i > 0 else 0
         if signal != 0:
             raw_events += 1
@@ -135,8 +165,6 @@ def wfo(cls, signals, data, train=504, test=63):
         test_end = train_end + test
         st = fit_strategy(cls(), signals, data, start, train_end)
 
-        # Generate signals using only observations available through the test date.
-        # Execution is shifted one day by backtest_events.
         hist = signals.iloc[:test_end].copy()
         sig = st.generate_signal(st.generate_features(hist))
         metrics = backtest_events(data, sig, train_end, test_end)
@@ -156,14 +184,13 @@ def main():
     signals, price, data = load_data()
     classes = [Alpha01, Alpha02, Alpha03, Alpha04, Alpha05]
     results = []
-    streams = {}
+    signal_streams = {}
+    return_streams = {}
 
     for cls in classes:
         st = fit_strategy(cls(), signals, data, 0, min(504, len(data)))
         sig = st.generate_signal(st.generate_features(signals))
         folds = wfo(cls, signals, data)
-
-        # Descriptive frozen-fit statistic; WFO is the primary OOS evidence.
         full = backtest_events(data, sig)
 
         results.append({
@@ -175,16 +202,27 @@ def main():
             "wfo_mean_sharpe": float(np.mean([f["sharpe_ratio"] for f in folds])),
             "wfo_positive_folds": int(sum(f["total_return_%"] > 0 for f in folds)),
         })
-        streams[st.name] = sig.to_numpy(dtype=float)
+        signal_streams[st.name] = sig.to_numpy(dtype=float)
+        return_streams[st.name] = daily_return_stream(data, sig).to_numpy(dtype=float)
 
-    corr = pd.DataFrame(streams).corr()
     out = ROOT / "research_output"
     out.mkdir(exist_ok=True)
     (out / "TASK2_CORRECTED_RESULTS.json").write_text(json.dumps(results, indent=2))
-    corr.to_csv(out / "TASK2_RETURN_SPACE_CORRELATION.csv")
+
+    # Orthogonality is measured in realized daily return space, not raw trade-state space.
+    return_corr = pd.DataFrame(return_streams).corr()
+    return_corr.to_csv(out / "TASK2_RETURN_SPACE_CORRELATION.csv")
+
+    # Canonical Task 3 input: corrected full-sample frozen-fit daily streams.
+    canonical = pd.DataFrame({
+        "date": data["date"],
+        "bb01_daily_return": return_streams["BB01_Breakout_20D"],
+        "pb07_daily_return": return_streams["PB07_TailReversal_10D"],
+    })
+    canonical.to_csv(out / "portfolio_daily_returns.csv", index=False)
 
     print(json.dumps(results, indent=2))
-    print(corr.round(4))
+    print(return_corr.round(4))
 
 
 if __name__ == "__main__":
