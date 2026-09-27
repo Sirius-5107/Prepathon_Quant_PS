@@ -122,7 +122,7 @@ Dynamic performance is therefore evaluated only on the OOS period, from
         report += f'| {name} | Full sample | {m["total_return"]:.2%} | {m["cagr"]:.2%} | {m["annual_vol"]:.2%} | {m["sharpe"]:.3f} | {m["max_drawdown"]:.2%} | {m["calmar"]:.3f} |\n'
     d = dynamic["portfolio"]["metrics"]
     report += f'| dynamic_erc_wfo | OOS only | {d["total_return"]:.2%} | {d["cagr"]:.2%} | {d["annual_vol"]:.2%} | {d["sharpe"]:.3f} | {d["max_drawdown"]:.2%} | {d["calmar"]:.3f} |\n'
-    report += """
+    report += f"""
 ## Interpretation
 
 The 70/30 allocation is retained as a descriptive benchmark for the corrected BB01/PB07 return streams. Full-sample
@@ -134,7 +134,7 @@ subsequent observations.
 
 ## Validation Checks
 
-- Canonical observation count: 866.
+- Canonical observation count: {engine.n_obs}.
 - Canonical period: 2018-01-02 to 2021-11-01.
 - 70/30 baseline is generated directly from the current canonical corrected return stream.
 - Dynamic weights start at the first OOS observation (after 504 training days).
