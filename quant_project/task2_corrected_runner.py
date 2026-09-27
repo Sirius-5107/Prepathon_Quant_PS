@@ -24,6 +24,7 @@ from strategies.alpha_05 import Alpha05
 from strategies.alpha_06 import Alpha06
 from strategies.alpha_07 import Alpha07
 from strategies.alpha_08 import Alpha08
+from strategies.alpha_09 import Alpha09
 
 SIGNALS = (
     [f"PB{i:02d}" for i in range(1, 9)]
@@ -152,6 +153,70 @@ def backtest_events(data, sig, start=0, end=None, cost=COST):
     }
 
 
+def backtest_desired_position(data, sig, start=0, end=None, cost=COST):
+    """Backtest a desired-position signal: +1 long, -1 short, 0 flat.
+
+    The signal observed at t-1 is applied at t open. Position changes are
+    costed once per entry/exit/reversal.
+    """
+    end = len(data) if end is None else min(end, len(data))
+    start = max(start, 0)
+
+    equity = 1.0
+    position = 0
+    trade_returns = []
+    daily_equity = []
+    entry_price = None
+
+    for i in range(start, end):
+        open_px = float(data.iloc[i]["open"])
+
+        if i > start and position != 0:
+            prev_open = float(data.iloc[i - 1]["open"])
+            equity *= 1.0 + position * (open_px / prev_open - 1.0)
+
+        desired = int(sig.iloc[i - 1]) if i > 0 else 0
+
+        if desired != position:
+            if position != 0 and entry_price is not None:
+                gross = position * (open_px / entry_price - 1.0)
+                trade_returns.append(gross - 2.0 * cost)
+
+            if position != 0:
+                equity *= 1.0 - cost
+            if desired != 0:
+                equity *= 1.0 - cost
+
+            position = desired
+            entry_price = open_px if desired != 0 else None
+
+        daily_equity.append(equity)
+
+    eq = pd.Series(daily_equity, dtype=float)
+    rets = eq.pct_change().dropna()
+    total_return = (eq.iloc[-1] - 1.0) * 100.0 if len(eq) else 0.0
+    dd = ((eq / eq.cummax()) - 1.0).min() * 100.0 if len(eq) else 0.0
+    vol = rets.std() * np.sqrt(252) * 100.0 if len(rets) > 1 else 0.0
+    sharpe = (
+        rets.mean() / (rets.std() + 1e-12) * np.sqrt(252)
+        if len(rets) > 1 else 0.0
+    )
+    wins = sum(r > 0 for r in trade_returns)
+    losses = sum(r < 0 for r in trade_returns)
+    gross_profit = sum(r for r in trade_returns if r > 0)
+    gross_loss = -sum(r for r in trade_returns if r < 0)
+
+    return {
+        "total_return_%": float(total_return),
+        "sharpe_ratio": float(sharpe),
+        "volatility_%": float(vol),
+        "max_drawdown_%": float(dd),
+        "trades": int(len(trade_returns)),
+        "win_rate_%": float(100.0 * wins / len(trade_returns)) if trade_returns else 0.0,
+        "profit_factor": float(gross_profit / gross_loss) if gross_loss > 0 else float("inf") if gross_profit > 0 else 0.0,
+    }
+
+
 def fit_strategy(st, signals, data, start, end):
     tr_sig = signals.iloc[start:end].copy()
     tr_data = data.iloc[start:end].copy()
@@ -185,7 +250,7 @@ def wfo(cls, signals, data, train=504, test=63):
 
 def main():
     signals, price, data = load_data()
-    classes = [Alpha01, Alpha02, Alpha03, Alpha04, Alpha05, Alpha06, Alpha07, Alpha08]
+    classes = [Alpha01, Alpha02, Alpha03, Alpha04, Alpha05, Alpha06, Alpha07, Alpha08, Alpha09]
     results = []
     signal_streams = {}
     return_streams = {}
@@ -194,7 +259,7 @@ def main():
         st = fit_strategy(cls(), signals, data, 0, min(504, len(data)))
         sig = st.generate_signal(st.generate_features(signals))
         folds = wfo(cls, signals, data)
-        full = backtest_events(data, sig)
+        full = backtest_desired_position(data, sig) if isinstance(st, Alpha09) else backtest_events(data, sig)
 
         results.append({
             "strategy": st.name,
@@ -206,7 +271,7 @@ def main():
             "wfo_positive_folds": int(sum(f["total_return_%"] > 0 for f in folds)),
         })
         signal_streams[st.name] = sig.to_numpy(dtype=float)
-        return_streams[st.name] = daily_return_stream(data, sig).to_numpy(dtype=float)
+        return_streams[st.name] = (daily_return_stream(data, sig) if not isinstance(st, Alpha09) else _event_equity(data, sig).pct_change().fillna(0.0)).to_numpy(dtype=float)
 
     out = ROOT / "research_output"
     out.mkdir(exist_ok=True)
