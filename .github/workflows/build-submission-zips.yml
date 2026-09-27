@@ -25,7 +25,7 @@ jobs:
           for f in alpha_research.py backtester.py config.py data_cleaner.py data_loader.py execution_engine.py feature_engine.py orthogonality.py performance.py signal_shape_analysis.py signal_statistical_validation.py pb07_bb01_validation.py strategy_bb01.py strategy_mean_reversion.py task2_corrected_runner.py task2_submission_integrity_audit.py; do
             test -f quant_project/$f && cp quant_project/$f checkpoint2/quant_project/
           done
-          for f in TASK2_CORRECTED_RESEARCH_REPORT.md TASK2_RETURN_SPACE_CORRELATION.csv TASK2_RESULTS_986_BASELINE.json portfolio_daily_returns.csv strategy_bb01_metrics.json strategy_bb01_trades.csv strategy_bb01_wfo.csv strategy_bb01_yearly.csv strategy_02_candidates.csv strategy_02_equity.csv strategy_02_metrics.json strategy_02_trades.csv strategy_02_wfo.csv strategy_02_yearly.csv signal_statistical_validation.csv; do
+          for f in TASK2_CORRECTED_RESEARCH_REPORT.md TASK2_RETURN_SPACE_CORRELATION.csv portfolio_daily_returns.csv strategy_bb01_metrics.json strategy_bb01_trades.csv strategy_bb01_wfo.csv strategy_bb01_yearly.csv strategy_02_candidates.csv strategy_02_equity.csv strategy_02_metrics.json strategy_02_trades.csv strategy_02_wfo.csv strategy_02_yearly.csv signal_statistical_validation.csv; do
             test -f research_output/$f && cp research_output/$f checkpoint2/research_output/
           done
           cat > checkpoint2/CHECKPOINT2_PACKAGE_README.md <<'EOF'
