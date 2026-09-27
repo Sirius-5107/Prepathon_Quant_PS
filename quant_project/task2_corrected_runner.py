@@ -153,6 +153,31 @@ def backtest_events(data, sig, start=0, end=None, cost=COST):
     }
 
 
+def desired_position_equity(data, sig, start=0, end=None, cost=COST):
+    """Daily equity curve for desired-position signals."""
+    end = len(data) if end is None else min(end, len(data))
+    start = max(start, 0)
+    equity = 1.0
+    position = 0
+    daily_equity = []
+
+    for i in range(start, end):
+        open_px = float(data.iloc[i]["open"])
+        if i > start and position != 0:
+            prev_open = float(data.iloc[i - 1]["open"])
+            equity *= 1.0 + position * (open_px / prev_open - 1.0)
+
+        desired = int(sig.iloc[i - 1]) if i > 0 else 0
+        if desired != position:
+            changes = (1 if position != 0 else 0) + (1 if desired != 0 else 0)
+            equity *= (1.0 - cost) ** changes
+            position = desired
+
+        daily_equity.append(equity)
+
+    return pd.Series(daily_equity, index=data.index[start:end], dtype=float)
+
+
 def backtest_desired_position(data, sig, start=0, end=None, cost=COST):
     """Backtest a desired-position signal: +1 long, -1 short, 0 flat.
 
@@ -235,7 +260,7 @@ def wfo(cls, signals, data, train=504, test=63):
 
         hist = signals.iloc[:test_end].copy()
         sig = st.generate_signal(st.generate_features(hist))
-        metrics = backtest_events(data, sig, train_end, test_end)
+        metrics = (backtest_desired_position(data, sig, train_end, test_end) if isinstance(st, Alpha09) else backtest_events(data, sig, train_end, test_end))
 
         folds.append({
             "fold": k,
@@ -271,7 +296,7 @@ def main():
             "wfo_positive_folds": int(sum(f["total_return_%"] > 0 for f in folds)),
         })
         signal_streams[st.name] = sig.to_numpy(dtype=float)
-        return_streams[st.name] = (daily_return_stream(data, sig) if not isinstance(st, Alpha09) else _event_equity(data, sig).pct_change().fillna(0.0)).to_numpy(dtype=float)
+        return_streams[st.name] = (daily_return_stream(data, sig) if not isinstance(st, Alpha09) else desired_position_equity(data, sig).pct_change().fillna(0.0)).to_numpy(dtype=float)
 
     out = ROOT / "research_output"
     out.mkdir(exist_ok=True)
