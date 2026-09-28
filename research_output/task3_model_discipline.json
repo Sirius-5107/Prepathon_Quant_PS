@@ -1,0 +1,40 @@
+{
+  "train": {
+    "mean_fold_return": 0.2053708840323734,
+    "mean_fold_sharpe": 1.5922141180023601
+  },
+  "validation": {
+    "mean_fold_return": 0.07118236639844165,
+    "mean_fold_sharpe": 1.8429025540852293
+  },
+  "test": {
+    "mean_fold_return": 0.04090435419172277,
+    "mean_fold_sharpe": 1.7576716493501796,
+    "total_return": 0.3525706515149254,
+    "cagr": 0.17104411783032214,
+    "annual_vol": 0.06701815888804914,
+    "sharpe": 2.3898767226129007,
+    "max_drawdown": -0.021719402709006408
+  },
+  "null_baseline": {
+    "observed_oos_total_return": 0.3525706515149254,
+    "null_mean_total_return": 0.2485605587781999,
+    "null_std_total_return": 0.07471003282687458,
+    "null_p95_total_return": 0.3769897949245415,
+    "null_exceed_count": 56,
+    "n_permutations": 500
+  },
+  "overfit_risk": "Judge from rolling train-to-validation/OOS gaps; do not select on full-sample OOS outcomes.",
+  "meta_model": {
+    "capacity_justification": "one trailing mean/vol score per strategy; no cross-strategy fitted parameters",
+    "wfo_folds": 8,
+    "null_baseline_permutations": 500,
+    "model": "trailing mean / volatility"
+  },
+  "selected_strategies": [
+    "PB07_TailReversal_10D",
+    "PB07_BB03_BB04_Conditional",
+    "BB03_Reversal_10D"
+  ],
+  "selection_rule": "Frozen corrected Task 2 WFO evidence plus non-redundant return-space contribution"
+}

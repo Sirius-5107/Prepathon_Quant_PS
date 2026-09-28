@@ -1,0 +1,8 @@
+{
+  "observed_oos_total_return": 0.3525706515149254,
+  "null_mean_total_return": 0.2485605587781999,
+  "null_std_total_return": 0.07471003282687458,
+  "null_p95_total_return": 0.3769897949245415,
+  "null_exceed_count": 56,
+  "n_permutations": 500
+}
