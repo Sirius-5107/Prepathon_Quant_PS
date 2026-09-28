@@ -1,7 +1,7 @@
 # PREPATHON Submission Status
 
 **Date:** September 28, 2026  
-**Status:** Task 2 final research artifacts completed. Task 3 remains frozen.
+**Status:** Task 2 corrected research and Task 3 multi-alpha rebuild are complete; generated Task 3 metrics must be refreshed locally before packaging.
 
 ## Task 1
 
@@ -49,9 +49,13 @@ These are descriptive WFO results. They should not be presented as guarantees of
 
 The previous 70% PB07 / 30% BB01 portfolio figures are historical and are **not** the canonical Task 2 result.
 
-## Task 3
+## Task 3 — Corrected Multi-Alpha Build
 
-Task 3 artifacts are frozen and were not modified as part of this Task 2 completion.
+Task 3 now consumes all nine corrected Task 2 return streams. The learned component uses a 504/63 rolling walk-forward, an internal 80/20 train-validation split, a low-capacity trailing mean/volatility score, 0.05% portfolio turnover cost, and a 500-repetition permutation null.
+
+The prior two-strategy Task 3 performance claims are superseded and must not be packaged as current evidence.
+
+Run `python quant_project/task2_corrected_runner.py` followed by `python quant_project/task3_backtest.py` before packaging so the CSV/JSON/MD outputs match the current code.
 
 ## Submission Principle
 
