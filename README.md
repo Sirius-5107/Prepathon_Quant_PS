@@ -60,6 +60,8 @@ The previous 70% PB07 / 30% BB01 portfolio metrics are historical and should not
 
 ## Task 3 — Corrected Multi-Alpha Allocation
 
-Task 3 now consumes all nine corrected Task 2 strategy return streams. Static equal-weight/ERC baselines are descriptive only. The learned component uses a low-capacity trailing mean/volatility score, 504-observation rolling training windows, an internal 80/20 validation split, 63-observation OOS test windows, 0.05% turnover cost, and a 500-repetition permutation allocation null.
+Task 3 uses a frozen three-strategy selection from the corrected Task 2 evidence: PB07_TailReversal_10D, PB07_BB03_BB04_Conditional, and BB03_Reversal_10D. BB01, MeanReversion_Composite, and BB04 have negative corrected mean WFO returns and are excluded; BB03_RegimeFiltered is redundant with BB03.
 
-The previous two-strategy 70/30 PB07/BB01 Task 3 results are superseded and should not be used as submission evidence.
+The Task 3 comparison includes the best selected individual, equal-weight, covariance ERC, long-only full-sample maximum-Sharpe descriptive optimization, and the proposed rolling dynamic meta-model. The dynamic model uses a low-capacity trailing mean/volatility score, 504-observation rolling training windows, an internal 80/20 validation split, 63-observation OOS test windows, 0.05% turnover cost, and a 500-repetition permutation allocation null.
+
+Superseded two-strategy portfolio artifacts and old strategy implementation files have been removed from the canonical branch. Do not use historical metrics from prior Task 3 runs.
