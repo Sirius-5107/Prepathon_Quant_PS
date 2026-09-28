@@ -1,158 +1,166 @@
-"""Task 3 reproducible backtest runner."""
-
-import sys
+"""Task 3 reproducible multi-alpha portfolio study with strict rolling OOS discipline."""
 from pathlib import Path
+import json
+import numpy as np
 import pandas as pd
-
-sys.path.insert(0, str(Path(__file__).parent))
 from portfolio_engine import PortfolioEngine
-from static_allocator import run_static_allocation_study
-from dynamic_allocator import run_dynamic_allocation_study
+from portfolio_optimizer import PortfolioOptimizer
+from meta_model import AlphaMetaModel
+from dynamic_allocator import DynamicAllocator
+from factor_model import FactorModel
+from final_evaluation import FinalEvaluator
 
+TRAIN=504; TEST=63; COST=0.0005
 
 def main():
-    out = Path("research_output")
-    out.mkdir(exist_ok=True)
+    out=Path("research_output"); out.mkdir(exist_ok=True)
+    engine=PortfolioEngine()
+    R=engine.returns.copy(); names=engine.strategy_names
 
-    engine = PortfolioEngine()
-    static = run_static_allocation_study(engine)
-    dynamic = run_dynamic_allocation_study(engine)
+    # Static baselines are descriptive only.
+    opt=PortfolioOptimizer().fit(R.to_numpy())
+    eq=opt.optimize("equal_weight")
+    erc=opt.optimize("erc")
+    static_rows=[]
+    for label,w in [("equal_weight",eq),("erc",erc)]:
+        m=engine.metrics(R.to_numpy()@w)
+        static_rows.append({"allocator":label,"evaluation":"full_sample_descriptive",**m,**{f"w_{n}":w[i] for i,n in enumerate(names)}})
+    pd.DataFrame(static_rows).to_csv(out/"task3_allocator_comparison.csv",index=False)
 
-    rows = []
-    for name in ["baseline", "equal_weight", "risk_parity", "optimize_sharpe"]:
-        m = static[name]["portfolio"]["metrics"]
-        rows.append({
-            "allocator": name,
-            "w_pb07": static[name]["weights"]["pb07"],
-            "w_bb01": static[name]["weights"]["bb01"],
-            **m,
-            "evaluation": "full_sample_descriptive",
+    # Rolling meta-model: 80/20 train-validation inside each training window,
+    # then refit on the complete 504-day window before the 63-day OOS test.
+    meta=AlphaMetaModel(null_reps=500,random_state=42)
+    allocator=DynamicAllocator(transaction_cost=COST)
+    factor_rows=[]; oos_parts=[]; fold_rows=[]; null_totals=[]
+    prev=pd.Series(1/len(names),index=names,dtype=float)
+
+    for fold,start in enumerate(range(TRAIN,len(R),TEST),1):
+        end=min(start+TEST,len(R)); train=R.iloc[start-TRAIN:start]; test=R.iloc[start:end]
+        split=int(len(train)*0.8); tr=train.iloc[:split]; val=train.iloc[split:]
+
+        # Validation performance uses weights learned only from the first 80% of train.
+        meta.fit(tr); val_w=allocator.allocate(meta.predict(tr))
+        train_r=tr.to_numpy()@val_w.reindex(names).to_numpy()
+        val_r=val.to_numpy()@val_w.reindex(names).to_numpy()
+
+        # Final fit uses all information available before this OOS test block.
+        meta.fit(train); scores=meta.predict(train); target=allocator.allocate(scores)
+        target,turnover=allocator.rebalance(prev,target)
+        test_r=test.to_numpy()@target.reindex(names).to_numpy()
+        test_r=np.asarray(test_r,float); test_r[0]-=COST*turnover
+
+        # Permutation null: preserve the learned weight magnitudes but randomly
+        # assign them to strategy labels before evaluating the same OOS block.
+        _,null_fold=meta.null_allocation_returns(train,test)
+        null_fold=np.asarray(null_fold,float)
+        null_totals.append(null_fold)
+
+        factor=R.iloc[start-TRAIN:start].mean(axis=1).to_frame("strategy_basket")
+        fm=FactorModel().fit(train,factor)
+        residuals=fm.get_residuals()
+        factor_rows.append({"fold":fold,"residual_rms_mean":float(np.sqrt(np.mean(residuals.to_numpy()**2))),
+                            "n_train":len(train),"test_start":str(engine.dates[start].date()),
+                            "test_end":str(engine.dates[end-1].date())})
+
+        oos_parts.append(test_r)
+        fold_rows.append({
+            "fold":fold,"train_start":str(engine.dates[start-TRAIN].date()),
+            "train_end":str(engine.dates[start-1].date()),
+            "validation_start":str(engine.dates[start-TRAIN+split].date()),
+            "validation_end":str(engine.dates[start-1].date()),
+            "test_start":str(engine.dates[start].date()),
+            "test_end":str(engine.dates[end-1].date()),
+            "train_sharpe":engine.metrics(train_r)["sharpe"],
+            "validation_sharpe":engine.metrics(val_r)["sharpe"],
+            "test_sharpe":engine.metrics(test_r)["sharpe"],
+            "train_return":engine.metrics(train_r)["total_return"],
+            "validation_return":engine.metrics(val_r)["total_return"],
+            "test_return":engine.metrics(test_r)["total_return"],
+            "turnover":turnover,
+            **{f"w_{n}":target[n] for n in names}
         })
-    m = dynamic["portfolio"]["metrics"]
-    rows.append({
-        "allocator": "dynamic_erc_wfo",
-        "w_pb07": float(dynamic["weights"]["w_pb07"].iloc[0]),
-        "w_bb01": float(dynamic["weights"]["w_bb01"].iloc[0]),
-        **m,
-        "evaluation": "out_of_sample",
-    })
-    pd.DataFrame(rows).to_csv(out / "task3_allocator_comparison.csv", index=False)
+        prev=target
 
-    grid = pd.DataFrame(static["grid_search"])
-    grid["evaluation"] = "full_sample_descriptive"
-    grid.to_csv(out / "task3_grid_search.csv", index=False)
+    folds=pd.DataFrame(fold_rows); folds.to_csv(out/"task3_dynamic_folds.csv",index=False)
+    weights=folds[["fold","test_start","test_end","turnover"]+[f"w_{n}" for n in names]]
+    weights.to_csv(out/"task3_dynamic_weights.csv",index=False)
 
-    dynamic["weights"].to_csv(out / "task3_dynamic_weights.csv", index=False)
+    oos=np.concatenate(oos_parts); oos_metrics=engine.metrics(oos)
+    # Compound fold-level permutation outcomes to a full OOS null distribution.
+    null_matrix=np.vstack(null_totals)
+    null_distribution=np.prod(1+null_matrix,axis=0)-1
+    null_summary={"observed_oos_total_return":oos_metrics["total_return"],
+                   "null_mean_total_return":float(null_distribution.mean()),
+                   "null_std_total_return":float(null_distribution.std(ddof=1)),
+                   "null_p95_total_return":float(np.quantile(null_distribution,.95)),
+                   "null_exceed_count":int(np.sum(null_distribution>=oos_metrics["total_return"])),
+                   "n_permutations":500}
+    (out/"task3_null_baseline.json").write_text(json.dumps(null_summary,indent=2))
 
-    pd.DataFrame({
-        "date": static["baseline"]["portfolio"]["dates"],
-        "baseline_equity": static["baseline"]["portfolio"]["equity_curve"],
-        "equal_weight_equity": static["equal_weight"]["portfolio"]["equity_curve"],
-        "risk_parity_equity": static["risk_parity"]["portfolio"]["equity_curve"],
-        "optimize_sharpe_equity": static["optimize_sharpe"]["portfolio"]["equity_curve"],
-    }).to_csv(out / "task3_portfolio_comparison.csv", index=False)
+    factor_df=pd.DataFrame(factor_rows); factor_df.to_csv(out/"task3_factor_model.csv",index=False)
 
-    pd.DataFrame({
-        "date": dynamic["portfolio"]["dates"],
-        "dynamic_erc_wfo_equity": dynamic["portfolio"]["equity_curve"],
-    }).to_csv(out / "task3_dynamic_oos_equity.csv", index=False)
+    # OOS equity only; no pre-training backfill.
+    eq_curve=np.cumprod(1+oos)
+    pd.DataFrame({"date":engine.dates[TRAIN:],"dynamic_meta_oos_equity":eq_curve}).to_csv(out/"task3_dynamic_oos_equity.csv",index=False)
 
-    b = static["baseline"]["portfolio"]["metrics"]
+    evaluator=FinalEvaluator()
+    discipline=evaluator.report(
+        train_metrics={"mean_fold_sharpe":float(folds.train_sharpe.mean()),"mean_fold_return":float(folds.train_return.mean())},
+        validation_metrics={"mean_fold_sharpe":float(folds.validation_sharpe.mean()),"mean_fold_return":float(folds.validation_return.mean())},
+        test_metrics={"mean_fold_sharpe":float(folds.test_sharpe.mean()),"mean_fold_return":float(folds.test_return.mean()),**oos_metrics},
+        null=null_summary)
+    (out/"task3_model_discipline.json").write_text(json.dumps(discipline,indent=2))
 
-    report = f"""# Task 3: Portfolio Construction and Allocation
+    report=f"""# Task 3: Multi-Alpha Portfolio Construction
 
-## Executive Summary
+## Scope
+Task 3 consumes the corrected Task 2 daily return matrix containing {len(names)} strategy streams and {engine.n_obs} synchronized observations ({engine.dates[0].date()} to {engine.dates[-1].date()}).
 
-Task 3 compares static allocations of the two strategies selected in Task 2
-(PB07 and BB01) and a strictly out-of-sample dynamic allocator.
+All Task 3 inputs are already-realized Task 2 strategy returns. No Task 3 step reconstructs a signal from price or volume.
 
-The Task 2 baseline is reproduced from the canonical return stream:
-**70% PB07 + 30% BB01 = {b["total_return"]:.4%} cumulative return**, using the corrected Task 2 return stream generated by `task2_corrected_runner.py`.
+## Static baselines
+Equal-weight and covariance ERC are reported as full-sample descriptive baselines. They are not OOS forecasts and are not used to select the dynamic model.
 
-## Return Construction
+## Learned component and capacity
+The AlphaMetaModel uses one statistic per strategy: trailing mean divided by trailing volatility. There are no cross-strategy fitted coefficients, hidden layers, or high-dimensional features. This is deliberately low capacity relative to the 504-observation training window.
 
-Task 3 uses research_output/portfolio_daily_returns.csv, the canonical Task 2
-daily realized-return stream. Returns are already decimals and are compounded
-once at the portfolio level. The separate daily MTM files are not used,
-because their values represent cumulative return from entry during a holding
-period rather than incremental daily returns.
+## Validation and OOS protocol
+There are {len(folds)} rolling folds. Each fold uses 504 prior observations for training and 63 subsequent observations for testing. Inside each 504-observation training window, the first 80% is used to assess an internal validation block; the final OOS test block is reached only after refitting on the full 504-observation training window.
 
-Period: {engine.dates[0].date()} to {engine.dates[-1].date()} ({engine.n_obs} observations).
+Transaction cost is 0.05% per unit portfolio turnover at each rebalance. Strategy-level Task 2 costs are already embedded in the supplied return streams.
 
-## Static Allocation Study
+## Model discipline results
+Mean fold train return: {folds.train_return.mean():.2%}; validation return: {folds.validation_return.mean():.2%}; OOS test return: {folds.test_return.mean():.2%}.
+Mean fold train Sharpe: {folds.train_sharpe.mean():.3f}; validation Sharpe: {folds.validation_sharpe.mean():.3f}; OOS test Sharpe: {folds.test_sharpe.mean():.3f}.
 
-Static results are full-sample descriptive comparisons, not out-of-sample
-forecasts.
+These gaps are reported for overfitting assessment; no full-sample performance is substituted for OOS evidence.
 
-- **Baseline:** 70% PB07 / 30% BB01.
-- **Equal weight:** 50% / 50%.
-- **ERC risk parity:** covariance-based equal-risk-contribution allocation.
-- **Sharpe optimization:** long-only full-sample Sharpe maximization; explicitly
-  treated as in-sample/descriptive.
-- **Grid search:** 10 percentage-point increments from 0/100 through 100/0.
+## Null baseline
+A 500-repetition permutation null randomly reassigns the learned weight magnitudes to strategy labels within each OOS fold. The observed OOS cumulative return is {oos_metrics["total_return"]:.2%}; the permutation-null mean is {null_summary["null_mean_total_return"]:.2%}, with standard deviation {null_summary["null_std_total_return"]:.2%}. {null_summary["null_exceed_count"]} of 500 null runs reached or exceeded the observed OOS cumulative return.
 
-The baseline is retained as the Task 2 reference allocation. The optimizer is
-not treated as an OOS result.
+The null is a diagnostic, not a significance claim.
 
-## Dynamic Allocation
+## OOS portfolio result
+Dynamic meta-model OOS cumulative return: {oos_metrics["total_return"]:.2%}
+CAGR: {oos_metrics["cagr"]:.2%}
+Annual volatility: {oos_metrics["annual_vol"]:.2%}
+Sharpe: {oos_metrics["sharpe"]:.3f}
+Maximum drawdown: {oos_metrics["max_drawdown"]:.2%}
 
-The dynamic allocator uses a **504-observation rolling training window** and
-**63-observation quarterly OOS test/rebalance windows**.
-
-At each rebalance date:
-1. only the preceding 504 observations are used;
-2. ERC weights are estimated from that training sample;
-3. the weights are frozen for the next 63 observations;
-4. the process repeats until the final observation.
-
-No weight is assigned to the pre-training period, and no backfill is used.
-This produces **{dynamic["n_oos_windows"]} genuine OOS windows**, beginning
-{dynamic["oos_start"]}.
-
-Dynamic performance is therefore evaluated only on the OOS period, from
-{dynamic["oos_start"]} through {dynamic["portfolio"]["dates"][-1].date()}.
-
-## Results
-
-| Allocator | Evaluation | Total Return | CAGR | Annual Vol | Sharpe | Max DD | Calmar |
-|---|---|---:|---:|---:|---:|---:|---:|
-"""
-    for name in ["baseline", "equal_weight", "risk_parity", "optimize_sharpe"]:
-        m = static[name]["portfolio"]["metrics"]
-        report += f'| {name} | Full sample | {m["total_return"]:.2%} | {m["cagr"]:.2%} | {m["annual_vol"]:.2%} | {m["sharpe"]:.3f} | {m["max_drawdown"]:.2%} | {m["calmar"]:.3f} |\n'
-    d = dynamic["portfolio"]["metrics"]
-    report += f'| dynamic_erc_wfo | OOS only | {d["total_return"]:.2%} | {d["cagr"]:.2%} | {d["annual_vol"]:.2%} | {d["sharpe"]:.3f} | {d["max_drawdown"]:.2%} | {d["calmar"]:.3f} |\n'
-    report += f"""
-## Interpretation
-
-The 70/30 allocation is retained as a descriptive benchmark for the corrected BB01/PB07 return streams. Full-sample
-optimization is useful as a descriptive sensitivity check, but its weights
-use the complete sample and therefore should not be presented as an OOS
-forecast. The dynamic ERC series is the only allocation in this study whose
-weights are estimated strictly from prior observations and evaluated on
-subsequent observations.
-
-## Validation Checks
-
-- Canonical observation count: {engine.n_obs}.
-- Canonical period: 2018-01-02 to 2021-11-01.
-- 70/30 baseline is generated directly from the current canonical corrected return stream.
-- Dynamic weights start at the first OOS observation (after 504 training days).
-- Dynamic weights contain no backfilled pre-OOS observations.
-- All weights are non-negative and sum to 1.
-- Dynamic performance is measured only on genuine OOS dates.\n- These Task 3 results remain conditional on the corrected Task 2 daily streams and should not be interpreted as validation of the underlying strategies.
+## Factor separation
+A simple OLS factor model is fit fold-by-fold using the equal-weight strategy basket as an explicitly endogenous diagnostic factor. Residual RMS is recorded in task3_factor_model.csv. This is not presented as an external market-factor attribution.
 
 ## Files
-
 - task3_allocator_comparison.csv
-- task3_grid_search.csv
+- task3_dynamic_folds.csv
 - task3_dynamic_weights.csv
-- task3_portfolio_comparison.csv
 - task3_dynamic_oos_equity.csv
+- task3_null_baseline.json
+- task3_model_discipline.json
+- task3_factor_model.csv
 - TASK3_PORTFOLIO_REPORT.md
 """
-    (out / "TASK3_PORTFOLIO_REPORT.md").write_text(report)
+    (out/"TASK3_PORTFOLIO_REPORT.md").write_text(report)
 
-
-if __name__ == "__main__":
+if __name__=="__main__":
     main()
