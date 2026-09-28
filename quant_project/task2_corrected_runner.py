@@ -306,11 +306,19 @@ def main():
     return_corr = pd.DataFrame(return_streams).corr()
     return_corr.to_csv(out / "TASK2_RETURN_SPACE_CORRELATION.csv")
 
-    # Canonical Task 3 input: corrected full-sample frozen-fit daily streams.
+    # Canonical Task 3 input: all corrected strategy return streams.
+    # Task 3 must not silently revert to a pre-correction two-strategy subset.
     canonical = pd.DataFrame({
         "date": data["date"],
-        "bb01_daily_return": return_streams["BB01_Breakout_20D"],
-        "pb07_daily_return": return_streams["PB07_TailReversal_10D"],
+        "BB01_Breakout_20D": return_streams["BB01_Breakout_20D"],
+        "PB07_TailReversal_10D": return_streams["PB07_TailReversal_10D"],
+        "BB03_Reversal_10D": return_streams["BB03_Reversal_10D"],
+        "MeanReversion_Composite_10D": return_streams["MeanReversion_Composite_10D"],
+        "BB03_RegimeFiltered_10D": return_streams["BB03_RegimeFiltered_10D"],
+        "BB04_Reversal_5D": return_streams["BB04_Reversal_5D"],
+        "VB03_Continuation_5D": return_streams["VB03_Continuation_5D"],
+        "BB07_UpperTail_10D": return_streams["BB07_UpperTail_10D"],
+        "PB07_BB03_BB04_Conditional": return_streams["PB07_BB03_BB04_Conditional"],
     })
     canonical.to_csv(out / "portfolio_daily_returns.csv", index=False)
 
