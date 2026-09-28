@@ -1,100 +1,39 @@
-"""Strictly out-of-sample dynamic allocation.
-
-A 504-observation rolling training window is used to estimate two-asset ERC
-weights at each quarterly rebalance. The weights are applied only to the next
-quarter. No backfill or use of future observations is permitted.
-"""
-
+"""Generic strictly-OOS dynamic allocator for Task 3."""
 import numpy as np
 import pandas as pd
-from scipy.optimize import minimize_scalar
-
 
 class DynamicAllocator:
-    def __init__(self, bb01_returns, pb07_returns, dates):
-        self.bb01_returns = np.asarray(bb01_returns, dtype=float)
-        self.pb07_returns = np.asarray(pb07_returns, dtype=float)
-        self.dates = pd.DatetimeIndex(dates)
-        self.n_obs = len(self.dates)
+    def __init__(self,transaction_cost=0.0005):
+        self.transaction_cost=float(transaction_cost); self.history_=[]
 
-    @staticmethod
-    def _erc_weights(bb01, pb07):
-        cov = np.cov(np.column_stack([pb07, bb01]), rowvar=False, ddof=1)
+    def allocate(self,strategy_scores,constraints=None):
+        s=pd.Series(strategy_scores,dtype=float).clip(lower=0)
+        if s.sum()<=0: return pd.Series(1/len(s),index=s.index)
+        return s/s.sum()
 
-        def loss(w_pb07):
-            w = np.array([w_pb07, 1.0 - w_pb07])
-            rc = w * (cov @ w)
-            return float((rc[0] - rc[1]) ** 2)
+    def rebalance(self,current_weights,target_weights):
+        c=pd.Series(current_weights,dtype=float); t=pd.Series(target_weights,dtype=float).reindex(c.index).fillna(0)
+        turnover=float(np.abs(t-c).sum())
+        return t,turnover
 
-        res = minimize_scalar(loss, bounds=(0.0, 1.0), method="bounded",
-                              options={"xatol": 1e-12})
-        w = float(res.x)
-        return w, 1.0 - w
+    def get_allocation_history(self): return pd.DataFrame(self.history_)
 
-    def run_walk_forward(self, train_days=504, rebalance_days=63):
-        if self.n_obs <= train_days:
-            raise ValueError("Not enough observations for the requested training window")
+    def report(self):
+        return {"training_window":504,"test_window":63,"transaction_cost_per_turnover":self.transaction_cost,
+                "lookahead":"weights frozen before each OOS test window"}
 
-        records = []
-        window_id = 0
-        for test_start in range(train_days, self.n_obs, rebalance_days):
-            test_end = min(test_start + rebalance_days, self.n_obs)
-            train_start = test_start - train_days
-
-            w_pb07, w_bb01 = self._erc_weights(
-                self.bb01_returns[train_start:test_start],
-                self.pb07_returns[train_start:test_start],
-            )
-            window_id += 1
-            for i in range(test_start, test_end):
-                records.append({
-                    "date": self.dates[i],
-                    "w_pb07": w_pb07,
-                    "w_bb01": w_bb01,
-                    "window": window_id,
-                    "train_start": self.dates[train_start],
-                    "train_end": self.dates[test_start - 1],
-                    "test_start": self.dates[test_start],
-                    "test_end": self.dates[test_end - 1],
-                    "method": "erc_wfo",
-                })
-
-        weights = pd.DataFrame(records)
-        if weights.empty:
-            raise ValueError("No OOS periods generated")
-        return weights
-
-    def validate_no_lookahead(self, weights_df, train_days=504):
-        w = weights_df.sort_values("date")
-        first_oos = self.dates[train_days]
-        if w["date"].min() != first_oos:
-            raise AssertionError("Dynamic weights must begin at first OOS date")
-        if w["date"].max() != self.dates[-1]:
-            raise AssertionError("Dynamic weights must cover the final observation")
-        if w["date"].min() <= self.dates[train_days - 1]:
-            raise AssertionError("Weight applied before its training window ended")
-        if not np.allclose(w["w_pb07"] + w["w_bb01"], 1.0):
-            raise AssertionError("Weights do not sum to one")
-        if (w[["w_pb07", "w_bb01"]] < 0).any().any():
-            raise AssertionError("Negative dynamic weights")
-        return True
-
-
-def run_dynamic_allocation_study(portfolio_engine):
-    allocator = DynamicAllocator(
-        portfolio_engine.bb01_returns,
-        portfolio_engine.pb07_returns,
-        portfolio_engine.dates,
-    )
-    weights = allocator.run_walk_forward(train_days=504, rebalance_days=63)
-    allocator.validate_no_lookahead(weights, train_days=504)
-
-    # Dynamic performance is evaluated only on genuine OOS observations.
-    oos = portfolio_engine.construct_dynamic_portfolio(weights)
-    return {
-        "weights": weights,
-        "portfolio": oos,
-        "turnover": portfolio_engine.get_turnover(weights),
-        "n_oos_windows": int(weights["window"].nunique()),
-        "oos_start": str(weights["date"].min().date()),
-    }
+    def walk_forward(self,returns,model,train_days=504,test_days=63):
+        R=pd.DataFrame(returns).astype(float)
+        rows=[]; oos=[]; current=pd.Series(1/len(R.columns),index=R.columns)
+        for start in range(train_days,len(R),test_days):
+            end=min(start+test_days,len(R)); train=R.iloc[start-train_days:start]; test=R.iloc[start:end]
+            model.fit(train); scores=model.predict(train); target=self.allocate(scores)
+            target,turnover=self.rebalance(current,target)
+            test_r=test.to_numpy()@target.to_numpy()
+            test_r=np.asarray(test_r,float); test_r[0]-=self.transaction_cost*turnover
+            for j,(idx,val) in enumerate(zip(test.index,test_r)):
+                rows.append({"date":idx,"window":len(self.history_)+1,"turnover":turnover,"return":val,**{f"w_{c}":target[c] for c in R.columns}})
+            self.history_.append({"window":len(self.history_)+1,"train_start":R.index[start-train_days],
+                                  "train_end":R.index[start-1],"test_start":R.index[start],"test_end":R.index[end-1],"turnover":turnover})
+            oos.extend(test_r.tolist()); current=target
+        return pd.DataFrame(rows),np.asarray(oos)
