@@ -104,11 +104,13 @@ def main():
     pd.DataFrame({"date":engine.dates[TRAIN:],"dynamic_meta_oos_equity":eq_curve}).to_csv(out/"task3_dynamic_oos_equity.csv",index=False)
 
     evaluator=FinalEvaluator()
+    meta.folds_=len(folds)
     discipline=evaluator.report(
         train_metrics={"mean_fold_sharpe":float(folds.train_sharpe.mean()),"mean_fold_return":float(folds.train_return.mean())},
         validation_metrics={"mean_fold_sharpe":float(folds.validation_sharpe.mean()),"mean_fold_return":float(folds.validation_return.mean())},
         test_metrics={"mean_fold_sharpe":float(folds.test_sharpe.mean()),"mean_fold_return":float(folds.test_return.mean()),**oos_metrics},
         null=null_summary)
+    discipline["meta_model"]=meta.report()
     (out/"task3_model_discipline.json").write_text(json.dumps(discipline,indent=2))
 
     report=f"""# Task 3: Multi-Alpha Portfolio Construction
