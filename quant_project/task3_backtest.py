@@ -129,7 +129,9 @@ The comparison table contains best individual, equal-weight, risk-based ERC, lon
 ERC minimizes dispersion in log component risk contributions w_i*(Sigma w)_i under long-only weights summing to one. This replaces the prior implementation that collapsed to equal weights.
 
 ## Model discipline
-The meta-model uses one trailing mean/volatility score per selected strategy. Each fold uses 504 training observations, an 80/20 internal train/validation split, refits on all 504 observations, and freezes weights for the following 63-observation OOS block. Transaction cost is 0.05% per unit turnover and is charged on the first day of each OOS rebalance block.
+The meta-model uses one trailing mean/volatility score per selected strategy. Task 3 produces 8 rolling OOS blocks from the 504/63 schedule; this is a separate portfolio-construction schedule from the 7-fold Task 2 WFO evidence used for alpha selection. Each block uses 504 training observations, an 80/20 internal train/validation split, refits on all 504 observations, and freezes weights for the following 63-observation OOS block. Transaction cost is 0.05% per unit turnover and is charged on the first day of each OOS rebalance block.
+
+The first OOS block starts from equal weights, so moving from 1/3-1/3-1/3 to the learned first target produces the reported 1.3333 turnover. This is an explicit initialization cost, not a hidden omission.
 
 Mean train return: {folds.train_return.mean():.2%}
 Mean validation return: {folds.validation_return.mean():.2%}
@@ -145,9 +147,10 @@ These gaps are the primary overfitting diagnostic; the stitched OOS Sharpe is no
 Observed stitched OOS return: {om["total_return"]:.2%}
 Null mean: {null_summary["null_mean_total_return"]:.2%}
 Null standard deviation: {null_summary["null_std_total_return"]:.2%}
-Null runs reaching observed: {null_summary["null_exceed_count"]}/{null_summary["n_permutations"]}
+Null 95th percentile: {null_summary["null_p95_total_return"]:.2%}
+Null runs reaching observed: {null_summary["null_exceed_count"]}/{null_summary["n_permutations"]} ({null_summary["null_exceed_count"]/null_summary["n_permutations"]:.1%})
 
-The null is diagnostic, not a significance claim.
+The null is diagnostic, not a significance claim; the exceedance rate is not presented as a formal p-value or proof of statistical significance.
 
 ## Dynamic OOS result
 Cumulative return: {om["total_return"]:.2%}
