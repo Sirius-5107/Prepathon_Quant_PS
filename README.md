@@ -6,7 +6,7 @@
 
 - **Task 1:** Complete and frozen.
 - **Task 2:** Final research run completed on the synchronized repository dataset.
-- **Task 3:** Frozen; no Task 3 changes are part of this completion.
+- **Task 3:** Rebuilt on the corrected nine-strategy Task 2 return matrix; rolling OOS model-discipline checks are included.
 
 ## Task 2 — Final Canonical Setup
 
@@ -58,6 +58,8 @@ The final research compares nine hypotheses using the same causal execution and 
 
 The previous 70% PB07 / 30% BB01 portfolio metrics are historical and should not be cited as the canonical Task 2 result.
 
-## Task 3 Boundary
+## Task 3 — Corrected Multi-Alpha Allocation
 
-Task 3 is frozen. This Task 2 completion does not modify or regenerate Task 3 artifacts.
+Task 3 now consumes all nine corrected Task 2 strategy return streams. Static equal-weight/ERC baselines are descriptive only. The learned component uses a low-capacity trailing mean/volatility score, 504-observation rolling training windows, an internal 80/20 validation split, 63-observation OOS test windows, 0.05% turnover cost, and a 500-repetition permutation allocation null.
+
+The previous two-strategy 70/30 PB07/BB01 Task 3 results are superseded and should not be used as submission evidence.
