@@ -1,0 +1,24 @@
+name: Validate Task 2 and Task 3 repair
+on:
+  push:
+    branches: ["task3-rubric-repair"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy pandas scipy
+      - run: python quant_project/task2_corrected_runner.py
+      - run: python quant_project/task3_backtest.py
+      - run: python - <<'PY'
+import json, pathlib, pandas as pd
+p=pathlib.Path("research_output")
+assert len(pd.read_csv(p/"portfolio_daily_returns.csv"))==986
+assert len(pd.read_csv(p/"task3_dynamic_folds.csv"))==8
+null=json.loads((p/"task3_null_baseline.json").read_text())
+assert null["n_permutations"]==500
+print("VALIDATION_OK", null)
+PY
