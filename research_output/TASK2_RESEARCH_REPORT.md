@@ -163,7 +163,7 @@ Input files:
 
 An archived 986-row baseline is retained separately as `TASK2_RESULTS_986_BASELINE.json` in the working tree for audit comparison.
 
-## 11. Task 3 Boundary
+## 11. Task 3 Boundary and final checkpoint reference
 
-Task 3 is frozen for this stage. This Task 2 completion does not modify, regenerate, or reinterpret the Task 3 research artifacts.
+Task 3 has since been rebuilt on the corrected Task 2 return streams. Its canonical report is `research_output/TASK3_PORTFOLIO_REPORT.md`, with fold-level model discipline and permutation-null diagnostics in `research_output/task3_model_discipline.json` and `research_output/task3_null_baseline.json`. See `CHECKPOINT_DOCUMENTATION.md` for the reconciled status across Tasks 1–3. This Task 2 report remains the record of the Task 2 run and its results; Task 3 does not change those Task 2 findings.
 
