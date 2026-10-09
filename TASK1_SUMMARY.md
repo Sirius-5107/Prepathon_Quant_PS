@@ -1,5 +1,7 @@
 # Task 1 Completion Summary
 
+> **Historical checkpoint note (reconciled 10 October 2026):** This file records the original Task 1 framework run. Its original data counts (including 866 overlapping candles) and baseline metrics are historical and are not the corrected Task 2 sample/results. The canonical cross-task status and later results are in `CHECKPOINT_DOCUMENTATION.md`; Task 1 itself remains frozen.
+
 **Date:** 9 September 2026  
 **Status:** ✅ COMPLETE  
 **Deadline:** 14 September 2026 (5 days buffer)
