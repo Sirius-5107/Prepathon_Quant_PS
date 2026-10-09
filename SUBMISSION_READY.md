@@ -1,32 +1,23 @@
 # PREPATHON Submission Status
 
-**Date:** September 28, 2026  
-**Status:** Task 2 corrected research and Task 3 multi-alpha rebuild are complete; generated Task 3 metrics must be refreshed locally before packaging.
+**Reconciled:** 10 October 2026  
+**Status:** Tasks 1–3 checkpoint documentation reconciled against the committed final research artifacts.
 
-## Task 1
+## Task 1 — Frozen initial framework
 
-Task 1 remains frozen and unchanged.
+Task 1 remains complete and unchanged. Its original baseline and data-alignment figures are historical checkpoint results; they should not be presented as the corrected Task 2 dataset or performance.
 
-## Task 2 — Final
+Reference: `TASK1_SUMMARY.md`.
 
-The final Task 2 run uses the synchronized dataset available in the repository:
+## Task 2 — Corrected final research
 
-- 986 signal observations
-- 986 price observations
-- 986 common dates
-- 2018-01-02 to 2021-11-01
-- 20 supplied predictive signals
-- 9 tested strategy hypotheses
-- 7 chronological WFO folds
-- 504 training / 63 test observations per fold
-- next-open execution
-- open-to-open marking
-- 0.05% transaction cost per executed side
-- training-only parameter fitting
+- 986 synchronized signal/price observations, 2018-01-02 to 2021-11-01.
+- 20 supplied signals; no additional price-derived predictive inputs.
+- Signal at t, next-open execution at t+1; open-to-open marking.
+- 0.05% cost per executed side.
+- 9 strategy hypotheses; 7 WFO folds with 504 training and 63 test observations.
 
-### Final WFO results
-
-| Strategy | Mean WFO Return | Mean WFO Sharpe | Positive-Return Folds |
+| Strategy | Mean WFO return | Mean WFO Sharpe | Positive folds |
 |---|---:|---:|---:|
 | BB01_Breakout_20D | -3.23% | -1.107 | 1/7 |
 | PB07_TailReversal_10D | +5.26% | +1.769 | 3/7 |
@@ -38,25 +29,38 @@ The final Task 2 run uses the synchronized dataset available in the repository:
 | BB07_UpperTail_10D | +0.50% | +0.652 | 3/7 |
 | PB07_BB03_BB04_Conditional | +3.11% | +1.667 | 6/7 |
 
-These are descriptive WFO results. They should not be presented as guarantees of future performance.
+Canonical artifacts: `quant_project/task2_corrected_runner.py`, `research_output/TASK2_CORRECTED_RESULTS.json`, `research_output/TASK2_RETURN_SPACE_CORRELATION.csv`, `research_output/TASK2_RESEARCH_REPORT.md`.
 
-### Canonical Task 2 artifacts
+The previous 70% PB07 / 30% BB01 figures are historical and are not the canonical Task 2 result.
 
-- `quant_project/task2_corrected_runner.py`
-- `research_output/TASK2_CORRECTED_RESULTS.json`
-- `research_output/TASK2_RETURN_SPACE_CORRELATION.csv`
-- `research_output/TASK2_RESEARCH_REPORT.md`
+## Task 3 — Final multi-alpha allocation research
 
-The previous 70% PB07 / 30% BB01 portfolio figures are historical and are **not** the canonical Task 2 result.
+The frozen selection is PB07_TailReversal_10D, PB07_BB03_BB04_Conditional, and BB03_Reversal_10D. The corrected Task 3 build includes:
+- `factor_model.py`
+- `portfolio_optimizer.py`
+- `meta_model.py`
+- `dynamic_allocator.py`
+- `final_evaluation.py`
 
-## Task 3 — Corrected Multi-Alpha Build
+The model uses one trailing mean/volatility score per strategy, 504-observation rolling training windows, internal 80/20 train-validation splits, 63-observation OOS blocks, 0.05% turnover cost, and a 500-repetition permutation allocation null. There are 8 Task 3 rolling OOS blocks, distinct from the 7 Task 2 alpha-selection folds.
 
-Task 3 now consumes all nine corrected Task 2 return streams. The learned component uses a 504/63 rolling walk-forward, an internal 80/20 train-validation split, a low-capacity trailing mean/volatility score, 0.05% portfolio turnover cost, and a 500-repetition permutation null.
+Stored-run dynamic OOS metrics: cumulative return 35.26%, CAGR 17.10%, annual volatility 6.70%, Sharpe 2.390, maximum drawdown -2.17%. Mean fold returns are 20.54% train, 7.12% validation, and 4.09% OOS test. The permutation null has mean return 24.86%, standard deviation 7.47%, 95th percentile 37.70%, and 56/500 exceedances (11.2%). This is a diagnostic, not a formal p-value or significance claim; the observed return is below the null 95th percentile.
 
-The prior two-strategy Task 3 performance claims are superseded and must not be packaged as current evidence.
+The best-individual, equal-weight, ERC, and maximum-Sharpe rows are full-sample descriptive baselines. Only the proposed dynamic row is stitched OOS. Do not report maximum-Sharpe as OOS evidence.
 
-Run `python quant_project/task2_corrected_runner.py` followed by `python quant_project/task3_backtest.py` before packaging so the CSV/JSON/MD outputs match the current code.
+Canonical report and outputs: `research_output/TASK3_PORTFOLIO_REPORT.md` and `research_output/task3_*`.
 
-## Submission Principle
+## Reproduction
 
-The submission should report the reproducible research evidence from the final runner and clearly distinguish frozen-sample results from chronological WFO results.
+From the repository root:
+
+```bash
+python quant_project/task2_corrected_runner.py
+python quant_project/task3_backtest.py
+```
+
+Regeneration overwrites generated outputs. Compare new files with the committed artifacts before replacing a submission package.
+
+## Single source for cross-task status
+
+See `CHECKPOINT_DOCUMENTATION.md` for the reconciled narrative, complete Task 2 WFO table, Task 3 selection and caveats, output inventory, and documentation maintenance rules.
